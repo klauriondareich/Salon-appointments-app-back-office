@@ -22,15 +22,9 @@
                     </div>
                     </div>
                 <!-- top info widgets -->
-                <div class="pt-5 pr-3 float-right">
-                    <label>Filtrer les clients : </label>
-                    <select>
-                        <option>Aujourd'hui</option>
-                        <option>Hier</option>
-                        <option>Semaine dernière</option>
-                        <option>Il ya 01 mois</option>
-                    </select>
-                    </div>
+                <div class=" row pt-5 pr-3 float-right">
+                    <input type="text" class="form-control" placeholder="Recherche" v-model="searchItem" @input="searchCustomers">
+                </div>
                 <div class="widget">
                     <div class="widget-title no-margin">
                         <h4>Liste des clients</h4>
@@ -39,21 +33,27 @@
                         <table class="table table-hover table-responsive">
                             <thead>
                                 <tr>
-                                    <th><em>Sr#</em></th>
+                                    <th><em>Sr</em></th>
                                     <th><em>Information du client</em></th>
                                     <th><em>Total payé</em></th>
                                     <th><em>Nombre de rdv</em></th>
-                                    <th><em>Date</em></th>
-                                    <!-- <th><em>action</em></th> -->
+                                   
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(item, index) in customersWithoutDouble" :key="index">
+                                <tr v-for="(item, index) in  searchCustomers()" :key="index">
                                     <td><i class="fa fa-user"></i></td>
                                     <td>{{item.customer_name}}</td>
                                     <td>{{item.totalPayed}} FCFA</td>
                                     <td>{{item.nbRdv}}</td>
-                                    <td><i>{{item.stamp | formatDate}}</i></td>
+                                </tr>
+                                <tr class="p-5" v-if="searchCustomers().length == 0">
+
+                                    <td><i class="fa fa-user"></i></td>
+                                    <td></td>
+                                    <td> Aucun client trouvé ...</td>
+                                    <td></td>
+                                   
                                 </tr>
                             </tbody>
                         </table>
@@ -78,12 +78,13 @@ export default {
        customersWithDouble: [],
        appointment: firebase.firestore().collection("appointment"),
        customer_name: "",
-       Obj : {}
+       Obj : {},
+       searchItem: null,
     }
    
   },
   methods:{
-      
+
     // Calcule le total des rdv d'un client et le montant payé
    calculTotals(){
 
@@ -94,6 +95,48 @@ export default {
             customer1.totalPayed =totalPayed;
         })
         
+   },
+
+    searchCustomers(){
+      return this.customersWithoutDouble.filter(data => !this.searchItem || data.customer_name.toLowerCase().includes(this.searchItem.toLowerCase()))
+    },
+
+   callOnChange(event){
+       
+       let currentDate = new Date();
+       
+
+       let table = this.customersWithoutDouble.filter((item) =>{
+
+            let oldDate = new Date(item.stamp);
+            const diffTime = Math.abs(currentDate - oldDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+           if (diffDays < 31) return item
+
+       })
+        console.log("table", table);
+        console.log("table", event.target.value);
+       
+    //    if (diffDays > 31){
+    //        // plus d'un mois
+    //    }
+
+    //    if (diffDays <= 7){
+    //        // Il y a une semaine
+    //    }
+
+    //     if (diffDays < 2){
+    //        // Hier
+    //    }
+       
+
+    //    this.customersWithoutDouble.filter(item => new Date(item.stamp) > currentDate);
+        //  console.log("current", currentDate);
+        //  console.log("old", oldDate);
+        //  console.log("click", event.target.value);
+        //  console.log("diff", diffDays)
+       
    }
 
   },
