@@ -17,7 +17,7 @@
                         <div class="notifi"> <i class="fa fa-users"></i>
                         <div class="notifi-info">
                             <p>Visualisation de tous les clients du système</p>
-                            <span>Nombre total : {{customers.length}}</span> </div>
+                            <span>Nombre total : {{customersWithoutDouble.length}}</span> </div>
                         </div>
                     </div>
                     </div>
@@ -48,10 +48,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(item, index) in customers" :key="index">
+                                <tr v-for="(item, index) in customersWithoutDouble" :key="index">
                                     <td><i class="fa fa-user"></i></td>
                                     <td>{{item.customer_name}}</td>
-                                    <td>{{item.totalPayed}}</td>
+                                    <td>{{item.totalPayed}} FCFA</td>
                                     <td>{{item.nbRdv}}</td>
                                     <td><i>{{item.stamp | formatDate}}</i></td>
                                 </tr>
@@ -74,7 +74,8 @@ export default {
   name: 'Allcustomers',
   data(){
     return{
-       customers: [],
+       customersWithoutDouble: [],
+       customersWithDouble: [],
        appointment: firebase.firestore().collection("appointment"),
        customer_name: "",
        Obj : {}
@@ -82,51 +83,48 @@ export default {
    
   },
   methods:{
+      
+    // Calcule le total des rdv d'un client et le montant payé
+   calculTotals(){
 
-   getNumberOfRdv(index){
-        this.customers.forEach(item =>{
-            if (item.customer_name === "dada97"){
-                item.nbRdv = index;
-            }
+        this.customersWithoutDouble.forEach(customer1 =>{
+            let customers_arr = this.customersWithDouble.filter(item => item.customer_name === customer1.customer_name);
+            let totalPayed = customers_arr.map(obj => obj.total).reduce((acc, currentValue) => acc +currentValue);
+            customer1.nbRdv = customers_arr.length;
+            customer1.totalPayed =totalPayed;
         })
+        
    }
-   
+
   },
   created(){
-     let index = 0;
-     let totalPayed = 0;
+
 
      this.appointment.where("salon", "==", "XMLjEcqdOURe2Vwadm7V").orderBy("stamp", "desc").onSnapshot((snapshot) =>{
       if(!snapshot.empty){
-        this.customers = [];
+        this.customersWithoutDouble = [];
+        this.customersWithDouble = [];
 
         snapshot.forEach((doc) =>{
-          let obj = doc.data();
-          obj.id = doc.id;
+            let obj = doc.data();
+            obj.id = doc.id;
+            this.customersWithDouble.push(obj);
 
+            // Suppression des doublons sur les noms des clients
             if (this.customer_name != doc.data().customer_name){
                 this.Obj = obj;
-                this.customers.push(this.Obj);
+                this.customersWithoutDouble.push(this.Obj);
                 this.customer_name = doc.data().customer_name;
             }
 
-            if (this.customer_name == "KLD"){
-                index++;
-               
-            }
-       
-
-            this.Obj.totalPayed = totalPayed + obj.total;
-            // console.log("total ", obj)
-
         })
-        console.log("nb : ", index);
-
-       // Call here
+        this.calculTotals();
       }
 
       else console.log("not data now")
     });
+
+
   }
 }
 </script>
