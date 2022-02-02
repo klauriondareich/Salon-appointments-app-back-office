@@ -101,43 +101,6 @@ export default {
       return this.customersWithoutDouble.filter(data => !this.searchItem || data.customer_name.toLowerCase().includes(this.searchItem.toLowerCase()))
     },
 
-   callOnChange(event){
-       
-       let currentDate = new Date();
-       
-
-       let table = this.customersWithoutDouble.filter((item) =>{
-
-            let oldDate = new Date(item.stamp);
-            const diffTime = Math.abs(currentDate - oldDate);
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-           if (diffDays < 31) return item
-
-       })
-        console.log("table", table);
-        console.log("table", event.target.value);
-       
-    //    if (diffDays > 31){
-    //        // plus d'un mois
-    //    }
-
-    //    if (diffDays <= 7){
-    //        // Il y a une semaine
-    //    }
-
-    //     if (diffDays < 2){
-    //        // Hier
-    //    }
-       
-
-    //    this.customersWithoutDouble.filter(item => new Date(item.stamp) > currentDate);
-        //  console.log("current", currentDate);
-        //  console.log("old", oldDate);
-        //  console.log("click", event.target.value);
-        //  console.log("diff", diffDays)
-       
-   }
 
   },
   created(){
