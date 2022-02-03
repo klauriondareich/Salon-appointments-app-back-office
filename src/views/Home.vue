@@ -165,6 +165,7 @@
                                             :value="today"
                                             :events="events"
                                             color="primary"
+                                            short-months=false
                                             type="month"
                                             ></v-calendar>
                                         </v-sheet>
@@ -351,6 +352,8 @@ export default {
        appointments: [],
        appointment: firebase.firestore().collection("appointment"), 
        today: '2022-01-06',
+        mode: 'stack',
+        modes: ['stack', 'column'],
         events: [
           
         ], 
