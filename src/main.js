@@ -3,7 +3,7 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import router from './router'
 import firebase from "./firebase/init"
-import VCalendar from 'v-calendar'
+import vuetify from '@/plugins/vuetify' // path to vuetify export
 // import store from './store/store'
 
 
@@ -11,11 +11,6 @@ import VCalendar from 'v-calendar'
 Vue.use(VueRouter)
 
 Vue.config.productionTip = false
-
-// Use v-calendar & v-date-picker components
-Vue.use(VCalendar, {
-  componentPrefix: 'vc',
-});
 
 Vue.filter('formatDate', function(value){
   let months = ["01","02","03","04","05","06","07","08","09","10","11","12"];
@@ -31,6 +26,7 @@ firebase.auth().onAuthStateChanged(user => {
   if(!app){
     app = new Vue({
       router,
+      vuetify,
       user,
       render: h => h(App),
     }).$mount('#app')

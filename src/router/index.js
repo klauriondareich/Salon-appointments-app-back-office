@@ -23,12 +23,17 @@ const routes = [
   {
     path: '/allcustomers',
     name: 'Allcustomers',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Allcustomers.vue')
+    component: () => import(/* webpackChunkName: "allcustomers" */ '../views/Allcustomers.vue')
   },
   {
     path: '/appointments',
     name: 'Allappointments',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Allappointments.vue')
+    component: () => import(/* webpackChunkName: "allappointments" */ '../views/Allappointments.vue')
+  },
+  {
+    path: '',
+    name: 'calendar',
+    component: () => import(/* webpackChunkName: "allappointments" */ '../views/Calendar.vue')
   }
 ]
 

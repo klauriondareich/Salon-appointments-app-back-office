@@ -34,7 +34,7 @@
                             <label>Filtrer les rdv : </label>
                             <select @change="callOnChange($event)">
                                 <!-- <option value="today">Aujourd'hui</option> -->
-                                <option value="all">Tous les clients</option>
+                                <option value="all">Tous les rdv</option>
                                 <option value="yesterday">Hier</option>
                                 <option value="under_month">Moins d'un mois</option>
                             </select>
