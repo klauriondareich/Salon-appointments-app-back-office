@@ -117,7 +117,7 @@
                   <div class="top-widget">
                     <i class="fa fa-dollar"></i>
                     <div class="informative">
-                      <span>90000 FCFA</span>
+                      <span>{{totalAmountRdv}} FCFA</span>
                       <em>Chiffre d'affaire du jour</em>
                     </div>
                   </div>
@@ -135,7 +135,7 @@
                   <div class="top-widget">
                     <i class="fa fa-trophy"></i>
                     <div class="informative">
-                      <span>100</span>
+                      <span>{{totalCompleteRdv}}</span>
                       <em>Rendez-vous terminés</em>
                     </div>
                   </div>
@@ -144,7 +144,7 @@
                   <div class="top-widget">
                     <i class="fa fa-clock-o"></i>
                     <div class="informative">
-                      <span>136</span>
+                      <span>{{totalOngoingRdv}}</span>
                       <em>Rendez-vous restants</em>
                     </div>
                   </div>
@@ -359,11 +359,30 @@ export default {
         events: [
           
         ], 
+        totalAmountRdv: 0,
+        totalCompleteRdv: 0,
+        totalOngoingRdv: 0,
     }
   },
-   mounted () {
+  methods:{
+
+      calculationOfTotalRdvAmount(){
+          return this.appointments.map(obj => obj.total).reduce((acc, currentValue) => acc + currentValue)
+      },
+
+      filteredCompleteRdv(){
+          return this.appointments.filter(obj => obj.status == "complete").length
+      },
+      
+      filteredOngoingRdv(){
+          return this.appointments.filter(obj => obj.status == "create").length
+      }
+   },
+  mounted () {
       this.$refs.calendar.scrollToTime('08:00')
     },
+ 
+
   created(){
 
       // date du jour
@@ -383,7 +402,11 @@ export default {
           let time_end =  obj.date.split(".").join("-") + " " + obj.time_end;
           this.events.push({name: obj.work_name, start: time_start,
             end: time_end,})
-        })
+        });
+
+        this.totalAmountRdv = this.calculationOfTotalRdvAmount();
+        this.totalCompleteRdv = this.filteredCompleteRdv();
+        this.totalOngoingRdv = this.filteredOngoingRdv();
       }
 
       else console.log("not data now")
