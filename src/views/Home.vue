@@ -126,7 +126,7 @@
                   <div class="top-widget">
                     <i class="fa fa-calendar"></i>
                     <div class="informative">
-                      <span>236</span>
+                      <span>{{appointments.length}}</span>
                       <em>Rendez-vous du jour</em>
                     </div>
                   </div>
@@ -158,16 +158,15 @@
                            <v-app>
                                 <v-row>
                                     <v-col>
-                                        <v-sheet height="400px">
+                                        <v-sheet height="auto">
                                             <v-calendar
                                             ref="calendar"
                                             :now="today"
                                             :value="today"
                                             :events="events"
-                                            event-height=30
-                                            color="primary"
-                                            :short-months=value
-                                           :event-overlap-mode="mode"
+                                            color="warning"
+                                            :event-height=value2
+                                            event-color="warning"
                                             type="month"
                                             ></v-calendar>
                                         </v-sheet>
@@ -356,6 +355,7 @@ export default {
        today: '2022-01-06',
        mode: 'stack',
         value: false,
+        value2: 50,
         events: [
           
         ], 
