@@ -2963,7 +2963,8 @@ span.blue:before {
   float: left;
   margin-bottom: 24px;
   padding-bottom: 22px;
-  width: 100%;
+  padding-right: 22px;
+  /* width: 100%; */
 }
 
 .q-comments > li:last-child {

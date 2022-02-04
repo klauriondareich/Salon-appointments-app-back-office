@@ -247,62 +247,22 @@
                       <div class="widget">
                           <div class="widget-title">
                               <h4>Commentaires récents</h4>
-                              <ul class="widget-controls">
-                          <li title="Refresh" class="refresh-content"><i class="fa fa-refresh"></i></li>
-                          <li title="Maximize" class="expand-content"><i class="icon-frame"></i></li>
-                          <li title="More Options" class="more-option"><i class="ti-more-alt"></i></li>
-                      </ul>
+                            
                           </div>
                           <div class="widget-peding">
                               <ul class="q-comments recent">
-                                  <li>
+                                  <li v-for="(item, index) in comments.slice(0,5)" :key="index">
                                       <div class="comenter"> <img src="images/resources/q-comment1.jpg" alt=""> </div>
                                       <div class="comment-detail">
-                                          <h5>Michael Baker</h5>
-                                          <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus sc risque ante sollicitudin commodo. </p>
+                                          <h5>{{item.username}}</h5>
+                                          <p>{{item.comment}}</p>
                                       </div>
                                       <ul class="comment-date">
-                                          <li><span>October 21, 2019</span></li>
+                                          <li><span>{{item.stamp | formatDate}}</span></li>
                                       </ul>
-                                      <a class="approved" href="#" title="">Afficher</a>
-                                      <ul class="control">
-                                          <li><a href="#" title=""><i class="icon-pencil"></i></a></li>
-                                          <li><a href="#" title=""><i class="icon-pin"></i></a></li>
-                                          <li><a class="close-content" href="#" title=""><i class="icon-trash"></i></a></li>
-                                      </ul>
+                                      <a class="approved float-right" href="#" title="">Voir</a>
                                   </li>
-                                  <li>
-                                      <div class="comenter"> <img src="images/resources/q-comment3.jpg" alt=""> </div>
-                                      <div class="comment-detail">
-                                          <h5>Sarah Loren</h5>
-                                          <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus sc risque ante sollicitudin commodo. </p>
-                                      </div>
-                                      <ul class="comment-date">
-                                          <li><span>December 21, 2019</span></li>
-                                      </ul>
-                                      <a class="approved" href="#" title="">Afficher</a>
-                                      <ul class="control">
-                                          <li><a href="#" title=""><i class="icon-pencil"></i></a></li>
-                                          <li><a href="#" title=""><i class="icon-pin"></i></a></li>
-                                          <li><a class="close-content" href="#" title=""><i class="icon-trash"></i></a></li>
-                                      </ul>
-                                  </li>
-                                  <li>
-                                      <div class="comenter"> <img src="images/resources/q-comment2.jpg" alt=""> </div>
-                                      <div class="comment-detail">
-                                          <h5>Michael Baker</h5>
-                                          <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus sc risque ante sollicitudin commodo. </p>
-                                      </div>
-                                      <ul class="comment-date">
-                                          <li><span>September 10, 2019</span></li>
-                                      </ul>
-                                      <a class="approved" href="#" title="">Afficher</a>
-                                      <ul class="control">
-                                          <li><a href="#" title=""><i class="icon-pencil"></i></a></li>
-                                          <li><a href="#" title=""><i class="icon-pin"></i></a></li>
-                                          <li><a class="close-content" href="#" title=""><i class="icon-trash"></i></a></li>
-                                      </ul>
-                                  </li>
+                                
                               </ul>
                           </div>
                       </div>
@@ -351,6 +311,7 @@ export default {
     
     return{
        appointments: [],
+       comments: [],
        appointment: firebase.firestore().collection("appointment"), 
        today: '2022-01-06',
        mode: 'stack',
@@ -401,7 +362,9 @@ export default {
           let time_start =  obj.date.split(".").join("-") + " " + obj.time_start;
           let time_end =  obj.date.split(".").join("-") + " " + obj.time_end;
           this.events.push({name: obj.work_name, start: time_start,
-            end: time_end,})
+            end: time_end,});
+            
+            if(obj.rate_text) this.comments.push({usernane: obj.customer_name, comment: obj.rate_text, stamp:obj.stamp})
         });
 
         this.totalAmountRdv = this.calculationOfTotalRdvAmount();
