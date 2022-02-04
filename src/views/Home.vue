@@ -158,14 +158,16 @@
                            <v-app>
                                 <v-row>
                                     <v-col>
-                                        <v-sheet height="auto">
+                                        <v-sheet height="400px">
                                             <v-calendar
                                             ref="calendar"
                                             :now="today"
                                             :value="today"
                                             :events="events"
+                                            event-height=30
                                             color="primary"
-                                            short-months=false
+                                            :short-months=value
+                                           :event-overlap-mode="mode"
                                             type="month"
                                             ></v-calendar>
                                         </v-sheet>
@@ -352,8 +354,8 @@ export default {
        appointments: [],
        appointment: firebase.firestore().collection("appointment"), 
        today: '2022-01-06',
-        mode: 'stack',
-        modes: ['stack', 'column'],
+       mode: 'stack',
+        value: false,
         events: [
           
         ], 
