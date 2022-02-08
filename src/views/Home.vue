@@ -251,7 +251,7 @@
                           </div>
                           <div class="widget-peding">
                               <ul class="q-comments recent">
-                                  <li v-for="(item, index) in comments.slice(0,5)" :key="index">
+                                  <li v-for="(item, index) in comments.slice(0,3)" :key="index">
                                       <div class="comenter"> <img src="images/resources/q-comment1.jpg" alt=""> </div>
                                       <div class="comment-detail">
                                           <h5>{{item.username}}</h5>
@@ -260,7 +260,7 @@
                                       <ul class="comment-date">
                                           <li><span>{{item.stamp | formatDate}}</span></li>
                                       </ul>
-                                      <router-link to="/comments" class="approved float-right" href="#" title="">Voir</router-link>
+                                      <router-link to="/comments" class="approved float-right" href="#" title="">Voir le commentaire</router-link>
                                   </li>
                                 
                               </ul>

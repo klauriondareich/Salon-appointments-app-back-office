@@ -27,7 +27,11 @@ const routes = [
     name: 'Comments',
     component: () => import(/* webpackChunkName: "comments" */ '../views/Comments.vue')
   },
-  
+  {
+    path: '/gallery',
+    name: 'Gallery',
+    component: () => import(/* webpackChunkName: "gallery" */ '../views/Gallery.vue')
+  },
 ]
 
 const router = new VueRouter({
