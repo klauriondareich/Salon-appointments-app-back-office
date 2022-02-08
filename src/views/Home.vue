@@ -260,7 +260,7 @@
                                       <ul class="comment-date">
                                           <li><span>{{item.stamp | formatDate}}</span></li>
                                       </ul>
-                                      <a class="approved float-right" href="#" title="">Voir</a>
+                                      <router-link to="/comments" class="approved float-right" href="#" title="">Voir</router-link>
                                   </li>
                                 
                               </ul>
@@ -353,6 +353,7 @@ export default {
      this.appointment.where("salon", "==", "XMLjEcqdOURe2Vwadm7V").orderBy("stamp", "desc").onSnapshot((snapshot) =>{
       if(!snapshot.empty){
         this.appointments = [];
+        this.comments = [];
         snapshot.forEach((doc) =>{
           console.log(doc.data())
           let obj = doc.data();
@@ -364,15 +365,13 @@ export default {
           this.events.push({name: obj.work_name, start: time_start,
             end: time_end,});
             
-            if(obj.rate_text) this.comments.push({usernane: obj.customer_name, comment: obj.rate_text, stamp:obj.stamp})
+            if(obj.rate_text) this.comments.push({username: obj.customer_name, comment: obj.rate_text, stamp:obj.stamp})
         });
 
         this.totalAmountRdv = this.calculationOfTotalRdvAmount();
         this.totalCompleteRdv = this.filteredCompleteRdv();
         this.totalOngoingRdv = this.filteredOngoingRdv();
       }
-
-      else console.log("not data now")
     });
   }
 }

@@ -48,7 +48,7 @@
                     <table class="prj-tbl striped table-responsive">
                         <thead  class="color">
                             <tr>
-                                <th><em>Sr#</em></th>
+                                <th><em>#</em></th>
                                 <th><em>Client</em></th>
                                 <th><em>Services</em></th>
                                 <th><em>Montant</em></th>
@@ -58,7 +58,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="(item, index) in appointments" :key="index">
-                                <td><i class="sngl-slct"></i></td>
+                                <td><i class="fa fa-calendar"></i></td>
                                 <td>{{item.customer_name}}</td>
                                 <td>
                                     {{item.work_name}}

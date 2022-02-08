@@ -9435,6 +9435,7 @@ ul.notify-area > li > i {
   display: table-cell;
   width: 40%;
   vertical-align: top;
+  overflow: scroll;
 }
 
 .email-list-inf {

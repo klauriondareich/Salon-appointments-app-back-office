@@ -13,14 +13,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue')
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  },
-  {
     path: '/allcustomers',
     name: 'Allcustomers',
     component: () => import(/* webpackChunkName: "allcustomers" */ '../views/Allcustomers.vue')
@@ -31,10 +23,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "allappointments" */ '../views/Allappointments.vue')
   },
   {
-    path: '',
-    name: 'calendar',
-    component: () => import(/* webpackChunkName: "allappointments" */ '../views/Calendar.vue')
-  }
+    path: '/comments',
+    name: 'Comments',
+    component: () => import(/* webpackChunkName: "comments" */ '../views/Comments.vue')
+  },
+  
 ]
 
 const router = new VueRouter({

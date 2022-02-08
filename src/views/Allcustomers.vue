@@ -33,7 +33,7 @@
                         <table class="table table-hover table-responsive">
                             <thead>
                                 <tr>
-                                    <th><em>Sr</em></th>
+                                    <th><em>#</em></th>
                                     <th><em>Information du client</em></th>
                                     <th><em>Total payé</em></th>
                                     <th><em>Nombre de rdv</em></th>
@@ -90,7 +90,7 @@ export default {
 
         this.customersWithoutDouble.forEach(customer1 =>{
             let customers_arr = this.customersWithDouble.filter(item => item.customer_name === customer1.customer_name);
-            let totalPayed = customers_arr.map(obj => obj.total).reduce((acc, currentValue) => acc +currentValue);
+            let totalPayed = customers_arr.map(obj => obj.total).reduce((acc, currentValue) => acc + currentValue);
             customer1.nbRdv = customers_arr.length;
             customer1.totalPayed =totalPayed;
         })

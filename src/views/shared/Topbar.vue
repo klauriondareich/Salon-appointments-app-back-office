@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-2">
-                    <div class="logo"><a href="home.html" title=""><img src="images/b-logo.png" alt=""></a></div>
+                    <div class="logo"><router-link to="/home" title=""><img src="images/b-logo.png" alt=""></router-link></div>
                 </div>
                 <div class="col-lg-9">
                     <ul class="notify-area">
@@ -64,11 +64,11 @@
                         </div>
                         <div class="drop setting"> <span class="drop-head">stifen Doe <i>30 days trial</i></span>
                             <ul class="drop-meta">
-                                <li> <a href="#" title=""><i class="fa fa-eyedropper"></i>Profil</a> </li>
-                                <li> <a href="#" title=""><i class="fa fa-envelope-o"></i>My Inbox</a> </li>
-                                <li> <a href="#" title=""><i class="fa fa-adjust"></i>task</a> </li>
-                                <li> <a href="#" title=""><i class="fa fa-calendar"></i>Calender</a> </li>
-                                <li> <a href="#" title=""><i class="fa fa-align-right"></i>Balance Report</a> </li>
+                                <li> <router-link to="#" title=""><i class="fa fa-eyedropper"></i>Profil</router-link> </li>
+                                <li> <router-link to="#" title=""><i class="fa fa-envelope-o"></i>My Inbox</router-link> </li>
+                                <li> <router-link to="#" title=""><i class="fa fa-adjust"></i>task</router-link> </li>
+                                <li> <router-link to="#" title=""><i class="fa fa-calendar"></i>Calender</router-link> </li>
+                                <li> <router-link to="#" title=""><i class="fa fa-align-right"></i>Balance Report</router-link> </li>
                             </ul>
                             <span class="drop-bottom"><a href="#" title=""><i class="fa fa-sign-out"></i>Se déconnecter</a></span> </div>
                     </div>
