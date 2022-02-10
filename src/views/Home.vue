@@ -349,7 +349,7 @@ export default {
       // date du jour
       // this.today = new Date().getFullYear() + "-" + new Date().getMonth() + "-" + new Date().getDate();
           
-
+    // Script à revoir, le syst doit recupérer les rdv du jour et non tous les rdv
      this.appointment.where("salon", "==", "XMLjEcqdOURe2Vwadm7V").orderBy("stamp", "desc").onSnapshot((snapshot) =>{
       if(!snapshot.empty){
         this.appointments = [];

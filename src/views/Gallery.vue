@@ -123,7 +123,7 @@
                             <ul class="insta-widget">
                                 <p class="text-center" v-if="images.length == 0">Votre galerie est vide ...</p>
                                 <li v-for="(item, index) in images" :key="index">
-                                    <a href="">
+                                    <a href="#">
                                         <img :src="item.imageUrl" alt="">
                                     </a>
                                 </li>

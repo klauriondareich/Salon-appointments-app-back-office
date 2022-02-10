@@ -74,7 +74,7 @@ body {
 }
 
 .container-fluid > .row > div {
-  padding: 0;
+  /* padding: 0; */
 }
 
 h1,
@@ -3507,6 +3507,7 @@ table.member-activity tr td:first-child {
   position: relative;
   width: 100%;
   background: #fff;
+  background-image: url("https://pixabay.com/fr/photos/salon-de-coiffure-2693077/");
 }
 
 .admin-meta {
@@ -5195,8 +5196,8 @@ a.btn-st.black {
 }
 
 .toggle-item .content {
-  float: left;
-  display: none;
+  /* float: left;
+  display: none; */
   padding: 0 40px 20px;
   width: 100%;
 }
@@ -5364,7 +5365,7 @@ a.btn-st.black {
 }
 
 .toggle-style3 .content {
-  padding-left: 85px;
+  /* padding-left: 85px; */
 }
 
 /*=== Toggels 6 ===*/
@@ -8517,7 +8518,7 @@ ul.notify-area > li > i {
   border-bottom: 1px solid #eaeaea;
   padding: 11px 0;
   position: relative;
-  font-size: 13px;
+  font-size: 15px;
   color: #1a1a1a;
 }
 
@@ -8533,7 +8534,7 @@ ul.notify-area > li > i {
 
 .rcnt-activt > ul > li span {
   float: right;
-  font-size: 10px;
+  font-size: 15px;
   margin-top: 2px;
   color: #888;
 }
@@ -8553,7 +8554,7 @@ ul.notify-area > li > i {
 }
 
 .rcnt-activt > ul > li:last-child {
-  border-bottom: 0;
+  /* border-bottom: 0; */
 }
 
 .clr1:before,
