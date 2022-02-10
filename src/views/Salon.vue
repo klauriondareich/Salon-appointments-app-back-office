@@ -100,55 +100,23 @@
                         <!-- customer support widget -->
                         <div class="col-md-6">
                             <div class="widget">
-                            <div class="widget-title">
-                                <h4>Tous les spécialistes </h4>
-                                <ul class="widget-controls">
-                                    <li class="refresh-content" title="Refresh"><i class="fa fa-refresh"></i></li>
-                                    <li class="expand-content" title="Maximize"><i class="icon-frame"></i></li>
-                                    <li class="more-option" title="More Options"><i class="ti-more-alt"></i></li>
-                                </ul>
+                              <div class="widget-title">
+                                  <h4>Tous les spécialistes </h4>
+                                  <ul class="widget-controls">
+                                      <li class="refresh-content" title="Refresh"><i class="fa fa-refresh"></i></li>
+                                      <li class="expand-content" title="Maximize"><i class="icon-frame"></i></li>
+                                      <li class="more-option" title="More Options"><i class="ti-more-alt"></i></li>
+                                  </ul>
+                              </div>
+                              <div class="widget-peding user-activity">
+                                  <div class="user-active" v-for="(item, index) in employees" :key="index">
+                                      <div class="active-usr"> <img :src="item.image" alt=""> </div>
+                                      <div class="active-info">
+                                          <h5><a href="#" title="">{{item.name}}</a></h5>
+                                      </div>
+                                  </div>
+                              </div>
                             </div>
-                            <div class="widget-peding user-activity">
-                                <div class="user-active">
-                                    <div class="active-usr"> <img src="images/resources/activity-1.jpg" alt=""> </div>
-                                    <div class="active-info">
-                                        <h5><a href="#" title="">Mario Flores</a></h5>
-                                    </div>
-                                </div>
-                                <div class="user-active">
-                                    <div class="active-usr"> <img src="images/resources/activity-2.jpg" alt=""> </div>
-                                    <div class="active-info">
-                                        <h5><a href="#" title="">Gabriella Cruz </a></h5>
-                                    </div>
-                                </div>
-                                <div class="user-active">
-                                    <div class="active-usr"> <img src="images/resources/activity-3.jpg" alt=""> </div>
-                                    <div class="active-info">
-                                        <h5><a href="#" title="">Johana Cooper</a></h5>
-                                    </div>
-                                </div>
-                                <div class="user-active">
-                                    <div class="active-usr"> <img src="images/resources/activity-2.jpg" alt=""> </div>
-                                    <div class="active-info">
-                                        <h5><a href="#" title="">Gabriella Cruz </a></h5>
-                                    </div>
-                                </div>
-                                <div class="user-active">
-                                    <div class="active-usr"> <img src="images/resources/activity-1.jpg" alt=""> </div>
-                                    <div class="active-info">
-                                        <h5><a href="#" title="">Mario Flores</a></h5>
-                                    </div>
-                                </div>
-                                <div class="user-active">
-                                    <div class="active-usr"> <img src="images/resources/activity-3.jpg" alt=""> </div>
-                                    <div class="active-info">
-                                        <h5><a href="#" title="">Johana Cooper</a></h5>
-                                        <span>02 Hours Ago</span>
-                                        <p>Fix Responsive Nvbar Collapse</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                             <!-- user list --> 
                         </div>
                         <!-- quick action widget --> 
@@ -179,10 +147,12 @@ export default {
        appointmentRef: firebase.firestore().collection("appointment"),
        categoryRef: firebase.firestore().collection("category"),
        servicesRef: firebase.firestore().collection("work"),
+       specialistsRef: firebase.firestore().collection("employee"),
        Storage: firebase.storage().ref(),
        appointments: [],
        categories: [],
        services: [],
+       employees: [],
        turnover: 0,
     }
   },
@@ -199,6 +169,29 @@ export default {
       let base_arr = this.salonObj.works;
       return base_arr.includes(service.id)
 
+    },
+
+    getSpecialists(employee){
+
+      if (employee.length !== 0){
+
+        employee.forEach((id) =>{
+
+          this.specialistsRef.doc(id).get().then((doc) =>{
+            if (doc.exists){
+
+              let obj = doc.data();
+              this.Storage.child(obj.image).getDownloadURL().then((url) =>{
+                  obj.image =  url;
+               });
+
+              this.employees.push(obj);
+
+            }
+          })
+        })
+
+      }
     }
 
   },
@@ -214,7 +207,11 @@ export default {
                }).catch(() => alert("L'image du salon na pas pu charger"))
                
                this.salonObj = obj;
+
+               this.getSpecialists(obj.employee);
            }
+
+
        });
 
       // Getting  all appointments and calculating the turnover
@@ -273,11 +270,12 @@ export default {
             // console.log(obj)
             this.categories.push(obj);
          });
-
-        
-    
       }
-    })
+    });
+
+    console.log(this.salonObj);
+
+    
   }
 }
 </script>
