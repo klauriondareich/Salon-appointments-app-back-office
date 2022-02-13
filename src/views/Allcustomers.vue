@@ -30,8 +30,8 @@
                         <h4>Liste des clients</h4>
                     </div>
                     <div class="main-table">
-                        <table class="table table-hover table-responsive">
-                            <thead>
+                        <table class="prj-tbl striped table-responsive">
+                            <thead class="color">
                                 <tr>
                                     <th><em>#</em></th>
                                     <th><em>Information du client</em></th>
