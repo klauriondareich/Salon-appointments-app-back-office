@@ -76,7 +76,7 @@
                         <div class="widget-title">
                             <h4>Services du salon</h4>
                             <ul class="widget-controls">
-                            <a href="services.html" title="" class="btn-st rd-30 btn-md ">Ajouter des services</a>
+                            <router-link to="/createService" title="" class="btn-st rd-30 btn-md ">Ajouter des services</router-link>
                             </ul>
                         </div>
                         <div class="widget-peding">
@@ -87,7 +87,10 @@
                                     <div class="widget-peding">
                                       <div class="rcnt-activt">
                                         <ul v-for="(element, index2) in item.works" :key="index2" >
-                                          <li class="clr1">{{element.name}} ({{element.duration}} min)  <span class="font-weight-bold">{{element.price}} FCFA</span> </li>
+                                          <li class="clr1">{{element.name}} ({{element.duration}} min)   
+                                            <span class="pl-3"><i class="fa fa-edit"></i></span>
+                                            <span class="font-weight-bold">{{element.price}} FCFA</span> 
+                                          </li>
                                         </ul>
                                       </div>
                                     </div>
@@ -97,32 +100,43 @@
                         </div>
                         <!-- user list --> 
                         </div>
-                        <!-- customer support widget -->
-                        <div class="col-md-6">
-                            <div class="widget">
-                              <div class="widget-title">
-                                  <h4>Tous les spécialistes </h4>
-                                  <ul class="widget-controls">
-                                      <li class="refresh-content" title="Refresh"><i class="fa fa-refresh"></i></li>
-                                      <li class="expand-content" title="Maximize"><i class="icon-frame"></i></li>
-                                      <li class="more-option" title="More Options"><i class="ti-more-alt"></i></li>
-                                  </ul>
-                              </div>
-                              <div class="widget-peding user-activity">
-                                  <div class="user-active" v-for="(item, index) in employees" :key="index">
-                                      <div class="active-usr"> <img :src="item.image" alt=""> </div>
-                                      <div class="active-info">
-                                          <h5><a href="#" title="">{{item.name}}</a></h5>
-                                      </div>
-                                  </div>
-                              </div>
-                            </div>
-                            <!-- user list --> 
-                        </div>
+              
+
+        
+                        
                         <!-- quick action widget --> 
                     </div>
                 </div>
-              
+              <div class="row">
+                <div class="col-lg-6 col-sm-6">
+                    <div class="widget">
+                        <div class="widget-title">
+                            <h4>Mes spécialistes</h4>
+                            <ul class="widget-controls">
+                              <a href="services.html" title="" class="btn-st rd-30 btn-md ">Ajouter un nouveau</a>
+                            </ul>
+                        </div>
+                        <div class="widget-peding" v-for="(item, index) in employees" :key="index">
+                            <ul class="q-comments">
+                                <li>
+                                    <div class="comenter"> <img :src="item.image" alt=""> </div>
+                                    <div class="comment-detail">
+                                        <h5>{{item.name}}</h5>
+                                        <p>{{item.desc}}</p>
+                                    </div>
+                                    <ul class="comment-date">
+                                        <li class="mango"><span>October 21, 2019</span></li>
+                                        <li><span>9:30-13:00</span></li>
+                                    </ul>
+                                    <div class="approv-reject"> <a class="approve active" href="#" title="">Afficher</a> <a class="rejected" href="#" title="">Modifier</a> </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                      
+                  </div>
+                  
+              </div>
               <!-- bottombar --> 
             </div>
           </div>
@@ -131,12 +145,9 @@
 
 <script>
 import firebase from '../firebase/init'
-import utilities from '../mixins/utilities'
-
 
 export default {
  name: 'Salon',
- mixins:[utilities],
 
   data(){
     
