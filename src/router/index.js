@@ -37,6 +37,11 @@ const routes = [
     name: 'Salon',
     component: () => import(/* webpackChunkName: "salon" */ '../views/Salon.vue')
   },
+  {
+    path: '/createService',
+    name: 'createService',
+    component: () => import(/* webpackChunkName: "createService" */ '../views/CreateService.vue')
+  },
 ]
 
 const router = new VueRouter({
