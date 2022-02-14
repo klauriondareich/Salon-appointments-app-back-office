@@ -15,17 +15,17 @@ const routes = [
   {
     path: '/allcustomers',
     name: 'Allcustomers',
-    component: () => import(/* webpackChunkName: "allcustomers" */ '../views/Allcustomers.vue')
+    component: () => import(/* webpackChunkName: "allcustomers" */ '../views/AllcustomersView.vue')
   },
   {
     path: '/appointments',
     name: 'Allappointments',
-    component: () => import(/* webpackChunkName: "allappointments" */ '../views/Allappointments.vue')
+    component: () => import(/* webpackChunkName: "allappointments" */ '../views/AllappointmentsView.vue')
   },
   {
     path: '/comments',
     name: 'Comments',
-    component: () => import(/* webpackChunkName: "comments" */ '../views/Comments.vue')
+    component: () => import(/* webpackChunkName: "comments" */ '../views/CommentsView.vue')
   },
   {
     path: '/gallery',
