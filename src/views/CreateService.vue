@@ -1,7 +1,7 @@
 <template>
   <div class="main-content">
     <div class="panel-body">
-        <div class="content-area">
+        <div class="content-area mt-5">
             <div class="sub-bar">
                 <div class="sub-title">
                 <h4>Ajouter un service</h4>
@@ -11,7 +11,7 @@
                 <li>Dashbord</li>
                 </ul>
             </div>
-            <div class="inner-bg">
+            <div class="inner-bg mb-5">
                 
                 <div class="pnl-bdy billing-sec">
                     <div class="row">
@@ -43,10 +43,15 @@
                             <label>Description <span>*</span> </label>
                             <input placeholder="" type="text" v-model="serviceObj.desc">
                         </div>
-                        <div class="mt-5">
-                            <a href="#" class="btn-st rd-30 btn-md " @click="addService()">Enregistrer</a>
-                        </div>
+                    </div>
                 </div>
+            </div>
+            <div class="px-5">
+                <div class="float-left">
+                    <router-link to="/salon" class="btn-st rd-30 org-clr">Retour</router-link>
+                </div>
+                <div class="float-right">
+                    <a href="#" class="btn-st rd-30 btn-st" @click="addService()">Enregistrer</a>
                 </div>
             </div>
         </div>

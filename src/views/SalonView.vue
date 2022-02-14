@@ -4,7 +4,7 @@
                           
             <div class="panel-body">
                             
-              <div class="content-area">
+              <div class="content-area mt-5">
                 <div class="sub-bar">
                   <div class="sub-title">
                     <h4>Salon</h4>
@@ -87,9 +87,11 @@
                                     <div class="widget-peding">
                                       <div class="rcnt-activt">
                                         <ul v-for="(element, index2) in item.works" :key="index2" >
-                                          <li class="clr1">{{element.name}} ({{element.duration}} min)   
-                                            <span class="pl-3"><i class="fa fa-edit"></i></span>
-                                            <span class="font-weight-bold">{{element.price}} FCFA</span> 
+                                          <li class="clr1 ">{{element.name}} ({{element.duration}} min)   
+                                            <span class="pl-3 pr-3"><i class="fa fa-edit"></i></span>
+                                            <span v-if="element.visible"  class="priority low">On</span>
+                                            <span v-if="!element.visible" class="priority high">Off</span>
+                                            <span class="font-weight-bold pr-3">{{element.price}} FCFA</span> 
                                           </li>
                                         </ul>
                                       </div>

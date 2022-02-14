@@ -1,17 +1,17 @@
 <template>
   <div class="main-content">
     <div class="panel-body">
-        <div class="content-area">
+        <div class="content-area mt-5">
             <div class="sub-bar">
                 <div class="sub-title">
-                <h4>Ajouter un service</h4>
+                <h4>Ajouter un nouveau spécialiste</h4>
                 </div>
                 <ul class="bread-crumb">
                 <li><a href="#" title="">Services</a></li>
                 <li>Dashbord</li>
                 </ul>
             </div>
-            <div class="inner-bg">
+            <div class="inner-bg mb-5">
                 
                 <div class="pnl-bdy billing-sec">
                     <div class="row">
@@ -40,10 +40,15 @@
                                 <label class="form-check-label" for="inlineCheckbox1">{{item.name}}</label>
                             </div>
                         </div>
-                        <div class="mt-5">
-                            <a href="#" class="btn-st rd-30 btn-md " @click="addSpecialist()">Enregistrer</a>
-                        </div>
                     </div>
+                </div>
+            </div>
+            <div class="px-5">
+                <div class="float-left">
+                    <router-link to="/salon" class="btn-st rd-30 org-clr">Retour</router-link>
+                </div>
+                <div class="float-right">
+                    <a href="#" class="btn-st rd-30 btn-st" @click="addSpecialist()">Enregistrer</a>
                 </div>
             </div>
         </div>
