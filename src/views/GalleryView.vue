@@ -101,7 +101,7 @@
         </div>
         <!-- responsive header -->
         <div class="panel-body">
-            <div class="content-area">
+            <div class="content-area mt-5">
                 
                 <div class="row pt-5">
                     <div class="inner-bg">
