@@ -15,38 +15,35 @@
                 
                 <div class="pnl-bdy billing-sec">
                     <div class="row">
-                        <div class="col-md-6 col-sm-6 field">
-                            <label>Nom <span>*</span> </label>
-                            <input v-model="serviceObj.name" type="text">
-                        </div>
-                        <div class="col-md-6 col-sm-6 field">
-                            <label>Prix <span>*</span> </label>
-                            <input v-model="serviceObj.price" type="text">
-                        </div>
-                        <div class="col-md-6 col-sm-6 field">
-                            <label>Catégorie <span>*</span> </label>
-                            <select style="background:#f4f8ff; padding-left: 10px;" @change="changeCategory($event)" >
-                                <option value="">Choisir une catégorie</option>
-                                <option :value="category.id" v-for="(category, index) in categories" :key="index"
-                               >{{category.name}}</option>
-                             
-                            </select>
-                        </div>
-                        <div class="col-md-6 col-sm-6 field">
-                             <label>Durée <span>*</span> </label>
-                            <select style="background:#f4f8ff; padding-left: 10px;" @change="changeDuration($event)">
-                                <option value="">Choisir une durée</option>
-                                <option v-for="(duration, index) in durations" :key="index">{{duration.value}} {{duration.libelle}}</option>
-                            </select>
+                        <div class="col-md-12 col-sm-12 field">
+                            <label>Nom de la spécialiste<span>*</span> </label>
+                            <input v-model="specialistObj.name" type="text">
                         </div>
                         <div class="col-md-12 col-sm-12 field">
                             <label>Description <span>*</span> </label>
-                            <input placeholder="" type="text" v-model="serviceObj.desc">
+                            <input placeholder="" type="text" v-model="specialistObj.desc">
+                        </div>
+                        <div class="col-md-9 col-sm-9 field">
+                           <span class="upload-image">Ajouter une nouvelle image</span>
+                            <label class="fileContainer"> <span>Ajouter</span>
+                            <input type="file" accept="image/*" @change="uploadImage($event)">
+                            </label>
+                        </div>
+                        <div class="col-md-2 col-sm-2 field">
+                            <div style="border: 1px solid; height: 200px;">
+                                <img :src="specialistObj.image"  alt="specialist profile">
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-check form-check-inline" v-for="(item, index) in allServices" :key="index">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" :value="item.id" @change="getIdFromCheckBox($event)">
+                                <label class="form-check-label" for="inlineCheckbox1">{{item.name}}</label>
+                            </div>
                         </div>
                         <div class="mt-5">
-                            <a href="#" class="btn-st rd-30 btn-md " @click="addService()">Enregistrer</a>
+                            <a href="#" class="btn-st rd-30 btn-md " @click="addSpecialist()">Enregistrer</a>
                         </div>
-                </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -59,76 +56,24 @@ import firebase from '../firebase/init'
 
 
 export default {
-    name: "createService",
+    name: "specialist",
 
     data(){
         return {
-            durations: [
-                    {
-                        "value": 10,
-                        "libelle": "min"
-                    },
-                    {
-                        "value": 15,
-                        "libelle": "min"
-                    },
-                    {
-                        "value": 20,
-                        "libelle": "min"
-                    },
-                    {
-                        "value": 25,
-                        "libelle": "min"
-                    },
-                    {
-                        "value": 30,
-                        "libelle": "min"
-                    },
-                    {
-                        "value": 35,
-                        "libelle": "min"
-                    },
-                    {
-                        "value": 40,
-                        "libelle": "min"
-                    },
-                    {
-                        "value": 45,
-                        "libelle": "min"
-                    },
-                    {
-                        "value": 50,
-                        "libelle": "min"
-                    },
-                    {
-                        "value": 55,
-                        "libelle": "min"
-                    },
-                    {
-                        "value": 1,
-                        "libelle": "heure"
-                    },
-                    {
-                        "value": 2,
-                        "libelle": "heure"
-                    },
-                    {
-                        "value": 3,
-                        "libelle": "heure"
-                    }
-                ],
+            
                 workRef:  firebase.firestore().collection("work"), 
-                categoryRef: firebase.firestore().collection("category"),
+                employeeRef: firebase.firestore().collection("employee"),
                 salonRef: firebase.firestore().collection("salons"), 
                 salonId: 'XMLjEcqdOURe2Vwadm7V',
-                categories: [],
-                serviceObj: {
-                    "categoryId": null,
+                Storage: firebase.storage().ref(),
+
+                allServices: [],
+                specialistObj: {
                     "desc": "",
-                    "duration": null,
+                    "board": "",
                     "name": "",
-                    "price": "",
-                    "visible": false
+                    "image": null,
+                    "works": []
                 }
 
             }
@@ -140,46 +85,77 @@ export default {
             // Ajouter un contrôle qui vérifie que tous les champs sont remplies
             // Ajouter un contrôle sur les champs numériques
 
-            addService(){
-                this.workRef.add(this.serviceObj).then((response) =>{
-                     this.salonRef.doc(this.salonId).get().then((doc)=>{
-                        if (doc.exists){
-                            let obj = doc.data();
-                            obj.works.push(response.id);
+            addSpecialist(){
 
-                            this.salonRef.doc(this.salonId).update(obj).then(() =>{
+                if (this.specialistObj.desc != "" && this.specialistObj.name != "" && this.specialistObj.image != null){
 
-                                this.$router.replace({name:'Salon'});
-
-                            });
-                          }
+                    this.employeeRef.add(this.specialistObj).then((response) =>{
+                         this.salonRef.doc(this.salonId).get().then((doc)=>{
+                            if (doc.exists){
+                                let obj = doc.data();
+                                obj.employee.push(response.id);
+    
+                                this.salonRef.doc(this.salonId).update(obj).then(() =>{
+    
+                                    this.$router.replace({name:'Salon'});
+    
+                                });
+                              }
                         })
+                    })
+                }
+            },
+
+            getIdFromCheckBox(event){
+
+                this.specialistObj.works.push(event.target.value)
+            },
+
+           uploadImage(event){
+                let metadata = {
+                    ContentLanguage : "fr",
+                    contentType: "image/jpeg",
+                }
+
+                let file = event.target.files[0];
+                let fileName = "profile-" + file.lastModified;
+
+                this.Storage.child("img/" + fileName).put(file, metadata)
+                .then(() =>{
+                this.getImageUrl(fileName)
+                }).catch((error) =>{
+                    alert(error.message)
                 })
             },
 
-            changeCategory(event){
-                this.serviceObj.categoryId = event.target.value;
+            getImageUrl(url){
+                this.Storage.child("img/" + url).getDownloadURL().then((url) =>{
+                 this.specialistObj.image = url;
+                })
             },
-
-            changeDuration(event){
-                this.serviceObj.duration = event.target.value.split(" ")[0];
-            }
         },
 
         created(){
             
-            // Get all categories of services
-            this.categoryRef.where("visible", "==", true).get().then((snapshot) =>{
-            
-                if(!snapshot.empty){
+            this.salonRef.doc(this.salonId).get().then((doc)=>{
+                if (doc.exists){
+                    let obj = doc.data();
+                    obj.id = doc.id;
                     
-                    snapshot.forEach((doc) =>{
-                        let obj = doc.data();
-                        obj.id = doc.id;
-                        this.categories.push(obj)
-                    })
+                    obj.works.forEach(id => {
+                        
+                        this.workRef.doc(id).get().then((doc) =>{
+                             if (doc.exists){
+                                 let obj = doc.data();
+                                 obj.id = doc.id;
+                                 this.allServices.push(obj)
+                                 console.log("doc", doc.data())
+                             }
+                        })
+                    });
                 }
-            })
+
+             });
         }
 
     }  

@@ -113,13 +113,13 @@
                         <div class="widget-title">
                             <h4>Mes spécialistes</h4>
                             <ul class="widget-controls">
-                              <a href="services.html" title="" class="btn-st rd-30 btn-md ">Ajouter un nouveau</a>
+                              <router-link to="/specialist" title="" class="btn-st rd-30 btn-md ">Ajouter un nouveau</router-link>
                             </ul>
                         </div>
                         <div class="widget-peding" v-for="(item, index) in employees" :key="index">
                             <ul class="q-comments">
                                 <li>
-                                    <div class="comenter"> <img :src="item.image" alt=""> </div>
+                                    <div class="comenter"> <img :src="item.image" alt="specialist profile" class="img-thumbnail"> </div>
                                     <div class="comment-detail">
                                         <h5>{{item.name}}</h5>
                                         <p>{{item.desc}}</p>
@@ -195,8 +195,15 @@ export default {
               this.Storage.child(obj.image).getDownloadURL().then((url) =>{
                   obj.image =  url;
                });
-
+              obj.works.forEach((id) =>{
+                this.servicesRef.doc(id).get().then((doc) =>{
+                  if (doc.exists){
+                    obj.worksName.push(doc.data().name)
+                  }
+                })
+              })
               this.employees.push(obj);
+              console.log("emp", obj)
 
             }
           })
@@ -213,7 +220,7 @@ export default {
            if (doc.exists){
                let obj = doc.data();
                obj.id = doc.id;
-               this.Storage.child(obj.image).getDownloadURL().then((url) =>{
+               this.Storage.child("img/" + obj.image.split("/")[1]).getDownloadURL().then((url) =>{
                   obj.image =  url;
                }).catch(() => alert("L'image du salon na pas pu charger"))
                
@@ -278,13 +285,10 @@ export default {
                
             })
 
-            // console.log(obj)
             this.categories.push(obj);
          });
       }
     });
-
-    console.log(this.salonObj);
 
     
   }

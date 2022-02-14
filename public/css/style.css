@@ -2980,7 +2980,7 @@ span.blue:before {
   width: 14%;
 }
 .comenter img{
-  border-radius: 100%;
+  /* border-radius: 100%; */
 }
 .comment-detail {
   display: table-cell;
