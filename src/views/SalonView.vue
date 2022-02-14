@@ -76,7 +76,7 @@
                         <div class="widget-title">
                             <h4>Services du salon</h4>
                             <ul class="widget-controls">
-                            <router-link to="/createService" title="" class="btn-st rd-30 btn-md ">Ajouter des services</router-link>
+                            <router-link to="/service" title="" class="btn-st rd-30 btn-md ">Ajouter des services</router-link>
                             </ul>
                         </div>
                         <div class="widget-peding">
