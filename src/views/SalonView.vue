@@ -125,10 +125,9 @@
                                         <p>{{item.desc}}</p>
                                     </div>
                                     <ul class="comment-date">
-                                        <li class="mango"><span>October 21, 2019</span></li>
-                                        <li><span>9:30-13:00</span></li>
+                                        <li class="mango" v-for="(el, index) in item.worksName" :key="index"><span>{{el}}</span></li> <br>
                                     </ul>
-                                    <div class="approv-reject"> <a class="approve active" href="#" title="">Afficher</a> <a class="rejected" href="#" title="">Modifier</a> </div>
+                                    <div class="approv-reject"> <a class="btn-st wht-clr" href="#" title="">Modifier</a></div>
                                 </li>
                             </ul>
                         </div>
@@ -195,15 +194,21 @@ export default {
               this.Storage.child(obj.image).getDownloadURL().then((url) =>{
                   obj.image =  url;
                });
-              obj.works.forEach((id) =>{
-                this.servicesRef.doc(id).get().then((doc) =>{
+
+              obj.worksName = [];
+                            // console.log("emp1", obj)
+
+              obj.works.forEach((item) =>{
+                // console.log("id", id)
+                this.servicesRef.doc(item.id).get().then((doc) =>{
                   if (doc.exists){
                     obj.worksName.push(doc.data().name)
                   }
                 })
               })
+
               this.employees.push(obj);
-              console.log("emp", obj)
+              // console.log("emp", obj)
 
             }
           })

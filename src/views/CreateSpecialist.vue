@@ -108,7 +108,7 @@ export default {
 
             getIdFromCheckBox(event){
 
-                this.specialistObj.works.push(event.target.value)
+                this.specialistObj.works.push({"id": event.target.value})
             },
 
            uploadImage(event){

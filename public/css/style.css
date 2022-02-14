@@ -3002,11 +3002,12 @@ span.blue:before {
 .comment-date {
   display: inline-block;
   vertical-align: sub;
+  padding: 10px;
 }
 
 .comment-date > li {
-  display: inline-block;
-  line-height: 10px;
+  display: block;
+  /* line-height: 10px; */
   padding-left: 15px;
   position: relative;
 }
@@ -3024,7 +3025,7 @@ span.blue:before {
 }
 
 .comment-date > li span {
-  font-size: 11px;
+  /* font-size: 11px; */
 }
 
 .approv-reject {
