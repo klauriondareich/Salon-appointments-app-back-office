@@ -58,6 +58,11 @@ const routes = [
     path: "/",
     component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
   },
+  {
+    name: "resetPassword",
+    path: "/reset_password",
+    component: () => import(/* webpackChunkName: "resetPassword" */ '../views/ResetPassword.vue')
+  },
 ]
 
 const router = new VueRouter({

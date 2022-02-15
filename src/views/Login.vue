@@ -13,7 +13,7 @@
                             <label><i class="fa fa-unlock-alt"></i></label>
                             <input type="text" placeholder="Password" style="background: #fff;">
                             
-                            <label for="remember"> <a href="#" title="">Mot de passe oublié?</a></label>
+                            <label for="remember"> <router-link to="/reset_password">Mot de passe oublié?</router-link></label>
                             <button type="submit">Se connecter</button>
                         </form>
                     </div>
