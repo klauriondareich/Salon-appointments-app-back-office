@@ -9739,7 +9739,7 @@ ul.notify-area > li > i {
 
 .billing-sec .field > label {
   float: left;
-  font-size: 12px;
+  font-size: 15px;
   font-weight: normal;
   margin: 0 0 10px;
   width: 100%;
@@ -10509,7 +10509,7 @@ ul.notify-area > li > i {
 
 .upload-image {
   display: inline-block;
-  font-size: 12px;
+  font-size: 15px;
   padding-right: 20px;
   text-transform: capitalize;
   margin-bottom: 10px;

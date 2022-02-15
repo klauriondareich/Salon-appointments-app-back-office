@@ -35,6 +35,7 @@
                             </div>
                         </div>
                         <div class="col-md-12 col-sm-12">
+                             <span style="display:block;" class="font-weight-bold pb-3">Choisir des services: </span>
                             <div class="form-check form-check-inline" v-for="(item, index) in allServices" :key="index">
                                 <input class="form-check-input" type="checkbox" id="inlineCheckbox1" :value="item.id" @change="getIdFromCheckBox($event)">
                                 <label class="form-check-label" for="inlineCheckbox1">{{item.name}}</label>
