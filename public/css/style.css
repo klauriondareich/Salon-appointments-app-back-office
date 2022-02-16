@@ -11325,7 +11325,7 @@ span.pending {
   margin-bottom: -14px;
   padding: 15px 50px;
   position: relative;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   width: 100%;
 }
 
