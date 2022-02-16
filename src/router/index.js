@@ -106,7 +106,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) =>{
   let firebaseUser = "";
- 
+  
   if(firebase.auth().currentUser){
 
     let managerRef = firebase.firestore().collection("managers");
@@ -119,14 +119,13 @@ router.beforeEach((to, from, next) =>{
 
         if (user_data.role && user_data.role === "manager"){
           firebaseUser = firebase.auth();
-
+          
           localStorage.setItem("user_id", doc.id);
           localStorage.setItem("salon_id", user_data.salonId);
 
           const requiresAuth = to.matched.some(route => route.meta.requiresAuth); 
 
-          if(requiresAuth && !firebaseUser) next({name: "Login"}); // Redirect to login page when the non logged in user try to access pages
-          else if (!requiresAuth && firebaseUser) next({name: "Home"}) // Prevent from go to login or register page when the user is logged in
+          if (!requiresAuth && firebaseUser) next({name: "Home"}) // Prevent from go to login or register page when the user is logged in
           else next();
         }
       }
@@ -135,6 +134,11 @@ router.beforeEach((to, from, next) =>{
       }
     })
     
+  }
+  else {
+    const requiresAuth = to.matched.some(route => route.meta.requiresAuth); 
+    if(requiresAuth && !firebaseUser) next({name: "Login"}); // Redirect to login page when the non logged in user try to access pages
+    next();
   }
   
 })

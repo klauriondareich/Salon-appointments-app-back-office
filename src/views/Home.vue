@@ -323,6 +323,7 @@ export default {
         totalAmountRdv: 0,
         totalCompleteRdv: 0,
         totalOngoingRdv: 0,
+        salonId: null,
     }
   },
   methods:{
@@ -346,11 +347,13 @@ export default {
 
   created(){
 
+      this.salonId = localStorage.getItem("salon_id");
+
       // date du jour
       // this.today = new Date().getFullYear() + "-" + new Date().getMonth() + "-" + new Date().getDate();
-          
+    
     // Script à revoir, le syst doit recupérer les rdv du jour et non tous les rdv
-     this.appointment.where("salon", "==", "XMLjEcqdOURe2Vwadm7V").orderBy("stamp", "desc").onSnapshot((snapshot) =>{
+     this.appointment.where("salon", "==", this.salonId).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
       if(!snapshot.empty){
         this.appointments = [];
         this.comments = [];
