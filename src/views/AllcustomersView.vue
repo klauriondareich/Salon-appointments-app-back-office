@@ -80,6 +80,7 @@ export default {
        customer_name: "",
        Obj : {},
        searchItem: null,
+       salonId: null,
     }
    
   },
@@ -105,8 +106,9 @@ export default {
   },
   created(){
 
+    this.salonId = localStorage.getItem("salon_id");
 
-     this.appointment.where("salon", "==", "XMLjEcqdOURe2Vwadm7V").orderBy("stamp", "desc").onSnapshot((snapshot) =>{
+     this.appointment.where("salon", "==", this.salonId).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
       if(!snapshot.empty){
         this.customersWithoutDouble = [];
         this.customersWithDouble = [];

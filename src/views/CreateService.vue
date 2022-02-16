@@ -125,7 +125,7 @@ export default {
                 workRef:  firebase.firestore().collection("work"), 
                 categoryRef: firebase.firestore().collection("category"),
                 salonRef: firebase.firestore().collection("salons"), 
-                salonId: 'XMLjEcqdOURe2Vwadm7V',
+                salonId: null,
                 categories: [],
                 serviceObj: {
                     "categoryId": null,
@@ -173,6 +173,8 @@ export default {
 
         created(){
             
+            this.salonId = localStorage.getItem("salon_id");
+
             // Get all categories of services
             this.categoryRef.where("visible", "==", true).get().then((snapshot) =>{
             

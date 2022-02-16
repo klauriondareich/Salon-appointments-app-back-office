@@ -70,7 +70,7 @@ export default {
                 workRef:  firebase.firestore().collection("work"), 
                 employeeRef: firebase.firestore().collection("employee"),
                 salonRef: firebase.firestore().collection("salons"), 
-                salonId: 'XMLjEcqdOURe2Vwadm7V',
+                salonId: null,
                 Storage: firebase.storage().ref(),
 
                 allServices: [],
@@ -143,6 +143,8 @@ export default {
 
         created(){
             
+            this.salonId = localStorage.getItem("salon_id");
+
             this.salonRef.doc(this.salonId).get().then((doc)=>{
                 if (doc.exists){
                     let obj = doc.data();

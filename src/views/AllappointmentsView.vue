@@ -120,6 +120,7 @@ export default {
             appointmentsBis: [],
             appointment: firebase.firestore().collection("appointment"),
             searchItem: null,
+            salonId: null
         }
     },
     methods:{
@@ -170,7 +171,9 @@ export default {
     },
     created(){
 
-     this.appointment.where("salon", "==", "XMLjEcqdOURe2Vwadm7V").orderBy("stamp", "desc").onSnapshot((snapshot) =>{
+    this.salonId = localStorage.getItem("salon_id");
+
+     this.appointment.where("salon", "==", this.salonId).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
       if(!snapshot.empty){
         this.appointments = [];
         snapshot.forEach((doc) =>{

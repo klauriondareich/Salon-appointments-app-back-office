@@ -148,13 +148,14 @@ export default {
     data(){
         return {
             images: [],
-            salonId: "XMLjEcqdOURe2Vwadm7V",
+            salonId: null,
             galleryRef: firebase.firestore().collection("gallery"), 
             Storage: firebase.storage().ref(),
         }
     },
     methods:{
-         addInCollection(obj){
+        
+        addInCollection(obj){
             this.galleryRef.add(obj).then(() =>{
             alert("avatar uploaded");
         }).catch((error) => alert(error.message))
@@ -186,7 +187,10 @@ export default {
 
     },
     created(){
-        this.galleryRef.where("salonId", "==", "XMLjEcqdOURe2Vwadm7V").get().then((snapshot) =>{
+
+        this.salonId = localStorage.getItem("salon_id");
+
+        this.galleryRef.where("salonId", "==", this.salonId).get().then((snapshot) =>{
             if(!snapshot.empty){
                 snapshot.forEach((doc) =>{
                     let obj = doc.data();

@@ -173,7 +173,8 @@ export default {
             comments: [],
             appointment: firebase.firestore().collection("appointment"), 
             currentComment: "",
-            moyenneEtoile: ""
+            moyenneEtoile: "",
+            salonId: null,
         }
     },
 
@@ -188,12 +189,15 @@ export default {
         }
     },
     created(){
+
+        this.salonId = localStorage.getItem("salon_id");
+
         let stars = [];
-        this.appointment.where("salon", "==", "XMLjEcqdOURe2Vwadm7V").orderBy("stamp", "desc").onSnapshot((snapshot) =>{
+        this.appointment.where("salon", "==", this.salonId).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
         if(!snapshot.empty){
                 this.comments = [];
                 snapshot.forEach((doc) =>{
-                console.log(doc.data())
+                    
                 let obj = doc.data();
                 obj.id = doc.id;
 
