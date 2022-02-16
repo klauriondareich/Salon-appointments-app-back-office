@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
+
 import router from './router'
 import firebase from "./firebase/init"
 import vuetify from '@/plugins/vuetify' // path to vuetify export
-// import store from './store/store'
+import store from './store/store'
 
 
 
@@ -26,6 +27,7 @@ firebase.auth().onAuthStateChanged(user => {
   if(!app){
     app = new Vue({
       router,
+      store,
       vuetify,
       user,
       render: h => h(App),

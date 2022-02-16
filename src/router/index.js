@@ -119,6 +119,10 @@ router.beforeEach((to, from, next) =>{
 
         if (user_data.role && user_data.role === "manager"){
           firebaseUser = firebase.auth();
+
+          localStorage.setItem("user_id", doc.id);
+          localStorage.setItem("salon_id", user_data.salonId);
+
           const requiresAuth = to.matched.some(route => route.meta.requiresAuth); 
 
           if(requiresAuth && !firebaseUser) next({name: "Login"}); // Redirect to login page when the non logged in user try to access pages
