@@ -122,6 +122,7 @@ router.beforeEach((to, from, next) =>{
           
           localStorage.setItem("user_id", doc.id);
           localStorage.setItem("salon_id", user_data.salonId);
+          localStorage.setItem("username", user_data.username);
 
           const requiresAuth = to.matched.some(route => route.meta.requiresAuth); 
 

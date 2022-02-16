@@ -35,8 +35,4 @@ firebase.auth().onAuthStateChanged(user => {
   }
 })
 
-// Logout the user if these values don't exist in localstorage
-let salon_id = localStorage.getItem("salon_id");
-let user_id = localStorage.getItem("user_id");
-if (salon_id == null || user_id) firebase.auth().signOut();
 

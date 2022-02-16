@@ -2,7 +2,7 @@
   <header>
     <div class="side-menus">
         <div class="side-header">
-            <div class="logo"><a title="" href="index.html"><img alt="" src="images/b-logo.png"></a></div>
+            <div class="logo"><router-link title="" to="/home"><img alt="" src="images/b-logo.png"></router-link></div>
             <nav class="slide-menu">
                 <ul class="parent-menu">                                           
                     <li><router-link to="/home" title=""><i class="fa fa-home"></i><span>Accueil</span></router-link></li>
