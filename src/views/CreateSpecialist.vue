@@ -18,7 +18,7 @@
                         <div class="pnl-bdy billing-sec">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 field">
-                                    <label>Nom de la spécialiste<span>*</span> </label>
+                                    <label>Nom du spécialiste<span>*</span> </label>
                                     <input v-model="specialistObj.name" type="text">
                                 </div>
                                 <div class="col-md-12 col-sm-12 field">

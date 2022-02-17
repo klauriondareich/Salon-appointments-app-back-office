@@ -4,11 +4,11 @@
         <div class="content-area mt-5">
             <div class="sub-bar">
                 <div class="sub-title">
-                <h4>Ajouter un service</h4>
+                    <h4>Ajouter un service</h4>
                 </div>
                 <ul class="bread-crumb">
-                <li><a href="#" title="">Services</a></li>
-                <li>Dashbord</li>
+                    <li><a href="#" title="">Services</a></li>
+                    <li>Dashbord</li>
                 </ul>
             </div>
             <div class="inner-bg mb-5">
