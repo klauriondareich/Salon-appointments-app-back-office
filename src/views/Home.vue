@@ -118,24 +118,13 @@
                 <div class="widget mt-5">
                     <div class="widget-title no-margin">
                         <h4>Liste des Rendez-vous du jour</h4>
-                        <ul class="widget-controls">
-                            <li class="refresh-content" title="Refresh"><i class="fa fa-refresh"></i></li>
-                            <li class="expand-content" title="Maximize"><i class="icon-frame"></i></li>
-                            <li class="more-option" title="More Options"><i class="ti-more-alt"></i></li>
-                        </ul>
-                        <div class="more-optn">
-                            <ul>
-                                <li><a href="#" title="">option 1</a></li>
-                                <li><a href="#" title="">option 2</a></li>
-                                <li><a href="#" title="">option 3</a></li>
-                            </ul>
-                        </div>
+                        
                     </div>
-                    <div class="main-table">
-                        <table class="table table-hover table-responsive">
+                    <div class="widget">
+                        <table class="prj-tbl striped bordered table-responsive">
                             <thead>
                                 <tr>
-                                    <th>NO.</th>
+                                    <th style="width:2%">NO.</th>
                                     <th>Service</th>
                                     <th>Spécilaiste</th>
                                     <th>Client</th>
@@ -206,7 +195,7 @@
                         <!-- user list -->
                     </div>
                     <!-- recent comment widget -->
-                        <div class="col-lg-4 col-sm-6">
+                    <!-- <div class="col-lg-4 col-sm-6">
                         <div class="widget">
                             <div class="widget-title">
                                 <h4>Rendez-vous mensuels</h4>
@@ -228,8 +217,8 @@
                                 </ul>
                             </div>
                         </div>
-                        <!-- guage widget -->
-                    </div>
+                  
+                    </div> -->
 
                     
                 </div>                            
