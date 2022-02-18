@@ -92,6 +92,15 @@ const routes = [
           role:"manager"
         },
         component: () => import(/* webpackChunkName: "createService" */ '../views/CreateSpecialist.vue')
+      },
+      {
+        path: '/editspec/:id',
+        name: 'editSpecialist',
+        meta:{
+          requiresAuth: true,
+          role:"manager"
+        },
+        component: () => import(/* webpackChunkName: "createService" */ '../views/EditSpec.vue')
       }
     ]
   },

@@ -183,7 +183,6 @@ export default {
       if(!snapshot.empty){
         this.appointments = [];
         snapshot.forEach((doc) =>{
-          console.log(doc.data())
           let obj = doc.data();
           obj.id = doc.id;
           obj.isVisible = false;

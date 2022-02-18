@@ -5,7 +5,7 @@
                 <div class="col-lg-2">
                     <div class="logo">
                         <router-link to="/home" title="">
-                            <img src="images/b-logo.png" width="40" height="40" alt="">
+                            <img src="/images/bcall.png" width="40" height="40" alt="">
                             BIoutyCall
                         </router-link>
                 </div>

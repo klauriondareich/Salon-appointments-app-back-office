@@ -5,7 +5,7 @@
             <div class="content-area mt-5">
                 <div class="sub-bar">
                     <div class="sub-title">
-                        <h4>Ajouter un nouveau spécialiste</h4>
+                        <h4>Modifier un spécialiste</h4>
                     </div>
                     <ul class="bread-crumb">
                         <li><a href="#" title="">Services</a></li>
@@ -48,10 +48,10 @@
                 </div>
                 <div class="px-5">
                     <div class="float-left">
-                        <router-link to="/salon" class="btn-st rd-30 org-clr">Retour</router-link>
+                        <router-link to="/salon" class="btn-st rd-30 org-clr">Retour au salon</router-link>
                     </div>
                     <div class="float-right">
-                        <a href="#" class="btn-st rd-30 btn-st" @click="addSpecialist()">Enregistrer</a>
+                        <a href="#" class="btn-st rd-30 btn-st" @click="updateSpecialist()">Modifier</a>
                     </div>
                 </div>
             </div>
@@ -94,24 +94,15 @@ export default {
             // Ajouter un contrôle qui vérifie que tous les champs sont remplies
             // Ajouter un contrôle sur les champs numériques
 
-            addSpecialist(){
-                this.loaderState = true;
+            updateSpecialist(){
 
                 if (this.specialistObj.desc != "" && this.specialistObj.name != "" && this.specialistObj.image != null){
 
-                    this.employeeRef.add(this.specialistObj).then((response) =>{
-                         this.salonRef.doc(this.salonId).get().then((doc)=>{
-                            if (doc.exists){
-                                let obj = doc.data();
-                                obj.employee.push(response.id);
-    
-                                this.salonRef.doc(this.salonId).update(obj).then(() =>{
-    
-                                    this.$router.replace({name:'Salon'});
-                                    this.loaderState = false;
-                                });
-                              }
-                        })
+                    this.loaderState = true;
+
+                    this.employeeRef.doc(this.id_spec).update(this.specialistObj).then(() =>{
+                        this.$router.replace({name:'Salon'});
+                        this.loaderState = true;
                     })
                 }
             },
@@ -155,6 +146,20 @@ export default {
 
             this.salonId = localStorage.getItem("salon_id");
 
+
+            this.id_spec = this.$route.params.id;
+            
+            this.employeeRef.doc(this.id_spec).get().then((doc) =>{
+                if (doc.exists){
+                    this.specialistObj.desc = doc.data().desc;
+                    this.specialistObj.name = doc.data().name;
+                    this.specialistObj.image = doc.data().image;
+                    this.specialistObj.works = doc.data().works;
+                }
+            })
+
+
+
             this.salonRef.doc(this.salonId).get().then((doc)=>{
                 if (doc.exists){
                     let obj = doc.data();
@@ -167,7 +172,7 @@ export default {
                                  let obj = doc.data();
                                  obj.id = doc.id;
                                  this.allServices.push(obj)
-                                this.loaderState = false;
+                                 this.loaderState = false;
                              }
                         })
                     });

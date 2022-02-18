@@ -132,7 +132,11 @@
                                   <ul class="comment-date">
                                       <li class="mango" v-for="(el, index) in item.worksName" :key="index"><span>{{el}}</span></li> <br>
                                   </ul>
-                                  <div class="approv-reject"> <a class="btn-st wht-clr" href="#" title="">Modifier</a></div>
+                                  <div class="approv-reject"> 
+                                    <router-link class="btn-st wht-clr" :to="'editspec/' + item.id">
+                                        Modifier
+                                    </router-link>
+                                  </div>
                               </li>
                           </ul>
                       </div>
@@ -199,6 +203,7 @@ export default {
             if (doc.exists){
 
               let obj = doc.data();
+              obj.id = doc.id;
               this.Storage.child(obj.image).getDownloadURL().then((url) =>{
                   obj.image =  url;
                });
