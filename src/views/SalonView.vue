@@ -114,7 +114,7 @@
             </div>
             <div class="row">
               <div class="col-lg-6 col-sm-6">
-                  <div class="widget" style="overflow-y: scroll; height: 60%;">
+                  <div class="widget">
                       <div class="widget-title">
                           <h4>Mes spécialistes</h4>
                           <ul class="widget-controls">

@@ -466,8 +466,8 @@ a.pinterest {
 .logo > a {
   color: #fff;
   display: inline-block;
-  font-family: hobo std;
-  font-size: 20px;
+  /* font-family: hobo std; */
+  font-size: 17px;
   line-height: initial;
   vertical-align: middle;
 }
