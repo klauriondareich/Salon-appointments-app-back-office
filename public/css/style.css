@@ -1488,6 +1488,7 @@ header {
   -o-box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.1);
   width: 100%;
+
 }
 
 .widget.loading-wait::before {

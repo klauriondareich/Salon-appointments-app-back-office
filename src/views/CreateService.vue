@@ -7,6 +7,9 @@
                 <div class="sub-title">
                     <h4>Ajouter un service</h4>
                 </div>
+                <p class="text-danger">
+                    {{errorMessage}}
+                </p>
                 <ul class="bread-crumb">
                     <li><a href="#" title="">Services</a></li>
                     <li>Dashbord</li>
@@ -22,7 +25,7 @@
                         </div>
                         <div class="col-md-6 col-sm-6 field">
                             <label>Prix <span>*</span> </label>
-                            <input v-model="serviceObj.price" type="text">
+                            <vue-numeric currency="FCFA" separator="." currency-symbol-position="suffix" v-model="serviceObj.price"></vue-numeric>
                         </div>
                         <div class="col-md-6 col-sm-6 field">
                             <label>Catégorie <span>*</span> </label>
@@ -49,7 +52,7 @@
             </div>
             <div class="px-5">
                 <div class="float-left">
-                    <router-link to="/salon" class="btn-st rd-30 org-clr">Retour</router-link>
+                    <router-link to="/salon" class="btn-st rd-30 org-clr">Retour au salon</router-link>
                 </div>
                 <div class="float-right">
                     <a href="#" class="btn-st rd-30 btn-st" @click="addService()">Enregistrer</a>
@@ -63,11 +66,12 @@
 <script>
 import firebase from '../firebase/init'
 import Loader from './shared/Loader.vue'
+import VueNumeric from 'vue-numeric'
 
 export default {
     name: "createService",
-    components: {Loader},
-    
+    components: {Loader, VueNumeric},
+
     data(){
         return {
             durations: [
@@ -128,6 +132,7 @@ export default {
                 categoryRef: firebase.firestore().collection("category"),
                 salonRef: firebase.firestore().collection("salons"), 
                 salonId: null,
+                errorMessage: null,
                 loaderState: false,
                 categories: [],
                 serviceObj: {
@@ -135,7 +140,7 @@ export default {
                     "desc": "",
                     "duration": null,
                     "name": "",
-                    "price": "",
+                    "price": 0,
                     "visible": false
                 }
 
@@ -149,9 +154,10 @@ export default {
             // Ajouter un contrôle sur les champs numériques
 
             addService(){
-                this.loaderState = true;
-
-                this.workRef.add(this.serviceObj).then((response) =>{
+                
+                 if (this.serviceObj.desc != "" && this.serviceObj.name != "" && this.serviceObj.duration != null && this.serviceObj.duration != null){
+                    this.loaderState = true;
+                    this.workRef.add(this.serviceObj).then((response) =>{
                      this.salonRef.doc(this.salonId).get().then((doc)=>{
                         if (doc.exists){
                             let obj = doc.data();
@@ -164,7 +170,9 @@ export default {
                             });
                           }
                         })
-                })
+                    })
+                }
+                else this.errorMessage = "Tous ces champs sont obligatoires"
             },
 
             changeCategory(event){
