@@ -76,6 +76,15 @@ const routes = [
         component: () => import(/* webpackChunkName: "createService" */ '../views/CreateService.vue')
       },
       {
+        path: '/edit/:id',
+        name: 'editService',
+        meta:{
+          requiresAuth: true,
+          role:"manager"
+        },
+        component: () => import(/* webpackChunkName: "createService" */ '../views/EditService.vue')
+      },
+      {
         path: '/specialist',
         name: 'createSpecialist',
         meta:{

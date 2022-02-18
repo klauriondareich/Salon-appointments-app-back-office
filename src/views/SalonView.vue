@@ -88,7 +88,11 @@
                                   <div class="rcnt-activt">
                                     <ul v-for="(element, index2) in item.works" :key="index2" >
                                       <li class="clr1 ">{{element.name}} ({{element.duration}} min)   
-                                        <span class="pl-3 pr-3"><i class="fa fa-edit"></i></span>
+                                        <span class="pl-3 pr-3">
+                                          <router-link :to="'edit/' + element.id">
+                                            <i class="fa fa-edit"></i>
+                                          </router-link>
+                                        </span>
                                         <span v-if="element.visible"  class="priority low">On</span>
                                         <span v-if="!element.visible" class="priority high">Off</span>
                                         <span class="font-weight-bold pr-3">{{element.price}} FCFA</span> 

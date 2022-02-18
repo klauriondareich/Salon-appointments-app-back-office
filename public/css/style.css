@@ -8526,7 +8526,7 @@ ul.notify-area > li > i {
 .rcnt-activt > ul > li a {
   color: inherit;
   display: inline-block;
-  max-width: 60%;
+  /* max-width: 60%; */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
