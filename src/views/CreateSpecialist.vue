@@ -7,6 +7,9 @@
                     <div class="sub-title">
                         <h4>Ajouter un nouveau spécialiste</h4>
                     </div>
+                     <p class="text-danger p-2">
+                        {{errorMessage}}
+                    </p>
                     <ul class="bread-crumb">
                         <li><a href="#" title="">Services</a></li>
                         <li>Dashbord</li>
@@ -17,17 +20,17 @@
                     <div class="pnl-bdy billing-sec">
                         <div class="row">
                             <div class="col-md-12 col-sm-12 field">
-                                <label>Nom du spécialiste<span>*</span> </label>
+                                <label class="font-weight-bold">Nom du spécialiste<span>*</span> </label>
                                 <input v-model="specialistObj.name" type="text">
                             </div>
                             <div class="col-md-12 col-sm-12 field">
-                                <label>Description <span>*</span> </label>
+                                <label class="font-weight-bold">Description <span>*</span> </label>
                                 <input placeholder="" type="text" v-model="specialistObj.desc">
                             </div>
                             <div class="col-md-9 col-sm-9 field">
                                 <p class="text-warning">{{loading}}</p>
-                                <span class="upload-image">Ajouter une nouvelle image</span>
-                                <label class="fileContainer"> <span>Ajouter</span>
+                                <span class="upload-image font-weight-bold">Ajouter une nouvelle image </span>
+                                <p class="font-italics">Taille recommandée: 205 x 246 Pixels</p>                                <label class="fileContainer"> <span>Ajouter</span>
                                     <input type="file" accept="image/*" @change="uploadImage($event)">
                                 </label>
                             </div>
@@ -48,7 +51,7 @@
                 </div>
                 <div class="px-5">
                     <div class="float-left">
-                        <router-link to="/salon" class="btn-st rd-30 org-clr">Retour</router-link>
+                        <router-link to="/salon" class="btn-st rd-30 org-clr">Retour au salon</router-link>
                     </div>
                     <div class="float-right">
                         <a href="#" class="btn-st rd-30 btn-st" @click="addSpecialist()">Enregistrer</a>
@@ -76,6 +79,7 @@ export default {
                 salonId: null,
                 Storage: firebase.storage().ref(),
                 loaderState: false,
+                errorMessage: null,
                 allServices: [],
                 specialistObj: {
                     "desc": "",
@@ -95,9 +99,10 @@ export default {
             // Ajouter un contrôle sur les champs numériques
 
             addSpecialist(){
-                this.loaderState = true;
 
                 if (this.specialistObj.desc != "" && this.specialistObj.name != "" && this.specialistObj.image != null){
+                
+                    this.loaderState = true;
 
                     this.employeeRef.add(this.specialistObj).then((response) =>{
                          this.salonRef.doc(this.salonId).get().then((doc)=>{
@@ -114,6 +119,8 @@ export default {
                         })
                     })
                 }
+                else this.errorMessage = "Tous ces champs sont obligatoires"
+
             },
 
             getIdFromCheckBox(event){

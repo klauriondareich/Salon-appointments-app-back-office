@@ -28,10 +28,10 @@
                     <div class="user-head">
                         <div class="admin">
                             <div class="admin-avatar" v-if="!isVisible" @click="isVisible = true">
-                                <img src="images/user-icon.png" alt=""> <i class="online"></i> 
+                                <img src="/images/user-icon.png" alt=""> <i class="online"></i> 
                             </div>
                             <div class="admin-avatar" v-if="isVisible" @click="isVisible = false">
-                                <img src="images/user-icon.png" alt=""> <i class="online"></i> 
+                                <img src="/images/user-icon.png" alt=""> <i class="online"></i> 
                             </div>
                         </div>
                         <div class="drop setting"  v-if="isVisible"> 

@@ -7,7 +7,7 @@
                 <div class="sub-title">
                     <h4>Ajouter un service</h4>
                 </div>
-                <p class="text-danger">
+                <p class="text-danger p-2">
                     {{errorMessage}}
                 </p>
                 <ul class="bread-crumb">
