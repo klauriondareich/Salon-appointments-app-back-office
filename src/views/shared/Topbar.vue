@@ -3,7 +3,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-2">
-                    <div class="logo"><router-link to="/home" title=""><img src="images/b-logo.png" alt=""></router-link></div>
+                    <div class="logo">
+                        <router-link to="/home" title="">
+                            <img src="images/b-logo.png" width="40" height="40" alt="">
+                            BIoutyCall
+                        </router-link>
+                </div>
                 </div>
                 <div class="col-lg-9">
                    
