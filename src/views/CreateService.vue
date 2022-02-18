@@ -1,5 +1,6 @@
 <template>
   <div class="main-content">
+    <Loader v-if="loaderState"/>
     <div class="panel-body">
         <div class="content-area mt-5">
             <div class="sub-bar">
@@ -61,11 +62,12 @@
 
 <script>
 import firebase from '../firebase/init'
-
+import Loader from './shared/Loader.vue'
 
 export default {
     name: "createService",
-
+    components: {Loader},
+    
     data(){
         return {
             durations: [
@@ -126,6 +128,7 @@ export default {
                 categoryRef: firebase.firestore().collection("category"),
                 salonRef: firebase.firestore().collection("salons"), 
                 salonId: null,
+                loaderState: false,
                 categories: [],
                 serviceObj: {
                     "categoryId": null,
@@ -146,6 +149,8 @@ export default {
             // Ajouter un contrôle sur les champs numériques
 
             addService(){
+                this.loaderState = true;
+
                 this.workRef.add(this.serviceObj).then((response) =>{
                      this.salonRef.doc(this.salonId).get().then((doc)=>{
                         if (doc.exists){
@@ -155,7 +160,7 @@ export default {
                             this.salonRef.doc(this.salonId).update(obj).then(() =>{
 
                                 this.$router.replace({name:'Salon'});
-
+                                this.loaderState = true;
                             });
                           }
                         })

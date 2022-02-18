@@ -1,71 +1,69 @@
 <template>
-    <div>
-        <Loader v-if="loaderState"/>
-        <div class="main-content">
-            <div class="panel-body">
-                <div class="content-area sortable-widt mt-5">
-                    <div class="sub-bar">
-                        <div class="sub-title">
-                            <h4>Dashboard:</h4>
-                            <!-- <span>Welcome To web Admin Panel!</span> -->
-                        </div>
-                        <ul class="bread-crumb">
-                            <li><a href="#" title="">Home</a></li>
-                            <li>Dashbord</li>
-                        </ul>
+    <div class="main-content">
+            <Loader v-if="loaderState"/>
+        <div class="panel-body">
+            <div class="content-area sortable-widt mt-5">
+                <div class="sub-bar">
+                    <div class="sub-title">
+                        <h4>Dashboard:</h4>
+                        <!-- <span>Welcome To web Admin Panel!</span> -->
                     </div>
-                    <div class="widget">
-                        <div class="widget-peding">
-                            <div class="notifi"> <i class="fa fa-users"></i>
-                            <div class="notifi-info">
-                                <p>Visualisation de tous les clients du système</p>
-                                <span>Nombre total : {{customersWithoutDouble.length}}</span> </div>
-                            </div>
+                    <ul class="bread-crumb">
+                        <li><a href="#" title="">Home</a></li>
+                        <li>Dashbord</li>
+                    </ul>
+                </div>
+                <div class="widget">
+                    <div class="widget-peding">
+                        <div class="notifi"> <i class="fa fa-users"></i>
+                        <div class="notifi-info">
+                            <p>Visualisation de tous les clients du système</p>
+                            <span>Nombre total : {{customersWithoutDouble.length}}</span> </div>
                         </div>
-                        </div>
-                    <!-- top info widgets -->
-                    <div class=" row pt-5 pr-3 float-right">
-                        <input type="text" class="form-control" placeholder="Recherche" v-model="searchItem" @input="searchCustomers">
                     </div>
-                    <div class="widget">
-                        <div class="widget-title no-margin">
-                            <h4>Liste des clients</h4>
-                        </div>
-                        <div class="main-table">
-                            <table class="prj-tbl striped table-responsive">
-                                <thead class="color">
-                                    <tr>
-                                        <th><em>#</em></th>
-                                        <th><em>Information du client</em></th>
-                                        <th><em>Total payé</em></th>
-                                        <th><em>Nombre de rdv</em></th>
-                                    
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="(item, index) in  searchCustomers()" :key="index">
-                                        <td><i class="fa fa-user"></i></td>
-                                        <td>{{item.customer_name}}</td>
-                                        <td>{{item.totalPayed}} FCFA</td>
-                                        <td>{{item.nbRdv}}</td>
-                                    </tr>
-                                    <tr class="p-5" v-if="searchCustomers().length == 0">
+                    </div>
+                <!-- top info widgets -->
+                <div class=" row pt-5 pr-3 float-right">
+                    <input type="text" class="form-control" placeholder="Recherche" v-model="searchItem" @input="searchCustomers">
+                </div>
+                <div class="widget">
+                    <div class="widget-title no-margin">
+                        <h4>Liste des clients</h4>
+                    </div>
+                    <div class="main-table">
+                        <table class="prj-tbl striped table-responsive">
+                            <thead class="color">
+                                <tr>
+                                    <th><em>#</em></th>
+                                    <th><em>Information du client</em></th>
+                                    <th><em>Total payé</em></th>
+                                    <th><em>Nombre de rdv</em></th>
+                                
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(item, index) in  searchCustomers()" :key="index">
+                                    <td><i class="fa fa-user"></i></td>
+                                    <td>{{item.customer_name}}</td>
+                                    <td>{{item.totalPayed}} FCFA</td>
+                                    <td>{{item.nbRdv}}</td>
+                                </tr>
+                                <tr class="p-5" v-if="searchCustomers().length == 0">
 
-                                        <td><i class="fa fa-user"></i></td>
-                                        <td></td>
-                                        <td> Aucun client trouvé ...</td>
-                                        <td></td>
-                                    
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                                    <td><i class="fa fa-user"></i></td>
+                                    <td></td>
+                                    <td> Aucun client trouvé ...</td>
+                                    <td></td>
+                                
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <!-- our project widget -->
-                    
-                    
-                </div>                     
-            </div>
+                </div>
+                <!-- our project widget -->
+                
+                
+            </div>                     
         </div>
     </div>
 </template>

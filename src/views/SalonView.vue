@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <Loader v-if="loaderState"/>
-    <div class="main-content">                       
+    <div class="main-content">  
+       <Loader v-if="loaderState"/>                     
         <div class="panel-body">
                         
           <div class="content-area mt-5">
@@ -146,7 +145,6 @@
           </div>
         </div>
     </div>
-  </div>
 </template>
 
 <script>
