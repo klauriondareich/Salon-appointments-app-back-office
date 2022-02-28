@@ -1,5 +1,5 @@
 <template>
-    <div class="panel-layout">
+    <div class="panel-layout" id="bg-page">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -38,17 +38,7 @@ export default {
          // Login the user to the system 
         signIn(){
             firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() =>{
-                let user = firebase.auth().currentUser;
-                console.log("User", user);
-                console.log("User", user.email);
-                console.log("User", user.uid);
                 this.$router.replace({ name: "Home" });
-                // if(isEmailVerified){
-                //   this.loaderState = false;
-                // }
-                // else{
-                //   console.log("error x")
-                // }
             }).catch((error) =>{
                 console.log("error", error.message) ;
             })
@@ -57,6 +47,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+ #bg-page{
+    background: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(63 146 116) 0%, rgb(32 152 142) 100%) repeat scroll 0 0!important;
+    overflow: hidden;
+ }
 
 </style>

@@ -152,9 +152,7 @@ img {
 .panel-layout {
   float: left;
   position: relative;
-  width: 100%;
-  background: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(63 146 116) 0%, rgb(32 152 142) 100%) repeat scroll 0 0;
-  overflow: hidden;
+  width: 100%; 
 }
 
 .panel.boxed {
