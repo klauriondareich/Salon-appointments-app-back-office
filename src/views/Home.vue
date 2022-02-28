@@ -243,7 +243,7 @@ export default {
        comments: [],
        loaderState: false,
        appointment: firebase.firestore().collection("appointment"), 
-       today: '2022-01-06',
+       today: "",
        mode: 'stack',
         value: false,
         value2: 50,
@@ -280,8 +280,9 @@ export default {
    
       this.salonId = localStorage.getItem("salon_id");  
       this.loaderState = true;
-      // date du jour
-      // this.today = new Date().getFullYear() + "-" + new Date().getMonth() + "-" + new Date().getDate();
+      
+    // date du jour
+    this.today = new Date().getFullYear() + "-" + new Date().getMonth()+1 + "-" + new Date().getDate();
     
     // Script à revoir, le syst doit recupérer les rdv du jour et non tous les rdv
      this.appointment.where("salon", "==", this.salonId).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
