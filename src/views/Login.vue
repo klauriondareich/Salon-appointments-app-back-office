@@ -1,5 +1,6 @@
 <template>
     <div class="panel-layout" id="bg-page">
+        <Loader v-if="loaderState"/>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -26,19 +27,28 @@
 
 <script>
 import firebase from '../firebase/init'
+import Loader from './shared/Loader.vue'
 
 export default {
+    name: "Login",
+    components: {Loader},
+
     data(){
         return {
             email: null,
-            password: null
+            password: null,
+            loaderState: false,
         }
     },
     methods:{
          // Login the user to the system 
         signIn(){
+
+            this.loaderState = true;
+
             firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() =>{
                 this.$router.replace({ name: "Home" });
+
             }).catch((error) =>{
                 console.log("error", error.message) ;
             })
