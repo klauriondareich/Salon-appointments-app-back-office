@@ -10,10 +10,7 @@
                     <p class="text-danger p-2">
                         {{errorMessage}}
                     </p>
-                    <ul class="bread-crumb">
-                        <li><a href="#" title="">Services</a></li>
-                        <li>Dashbord</li>
-                    </ul>
+                   
                 </div>
                 <div class="inner-bg mb-5">
                     
@@ -160,7 +157,12 @@ export default {
                 if (doc.exists){
                     this.specialistObj.desc = doc.data().desc;
                     this.specialistObj.name = doc.data().name;
-                    this.specialistObj.image = doc.data().image;
+
+                    this.Storage.child("img/" + doc.data().image.split("/")[1]).getDownloadURL().then((url) =>{
+                     this.specialistObj.image =  url;
+
+                    }).catch(() => alert("L'image du salon n'a pas pu charger"))
+               
                     this.specialistObj.works = doc.data().works;
                 }
             })
