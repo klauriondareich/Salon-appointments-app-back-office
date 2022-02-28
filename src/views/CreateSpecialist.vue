@@ -63,31 +63,18 @@
 </template>
 
 <script>
-import firebase from '../firebase/init'
+
 import Loader from './shared/Loader.vue'
+import specMixin from '../mixins/specMixin'
 
 export default {
     name: "Specialist",
     components: {Loader},
+    mixins: [specMixin],
 
     data(){
         return {
-                loading: null,
-                workRef:  firebase.firestore().collection("work"), 
-                employeeRef: firebase.firestore().collection("employee"),
-                salonRef: firebase.firestore().collection("salons"), 
-                salonId: null,
-                Storage: firebase.storage().ref(),
-                loaderState: false,
-                errorMessage: null,
-                allServices: [],
-                specialistObj: {
-                    "desc": "",
-                    "board": "",
-                    "name": "",
-                    "image": null,
-                    "works": []
-                }
+                
 
             }
 
@@ -104,6 +91,10 @@ export default {
                 
                     this.loaderState = true;
 
+                    let fileName = "spec-" + this.file.lastModified;
+                    this.specialistObj.image = "img/" + fileName;
+                    this.Storage.child("img/" + fileName).put(this.file);
+                
                     this.employeeRef.add(this.specialistObj).then((response) =>{
                          this.salonRef.doc(this.salonId).get().then((doc)=>{
                             if (doc.exists){
@@ -128,32 +119,6 @@ export default {
                 this.specialistObj.works.push({"id": event.target.value})
             },
 
-           uploadImage(event){
-
-               this.loading = "Chargement de l'image en cours ..."
-
-                let metadata = {
-                    ContentLanguage : "fr",
-                    contentType: "image/jpeg",
-                }
-
-                let file = event.target.files[0];
-                let fileName = "profile-" + file.lastModified;
-
-                this.Storage.child("img/" + fileName).put(file, metadata)
-                .then(() =>{
-                this.getImageUrl(fileName)
-                }).catch(() =>{
-                    this.loading = "Erreur de chargement"
-                })
-            },
-
-            getImageUrl(url){
-                this.Storage.child("img/" + url).getDownloadURL().then((url) =>{
-                 this.specialistObj.image = url;
-                 this.loading = "Chargement réussi! la preview s'affichera dans un instant"
-                })
-            },
         },
 
         created(){
