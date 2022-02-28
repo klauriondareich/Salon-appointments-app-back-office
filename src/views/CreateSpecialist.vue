@@ -91,9 +91,7 @@ export default {
                 
                     this.loaderState = true;
 
-                    let fileName = "spec-" + this.file.lastModified;
-                    this.specialistObj.image = "img/" + fileName;
-                    this.Storage.child("img/" + fileName).put(this.file);
+                    this.buildImageUrl();
                 
                     this.employeeRef.add(this.specialistObj).then((response) =>{
                          this.salonRef.doc(this.salonId).get().then((doc)=>{
@@ -125,27 +123,7 @@ export default {
 
             this.loaderState = true;
 
-            this.salonId = localStorage.getItem("salon_id");
-
-            this.salonRef.doc(this.salonId).get().then((doc)=>{
-                if (doc.exists){
-                    let obj = doc.data();
-                    obj.id = doc.id;
-                    
-                    obj.works.forEach(id => {
-                        
-                        this.workRef.doc(id).get().then((doc) =>{
-                             if (doc.exists){
-                                 let obj = doc.data();
-                                 obj.id = doc.id;
-                                 this.allServices.push(obj)
-                                this.loaderState = false;
-                             }
-                        })
-                    });
-                }
-
-             });
+            this.getAllServices();
         }
 
     }  

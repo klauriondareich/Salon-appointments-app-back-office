@@ -243,7 +243,7 @@ export default {
                obj.id = doc.id;
                this.Storage.child("img/" + obj.image.split("/")[1]).getDownloadURL().then((url) =>{
                   obj.image =  url;
-               }).catch(() => alert("L'image du salon na pas pu charger"))
+               }).catch(() => alert("L'image du salon n'a pas pu charger"))
                
                 this.salonObj = obj;
 

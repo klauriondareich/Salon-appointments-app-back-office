@@ -38,6 +38,31 @@ export default {
         let fileName = "spec-" + this.file.lastModified;
         this.specialistObj.image = "img/" + fileName;
         this.Storage.child("img/" + fileName).put(this.file);
+      },
+
+      getAllServices(){
+        
+        this.salonId = localStorage.getItem("salon_id");
+
+         this.salonRef.doc(this.salonId).get().then((doc)=>{
+                if (doc.exists){
+                    let obj = doc.data();
+                    obj.id = doc.id;
+                    
+                    obj.works.forEach(id => {
+                        
+                        this.workRef.doc(id).get().then((doc) =>{
+                             if (doc.exists){
+                                 let obj = doc.data();
+                                 obj.id = doc.id;
+                                 this.allServices.push(obj)
+                                 this.loaderState = false;
+                             }
+                        })
+                    });
+                }
+
+             });
       }
     }
 }

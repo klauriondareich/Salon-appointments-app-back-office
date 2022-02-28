@@ -61,31 +61,16 @@
 </template>
 
 <script>
-import firebase from '../firebase/init'
+import specMixin from '../mixins/specMixin'
 import Loader from './shared/Loader.vue'
 
 export default {
     name: "Specialist",
     components: {Loader},
+    mixins: [specMixin],
 
     data(){
-        return {
-                loading: null,
-                workRef:  firebase.firestore().collection("work"), 
-                employeeRef: firebase.firestore().collection("employee"),
-                salonRef: firebase.firestore().collection("salons"), 
-                salonId: null,
-                Storage: firebase.storage().ref(),
-                loaderState: false,
-                errorMessage: null,
-                allServices: [],
-                specialistObj: {
-                    "desc": "",
-                    "board": "",
-                    "name": "",
-                    "image": null,
-                    "works": []
-                }
+        return {               
 
             }
 
@@ -102,6 +87,8 @@ export default {
 
                     this.loaderState = true;
 
+                    this.buildImageUrl();
+
                     this.employeeRef.doc(this.id_spec).update(this.specialistObj).then(() =>{
                         this.$router.replace({name:'Salon'});
                         this.loaderState = true;
@@ -116,39 +103,11 @@ export default {
                 this.specialistObj.works.push({"id": event.target.value})
             },
 
-           uploadImage(event){
-
-               this.loading = "Chargement de l'image en cours ..."
-
-                let metadata = {
-                    ContentLanguage : "fr",
-                    contentType: "image/jpeg",
-                }
-
-                let file = event.target.files[0];
-                let fileName = "profile-" + file.lastModified;
-
-                this.Storage.child("img/" + fileName).put(file, metadata)
-                .then(() =>{
-                this.getImageUrl(fileName)
-                }).catch(() =>{
-                    this.loading = "Erreur de chargement"
-                })
-            },
-
-            getImageUrl(url){
-                this.Storage.child("img/" + url).getDownloadURL().then((url) =>{
-                 this.specialistObj.image = url;
-                 this.loading = "Chargement réussi! la preview s'affichera dans un instant"
-                })
-            },
         },
 
         created(){
 
-            this.loaderState = true;
-
-            this.salonId = localStorage.getItem("salon_id");
+            // this.loaderState = true;
 
 
             this.id_spec = this.$route.params.id;
@@ -167,27 +126,8 @@ export default {
                 }
             })
 
-
-
-            this.salonRef.doc(this.salonId).get().then((doc)=>{
-                if (doc.exists){
-                    let obj = doc.data();
-                    obj.id = doc.id;
-                    
-                    obj.works.forEach(id => {
-                        
-                        this.workRef.doc(id).get().then((doc) =>{
-                             if (doc.exists){
-                                 let obj = doc.data();
-                                 obj.id = doc.id;
-                                 this.allServices.push(obj)
-                                 this.loaderState = false;
-                             }
-                        })
-                    });
-                }
-
-             });
+            this.getAllServices();
+           
         }
 
     }  
