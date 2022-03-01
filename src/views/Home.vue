@@ -98,7 +98,7 @@
                             <v-app>
                                     <v-row>
                                         <v-col>
-                                            <v-sheet height="auto">
+                                            <v-sheet height="600">
                                                 <v-calendar
                                                 ref="calendar"
                                                 :now="today"
@@ -106,11 +106,15 @@
                                                 :short-weekdays=boolvalue
                                                 :short-months=boolvalue
                                                 :show-month-on-first=boolvalue
+                                                :event-more=boolvalue
+                                                :event-overlap-mode="mode"
+                                                first-interval="5"
+                                                interval-count="18"
                                                 :events="events"
                                                 color="warning"
                                                 :event-height=value2
                                                 event-color="warning"
-                                                type="month"
+                                                type="4day"
                                                 ></v-calendar>
                                             </v-sheet>
                                         </v-col>
@@ -170,7 +174,7 @@
                                 
                             </tbody>
                         </table>
-                        <p class="text-center p-3">Aucun rendez vous pour le moment!</p>
+                        <p class="text-center p-3" v-if="appointments.length == 0">Aucun rendez vous pour le moment!</p>
                     </div>
                 </div>
 
@@ -195,7 +199,7 @@
                                         <router-link to="/comments" class="approved float-right" href="#" title="">Voir le commentaire</router-link>
                                     </li>
                                 </ul>
-                                <p class="text-center p-3">Aucun commentaires récents!</p>
+                                <p class="text-center p-3" v-if="comments.length == 0">Aucun commentaires récents!</p>
                             </div>
                         </div>
                         <!-- user list -->
@@ -266,6 +270,23 @@ export default {
   },
   methods:{
 
+showEvent ({ nativeEvent, event }) {
+        const open = () => {
+          this.selectedEvent = event
+          this.selectedElement = nativeEvent.target
+          requestAnimationFrame(() => requestAnimationFrame(() => this.selectedOpen = true))
+        }
+
+        if (this.selectedOpen) {
+          this.selectedOpen = false
+          requestAnimationFrame(() => requestAnimationFrame(() => open()))
+        } else {
+          open()
+        }
+
+        nativeEvent.stopPropagation()
+      },
+
       calculationOfTotalRdvAmount(){
           return this.appointments.map(obj => obj.total).reduce((acc, currentValue) => acc + currentValue)
       },
@@ -279,7 +300,7 @@ export default {
       }
    },
   mounted () {
-      this.$refs.calendar.scrollToTime('08:00')
+      this.$refs.calendar.scrollToTime('6:00')
     },
  
 
@@ -292,19 +313,22 @@ export default {
     // date du jour et mois
     let months_numbers = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12",];
     let months_words = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
-    this.today = new Date().getFullYear() + "-" + months_numbers[new Date().getMonth()] + "-" + new Date().getDate();
+    let day = new Date().getDate();
+    if (day<10) day = "0" +  day;
+    this.today = new Date().getFullYear() + "-" + months_numbers[new Date().getMonth()] + "-" + day;
     this.actual_month = months_words[new Date().getMonth()];
 
-    let current_timestamp = Date.now();
+    let date_formatted = this.today.split("-").join(".");
     
-    // Script à revoir, le syst doit recupérer les rdv du jour et non tous les rdv
-     this.appointment.where("salon", "==", this.salonId).where("stamp", "==", current_timestamp).onSnapshot((snapshot) =>{
+    // Script à revoir, le syst doit recupérer les rdv du jour et non tous les rdvwhere("stamp", "==", current_timestamp)
+     this.appointment.where("salon", "==", this.salonId).where("date", "==", date_formatted).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
       if(!snapshot.empty){
         this.appointments = [];
         this.comments = [];
         snapshot.forEach((doc) =>{
           let obj = doc.data();
           obj.id = doc.id;
+
           this.appointments.push(obj);
 
           let time_start =  obj.date.split(".").join("-") + " " + obj.time_start;
