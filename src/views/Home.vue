@@ -323,6 +323,7 @@ showEvent ({ nativeEvent, event }) {
      this.appointment.where("salon", "==", this.salonId).where("date", "==", date_formatted).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
       if(!snapshot.empty){
         this.appointments = [];
+        this.events = [];
         this.comments = [];
         snapshot.forEach((doc) =>{
           let obj = doc.data();
