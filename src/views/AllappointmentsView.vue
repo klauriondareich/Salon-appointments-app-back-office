@@ -32,7 +32,7 @@
                     <div class="col-6">
                         <div class="pt-5 pr-3 float-right">
                             <label>Filtrer les rdv : </label>
-                            <select @change="callOnChange($event)">
+                            <select style="background:#e9e9e9; padding-left: 10px;" @change="callOnChange($event)">
                                 <!-- <option value="today">Aujourd'hui</option> -->
                                 <option value="all">Tous les rdv</option>
                                 <option value="yesterday">Hier</option>
