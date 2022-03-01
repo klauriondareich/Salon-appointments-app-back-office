@@ -123,8 +123,7 @@
 
                 <div class="widget mt-5">
                     <div class="widget-title no-margin">
-                        <h4>Liste des Rendez-vous du jour</h4>
-                        
+                        <h4>Liste des Rendez-vous du jour</h4> 
                     </div>
                     <div class="widget">
                         <table class="prj-tbl striped bordered table-responsive">
@@ -171,6 +170,7 @@
                                 
                             </tbody>
                         </table>
+                        <p class="text-center p-3">Aucun rendez vous pour le moment!</p>
                     </div>
                 </div>
 
@@ -194,8 +194,8 @@
                                         </ul>
                                         <router-link to="/comments" class="approved float-right" href="#" title="">Voir le commentaire</router-link>
                                     </li>
-                                    
                                 </ul>
+                                <p class="text-center p-3">Aucun commentaires récents!</p>
                             </div>
                         </div>
                         <!-- user list -->
@@ -294,9 +294,11 @@ export default {
     let months_words = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
     this.today = new Date().getFullYear() + "-" + months_numbers[new Date().getMonth()] + "-" + new Date().getDate();
     this.actual_month = months_words[new Date().getMonth()];
+
+    let current_timestamp = Date.now();
     
     // Script à revoir, le syst doit recupérer les rdv du jour et non tous les rdv
-     this.appointment.where("salon", "==", this.salonId).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
+     this.appointment.where("salon", "==", this.salonId).where("stamp", "==", current_timestamp).onSnapshot((snapshot) =>{
       if(!snapshot.empty){
         this.appointments = [];
         this.comments = [];
@@ -318,6 +320,7 @@ export default {
         this.totalOngoingRdv = this.filteredOngoingRdv();
         this.loaderState = false;
       }
+      else this.loaderState = false;
     });
   }
 }
