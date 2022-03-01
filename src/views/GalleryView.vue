@@ -100,52 +100,73 @@ export default {
     methods:{
 
         addInCollection(obj){
-            this.galleryRef.add(obj).then(() =>{
-            alert("avatar uploaded");
-        }).catch((error) => alert(error.message))
+
+            this.loaderState = true;
+
+            this.galleryRef.add(obj)
+            .then(() =>{
+                this.gettingGalleryImages();
+                this.loaderState = false;
+        })
+        .catch((error) => {
+            alert(error.message);
+            this.loaderState = false;
+            })
       },
 
+    
       uploadImage(event){
-        let metadata = {
-          ContentLanguage : "fr",
-          contentType: "image/jpeg",
-        }
-        let file = event.target.files[0];
-        let fileName = "picture-" + file.lastModified;
-        this.Storage.child("gallery/" + fileName).put(file, metadata)
-        .then(() =>{
-          this.getImageUrl(fileName)
-        }).catch((error) =>{
-          alert(error.message)
-        })
-      },
 
-      getImageUrl(url){
-            this.Storage.child("gallery/" + url).getDownloadURL().then((url) =>{
-            let obj = {salonId: this.salonId, imageUrl: url};
-            this.images.push(obj);
-            
-            this.addInCollection(obj)
-        })
-      },
-
-    },
-    created(){
-
-        this.salonId = localStorage.getItem("salon_id");
         this.loaderState = true;
 
-        this.galleryRef.where("salonId", "==", this.salonId).get().then((snapshot) =>{
+        let file = event.target.files[0];
+        let fileName = "gal-" + file.lastModified;
+        this.Storage.child("gallery/" + fileName).put(file).then(() =>{
+
+            let url = "gallery/" + fileName;
+            let obj = {salonId: this.salonId, imageUrl: url};
+            this.images.push(obj);
+            this.addInCollection(obj)
+        })
+        .catch((error) => {
+            alert(error.message);
+            this.loaderState = false
+        });
+ 
+      },
+
+      gettingGalleryImages(){
+
+          this.loaderState = true;
+          
+          this.images = [];
+          this.salonId = localStorage.getItem("salon_id");
+         
+
+          this.galleryRef.where("salonId", "==", this.salonId).get().then((snapshot) =>{
             if(!snapshot.empty){
                 snapshot.forEach((doc) =>{
                     let obj = doc.data();
                     obj.id = doc.id;
+
+                    //Get image full path
+                    this.Storage.child(obj.imageUrl).getDownloadURL().then((url) =>{
+                        obj.imageUrl =  url;
+                    });
+
                     this.images.push(obj);
-                    this.loaderState = false
+                    this.loaderState = false;
+                    
                 })
             }
             else this.loaderState = false
         })
+
+      }
+
+    },
+    created(){
+       this.gettingGalleryImages();     
     }
 }
 </script>
