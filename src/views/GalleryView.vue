@@ -1,6 +1,6 @@
 <template>
    <div class="main-content">
-       <Loader v-if="loaderState"/>
+        <Loader v-if="loaderState"/>
             <div class="responsive-header">
                 <div class="logo-area">
                     
@@ -41,7 +41,7 @@
             <!-- responsive header -->
             <div class="panel-body">
                 <div class="content-area mt-5">
-                    
+                   
                     <div class="row pt-5">
                         <div class="inner-bg">
                             <div class="col-md-12 col-sm-12 field"> 
@@ -52,6 +52,7 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="row">
                         <div class="col-lg-12 col-sm-12">
                             <div class="widget">
@@ -63,9 +64,18 @@
                                     <p class="text-center" v-if="images.length == 0">Votre galerie est vide ...</p>
                                     <li v-for="(item, index) in images" :key="index">
                                         <a href="#">
-                                            <img :src="item.imageUrl" alt="">
+                                            <img :src="item.imageUrl" alt="image">
                                         </a>
+                                       <button class="btn-danger btn-sm mb-4" @click="item.is_alert_visible = true">
+                                            <i class="fa fa-trash"></i>
+                                       </button>
+                                       <div class="alert alert-warning" style="position: absolute; top: 20; left: 0; width: 600px;" role="alert" v-if="item.is_alert_visible">
+                                             Voulez-vous supprimer cet élément?. 
+                                            <button class="btn-success btn-sm ml-2" @click="deleteImage(item.id)">Oui supprimer</button>
+                                            <button class="btn-danger btn-sm ml-5" @click="item.is_alert_visible = false">Non</button>
+                                        </div>
                                     </li>
+                                    
                                 </ul>
                             </div>
                             </div>
@@ -77,7 +87,7 @@
                 
                 <!-- bottombar -->
             </div>
-        </div>
+    </div>
 </template>
 
 <script>
@@ -93,11 +103,24 @@ export default {
             images: [],
             salonId: null,
             loaderState: false,
+            is_alert_visible: false,
+            imagesToDelete: [],
             galleryRef: firebase.firestore().collection("gallery"), 
             Storage: firebase.storage().ref(),
         }
     },
     methods:{
+
+        deleteImage(id){
+            this.galleryRef.doc(id).delete().then(() =>{
+                this.gettingGalleryImages();
+            })
+        },
+
+        getImageId(event){
+
+            console.log(event.target.value);
+        },
 
         addInCollection(obj){
 
@@ -138,7 +161,7 @@ export default {
       gettingGalleryImages(){
 
           this.loaderState = true;
-          
+
           this.images = [];
           this.salonId = localStorage.getItem("salon_id");
          
@@ -154,6 +177,7 @@ export default {
                         obj.imageUrl =  url;
                     });
 
+                    obj.is_alert_visible = false;
                     this.images.push(obj);
                     this.loaderState = false;
                     
@@ -166,11 +190,16 @@ export default {
 
     },
     created(){
+        
        this.gettingGalleryImages();     
     }
 }
 </script>
 
-<style>
-
+<style scoped>
+    .checkbox-design{
+        background: #fb8c00 ;
+        padding: 5px;
+        border-radius: 3px;
+    }
 </style>
