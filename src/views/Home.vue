@@ -92,6 +92,9 @@
         
                     <div class="row ">
                             <div class="widget">
+                                <p class="font-weight-bold px-5 py-2">
+                                     Mois de {{actual_month}}
+                                </p>
                             <v-app>
                                     <v-row>
                                         <v-col>
@@ -100,6 +103,9 @@
                                                 ref="calendar"
                                                 :now="today"
                                                 :value="today"
+                                                :short-weekdays=boolvalue
+                                                :short-months=boolvalue
+                                                :show-month-on-first=boolvalue
                                                 :events="events"
                                                 color="warning"
                                                 :event-height=value2
@@ -241,7 +247,9 @@ export default {
     return{
        appointments: [],
        comments: [],
+       boolvalue: false,
        loaderState: false,
+       actual_month: null,
        appointment: firebase.firestore().collection("appointment"), 
        today: "",
        mode: 'stack',
@@ -281,8 +289,11 @@ export default {
       this.salonId = localStorage.getItem("salon_id");  
       this.loaderState = true;
       
-    // date du jour
-    this.today = new Date().getFullYear() + "-" + new Date().getMonth()+1 + "-" + new Date().getDate();
+    // date du jour et mois
+    let months_numbers = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12",];
+    let months_words = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+    this.today = new Date().getFullYear() + "-" + months_numbers[new Date().getMonth()] + "-" + new Date().getDate();
+    this.actual_month = months_words[new Date().getMonth()];
     
     // Script à revoir, le syst doit recupérer les rdv du jour et non tous les rdv
      this.appointment.where("salon", "==", this.salonId).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
