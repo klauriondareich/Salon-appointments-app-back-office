@@ -182,8 +182,7 @@
                     <div class="col-lg-8 col-sm-6">
                         <div class="widget">
                             <div class="widget-title">
-                                <h4>Commentaires récents</h4>
-                                
+                                <h4>Commentaires récents</h4>      
                             </div>
                             <div class="widget-peding">
                                 <ul class="q-comments recent">
