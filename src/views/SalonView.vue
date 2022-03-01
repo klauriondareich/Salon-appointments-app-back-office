@@ -209,10 +209,8 @@ export default {
                });
 
               obj.worksName = [];
-                            // console.log("emp1", obj)
 
               obj.works.forEach((item) =>{
-                // console.log("id", id)
                 this.servicesRef.doc(item.id).get().then((doc) =>{
                   if (doc.exists){
                     obj.worksName.push(doc.data().name)
@@ -221,7 +219,6 @@ export default {
               })
 
               this.employees.push(obj);
-              // console.log("emp", obj)
 
             }
           })
