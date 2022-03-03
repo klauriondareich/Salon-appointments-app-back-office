@@ -254,7 +254,7 @@ export default {
        });
 
       // Getting  all appointments and calculating the turnover
-      this.appointmentRef.where("salon", "==", this.salonId).onSnapshot((snapshot) =>{
+      this.appointmentRef.where("salon", "==", this.salonId).get().then((snapshot) =>{
       if(!snapshot.empty){
         this.appointments = [];
         snapshot.forEach((doc) =>{

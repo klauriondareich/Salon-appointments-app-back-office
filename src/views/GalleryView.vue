@@ -2,40 +2,12 @@
    <div class="main-content">
         <Loader v-if="loaderState"/>
             <div class="responsive-header">
-                <div class="logo-area">
-                    
+                <div class="logo-area"> 
                     <div class="user-head">
-                    <div class="admin">
-                        <div class="admin-avatar"> <img src="images/user-icon.png" alt=""> <i class="online"></i> </div>
-                    </div>
-                    <div class="drop setting"> <span class="drop-head">stifen Doe <i>30 days trial</i></span>
-                        <ul class="drop-meta">
-                            <li> <a href="#" title=""><i class="fa fa-eyedropper"></i>Edit Profile</a> </li>
-                            <li> <a href="#" title=""><i class="fa fa-envelope-o"></i>My Inbox</a> </li>
-                            <li> <a href="#" title=""><i class="fa fa-adjust"></i>task</a> </li>
-                            <li> <a href="#" title=""><i class="fa fa-calendar"></i>Calender</a> </li>
-                            <li> <a href="#" title=""><i class="fa fa-align-right"></i>Balance Report</a> </li>
-                        </ul>
-                        <span class="drop-bottom"><a href="#" title=""><i class="fa fa-sign-out"></i>log Out</a></span> </div>
-                    </div>
-                    <ul class="seting-area">
-                    <li class="langages">
-                        <a title="" href="#">Eng</a>
-                        <ul class="drop language">
-                            <li class="lang-selected"><a href="#"><i class="fa fa-check"></i> Eng</a></li>
-                            <li><a href="#">Rus</a></li>
-                            <li><a href="#">Jap</a></li>
-                            <li><a href="#">Arb</a></li>
-                        </ul>
-                    </li>
-                    <li class="setting-panel"><a title="" href="#"><i class="icon-equalizer"></i></a></li>
-                </ul>
-                </div>
-                <div class="t-search">
-                    <form method="post">
-                        <input type="text" placeholder="Enter Your Keyword">
-                        <button type="submit"><i class="fa fa-search"></i></button>
-                    </form>
+                        <div class="admin">
+                            <div class="admin-avatar"> <img src="images/user-icon.png" alt=""> <i class="online"></i> </div>
+                        </div>
+                    </div>  
                 </div>
             </div>
             <!-- responsive header -->

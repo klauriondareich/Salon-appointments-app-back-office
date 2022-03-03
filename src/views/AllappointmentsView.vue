@@ -179,7 +179,7 @@ export default {
 
     this.salonId = localStorage.getItem("salon_id");
 
-     this.appointment.where("salon", "==", this.salonId).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
+     this.appointment.where("salon", "==", this.salonId).orderBy("stamp", "desc").get().then((snapshot) =>{
       if(!snapshot.empty){
         this.appointments = [];
         snapshot.forEach((doc) =>{

@@ -114,10 +114,10 @@ export default {
     this.salonId = localStorage.getItem("salon_id");
     this.loaderState = true;
 
-     this.appointment.where("salon", "==", this.salonId).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
-      if(!snapshot.empty){
-        this.customersWithoutDouble = [];
+    this.customersWithoutDouble = [];
         this.customersWithDouble = [];
+     this.appointment.where("salon", "==", this.salonId).orderBy("stamp", "desc").get().then((snapshot) =>{
+      if(!snapshot.empty){
 
         snapshot.forEach((doc) =>{
             let obj = doc.data();
@@ -129,10 +129,9 @@ export default {
             
             if (this.customer_name != doc.data().customer_name){
                 this.Obj = obj;
-                console.log(this.Obj);
                 if (!this.customersWithoutDouble.map(item => item.customer_name).includes(this.Obj.customer_name))
                 this.customersWithoutDouble.push(this.Obj);
-                this.customer_name = doc.data().customer_name;
+                this.customer_name = doc.data().customer_name
             }
         })
         this.calculTotals();
