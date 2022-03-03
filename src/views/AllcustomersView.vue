@@ -125,12 +125,15 @@ export default {
             this.customersWithDouble.push(obj);
 
             // Suppression des doublons sur les noms des clients
+            //console.log("Customer", this.customer_name, doc.data().customer_name);
+            
             if (this.customer_name != doc.data().customer_name){
                 this.Obj = obj;
+                console.log(this.Obj);
+                if (!this.customersWithoutDouble.map(item => item.customer_name).includes(this.Obj.customer_name))
                 this.customersWithoutDouble.push(this.Obj);
                 this.customer_name = doc.data().customer_name;
             }
-
         })
         this.calculTotals();
         this.loaderState = false;
