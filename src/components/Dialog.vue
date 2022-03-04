@@ -7,8 +7,8 @@
             >
             <template v-slot:activator="{ on, attrs }">
                 <v-btn
-                color="red lighten-2"
-                dark
+                color="white lighten-2"
+                
                 v-bind="attrs"
                 v-on="on"
                 >
@@ -17,12 +17,44 @@
             </template>
 
             <v-card>
+                
                 <v-card-title class="text-h5 grey lighten-2">
-                Privacy Policy
+                Détails
                 </v-card-title>
 
+
                 <v-card-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    Client : {{details.customer_name}}
+                </v-card-text>
+
+                <v-card-text>
+                    Service sollicité : {{details.work_name}}
+                </v-card-text>
+
+                <v-card-text>
+                    Montant payé (FCFA) : {{details.total}}
+                </v-card-text>
+
+                <v-card-text>
+                    Mode de paiement : {{details.payment}}
+                </v-card-text>
+
+                <v-card-text>
+                    Discount : {{details.discount}}
+                </v-card-text>
+
+                <v-card-text>
+                    CouponId : {{details.CouponId}}
+                </v-card-text>
+
+                 <v-card-text>
+                    Notation :   <span v-if="!details.rate">0</span>{{details.rate}} <i class="fa fa-star text-warning"></i>
+                </v-card-text>
+
+                 <v-card-text>
+                    <span>Status du rdv : </span> 
+                    <span v-if="details.status =='complete'" class="priority low">Terminé</span>
+                    <span v-if="details.status =='create'" class="priority medium">En attente</span>
                 </v-card-text>
 
                 <v-divider></v-divider>
@@ -34,7 +66,7 @@
                     text
                     @click="dialog = false"
                 >
-                    I accept
+                    Fermer
                 </v-btn>
                 </v-card-actions>
             </v-card>
@@ -45,8 +77,18 @@
 
 <script>
 export default {
-    name: "Dialog"
+    name: "Dialog",
+    props:["details"],
 
+    data(){
+        return{
+          dialog: false  
+        }
+    },
+
+    created(){
+        console.log("details", this.details)
+    }
 }
 </script>
 
