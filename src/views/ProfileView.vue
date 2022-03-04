@@ -1,5 +1,6 @@
 <template>
     <div class="main-content mt-5">
+            <Loader v-if="loaderState"/>    
             <div class="responsive-header">
                 <div class="logo-area">
                     <ul class="notify-area">
@@ -182,14 +183,17 @@
 <script>
 
 import firebase from '../firebase/init'
+import Loader from './shared/Loader.vue'
 
 export default {
 
     name: "userProfile",
+    components: {Loader},
 
     data(){
       return{
-          userInfo: {}
+          userInfo: {},
+          loaderState: false,
       }
     },
 
@@ -199,6 +203,8 @@ export default {
 
     created(){
 
+      this.loaderState = true;
+      
       if(firebase.auth().currentUser){
 
         let managerRef = firebase.firestore().collection("managers");
@@ -213,7 +219,7 @@ export default {
             if (user_data.role && user_data.role === "manager"){  
               
               this.userInfo = doc.data();
-              console.log(doc.data());
+              this.loaderState = false
             }
           }
           else {
