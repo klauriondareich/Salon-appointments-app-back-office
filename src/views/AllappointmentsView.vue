@@ -68,8 +68,8 @@
                                         </td>
                                         <td><i>{{item.stamp | formatDate}}</i></td>
                                         <td>
-                                           <Modal/> 
-                                            <ul>
+                                           <Modal :details="item"/> 
+                                            <!-- <ul>
                                                 <div v-if="item.isVisible" style="position:absolute;right: 0;">
 
                                                 <div class="tip-left tooltip">
@@ -89,7 +89,7 @@
                                                 </div>
                                                 <li v-if="!item.isVisible" @click="item.isVisible = true"><a href="#" ><i class="icon-eye"></i></a></li>
                                                 <li v-if="item.isVisible" @click="item.isVisible = false"><a href="#" ><i class="fa fa-eye-slash"></i></a></li>
-                                            </ul>
+                                            </ul> -->
                                         </td>
                                     </tr>
                                     <tr class="p-5" v-if="this.appointments.length == 0">
