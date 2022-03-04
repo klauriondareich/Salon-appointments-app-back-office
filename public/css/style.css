@@ -7149,7 +7149,7 @@ ul.notify-area > li > i {
   display: block;
   font-size: 15px;
   margin-top: 10px;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
 }
 
 .mega-style1 > div {
