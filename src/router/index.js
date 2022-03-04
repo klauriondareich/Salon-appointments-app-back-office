@@ -109,7 +109,7 @@ const routes = [
           requiresAuth: true,
           role:"manager"
         },
-        component: () => import(/* webpackChunkName: "createService" */ '../views/Profile.vue')
+        component: () => import(/* webpackChunkName: "createService" */ '../views/ProfileView.vue')
       }
     ]
   },
