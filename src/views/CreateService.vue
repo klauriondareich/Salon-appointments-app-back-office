@@ -150,9 +150,6 @@ export default {
 
         methods:{
 
-            // Ajouter un contrôle qui vérifie que tous les champs sont remplies
-            // Ajouter un contrôle sur les champs numériques
-
             addService(){
                 
                  if (this.serviceObj.desc != "" && this.serviceObj.name != "" && this.serviceObj.duration != null && this.serviceObj.duration != null){
