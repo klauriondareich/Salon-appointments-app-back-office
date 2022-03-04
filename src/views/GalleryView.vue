@@ -2,7 +2,8 @@
    <div class="main-content">
         <Loader v-if="loaderState"/>
             <div class="responsive-header">
-                <div class="logo-area"> 
+                <div class="logo-area">
+ 
                     <div class="user-head">
                         <div class="admin">
                             <div class="admin-avatar"> <img src="images/user-icon.png" alt=""> <i class="online"></i> </div>

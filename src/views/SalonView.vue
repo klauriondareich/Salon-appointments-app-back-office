@@ -113,7 +113,7 @@
                 </div>
             </div>
             <div class="row">
-              <div class="col-lg-6 col-sm-6">
+              <div class="col-lg-8 col-sm-8">
                   <div class="widget">
                       <div class="widget-title">
                           <h4>Mes spécialistes</h4>
