@@ -122,10 +122,11 @@
                       <div class="col-md-6 col-sm-6">
                         <div class="mega-post-info"> <span>Informations personnelles</span>
                           <ul>
-                            <li>Nom : KOUHOUINIKINA</li>
-                            <li>Prénom (s) : Laurion Dareich</li>
-                            <li>Nom d'utilisateur : @KLD</li>
-                            <li>Numéro de téléphone</li>
+                            <li>Nom : {{userInfo.name}}</li>
+                            <li>Prénom(s) : {{userInfo.firstname}}</li>
+                            <li>Email : {{userInfo.email}}</li>
+                            <li>Nom d'utilisateur : {{userInfo.username}}</li>
+                            <li>Numéro de téléphone : {{userInfo.personal_phone_number}}</li>
                           </ul>
                         </div>
                       </div>
@@ -137,8 +138,11 @@
                       <div class="col-md-6 col-sm-6">
                         <div class="mega-post-info"> <span>Informations salon</span>
                           <ul>
-                            <li>Nom du salon : La Diva</li>
-                            <li>Status du salon: Activé</li>
+                            <li>Nom du salon : {{userInfo.salon_name}}</li>
+                            <li>Status du compte : {{userInfo.isBlocked}}
+                               <span v-if="userInfo.isActive" class="priority low">Activé</span>
+                               <span v-if="!userInfo.isActive" class="priority high">Désactivé</span>
+                            </li>
                           </ul>
                         </div>
                       </div>
@@ -150,13 +154,17 @@
                       <div class="col-md-6 col-sm-6">
                         <div class="mega-post-info"> <span>Informations Paiement</span>
                           <ul>
-                            <li>
+                            <li style="border-bottom: 1px solid #eaeaea;">
                                 <img src="/images/airtel-money-small.jpg" alt="airtel money image">
-                                Numéro Airtel Money: 074 68 95 25 
+                                Numéro Airtel Money : {{userInfo.payout_mobile_airtel}}
                             </li>
-                            <li>
-                                <img src="/images//moov-africa-small.png" alt="moov africa image">
-                                Numéro Moov : 074 68 95 25
+                            <li style="border-bottom: 1px solid #eaeaea;">
+                                <img src="/images/moov-africa-small.png" alt="moov africa image">
+                                Numéro Moov : {{userInfo.payout_mobile_moov}}
+                            </li>
+                            <li style="border-bottom: 1px solid #eaeaea;">
+                                <img src="/images/pay-dunia-small.png" alt="pay dunia image">
+                                Numéro Pay Dunia : {{userInfo.payout_mobile_paydunia}}
                             </li>
                           </ul>
                         </div>
@@ -172,9 +180,49 @@
 </template>
 
 <script>
+
+import firebase from '../firebase/init'
+
 export default {
 
-    name: "userProfile"
+    name: "userProfile",
+
+    data(){
+      return{
+          userInfo: {}
+      }
+    },
+
+    methods:{
+
+    },
+
+    created(){
+
+      if(firebase.auth().currentUser){
+
+        let managerRef = firebase.firestore().collection("managers");
+        let uid = firebase.auth().currentUser.uid;
+
+        managerRef.doc(uid).get().then((doc) =>{
+
+          if (doc.exists){
+
+            let user_data = doc.data();
+
+            if (user_data.role && user_data.role === "manager"){  
+              
+              this.userInfo = doc.data();
+              console.log(doc.data());
+            }
+          }
+          else {
+            console.log("user doesn't exist")
+          }
+        })
+    
+      }
+    }
 }
 </script>
 
