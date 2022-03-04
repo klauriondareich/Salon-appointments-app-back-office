@@ -7147,7 +7147,7 @@ ul.notify-area > li > i {
 
 .mega-post-info > ul > li {
   display: block;
-  font-size: 13px;
+  font-size: 15px;
   margin-top: 10px;
   text-transform: capitalize;
 }
@@ -7156,11 +7156,11 @@ ul.notify-area > li > i {
   border-right: 1px solid #f3f3f3;
 }
 
-.mega-style1 > div img {
+/* .mega-style1 > div img {
   float: left;
   width: 100%;
   margin-bottom: 27px;
-}
+} */
 
 .mega-style1 > div:last-child {
   border-right: 0 none;
