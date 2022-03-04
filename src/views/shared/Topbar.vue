@@ -34,15 +34,13 @@
                                 <img src="/images/user-icon.png" alt=""> <i class="online"></i> 
                             </div>
                         </div>
-                        <div class="drop setting"  v-if="isVisible"> 
-                            <ul class="drop-meta">
-                                <li class="py-3"><router-link to="#" title=""><i class="fa fa-edit"></i>Mon profil</router-link> </li>
-                                <!-- <li> <router-link to="#" title=""><i class="fa fa-envelope-o"></i>My Inbox</router-link> </li>
-                                <li> <router-link to="#" title=""><i class="fa fa-adjust"></i>task</router-link> </li>
-                                <li> <router-link to="#" title=""><i class="fa fa-calendar"></i>Calender</router-link> </li>
-                                <li> <router-link to="#" title=""><i class="fa fa-align-right"></i>Balance Report</router-link> </li> -->
-                            </ul>
-                            <span class="drop-bottom"><a href="#" title="" @click="signOut()"><i class="fa fa-sign-out"></i>Se déconnecter</a></span> </div>
+                        <div class="drop setting pb-3"  v-if="isVisible"> 
+                            <!-- <router-link to="/user_profile" class="p-3">
+                                        <i class="fa fa-edit"></i>Mon profil
+                            </router-link>  -->
+                            
+                            <span class="drop-bottom"><a href="#" title="" @click="signOut()"><i class="fa fa-sign-out"></i>Se déconnecter</a></span> 
+                        </div>
                     </div>
                 </div>
             </div>
