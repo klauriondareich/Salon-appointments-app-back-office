@@ -17,7 +17,7 @@
             </template>
 
             <v-card>
-                
+
                 <v-card-title class="text-h5 grey lighten-2">
                 Détails
                 </v-card-title>
@@ -87,7 +87,6 @@ export default {
     },
 
     created(){
-        console.log("details", this.details)
     }
 }
 </script>
