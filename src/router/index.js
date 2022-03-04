@@ -101,6 +101,15 @@ const routes = [
           role:"manager"
         },
         component: () => import(/* webpackChunkName: "createService" */ '../views/EditSpec.vue')
+      },
+      {
+        path: '/profile',
+        name: 'userProfile',
+        meta:{
+          requiresAuth: true,
+          role:"manager"
+        },
+        component: () => import(/* webpackChunkName: "createService" */ '../views/Profile.vue')
       }
     ]
   },
