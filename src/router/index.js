@@ -103,7 +103,7 @@ const routes = [
         component: () => import(/* webpackChunkName: "createService" */ '../views/EditSpec.vue')
       },
       {
-        path: '/profile',
+        path: '/user-profile',
         name: 'userProfile',
         meta:{
           requiresAuth: true,
