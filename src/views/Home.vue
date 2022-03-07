@@ -1,41 +1,9 @@
 <template>
     <div class="main-content">
-        <Loader v-if="loaderState"/>        
-        
-        <div class="responsive-header">
-            <div class="logo-area">
-                
-                <div class="user-head">
-                <div class="admin">
-                    <div class="admin-avatar"> <img src="images/user-icon.png" alt=""> <i class="online"></i> </div>
-                </div>
-                <div class="drop setting"> <span class="drop-head">stifen Doe <i>30 days trial</i></span>
-                    <ul class="drop-meta">
-                        <li> <a href="#" title=""><i class="fa fa-eyedropper"></i>Edit Profile</a> </li>
-                        <li> <a href="#" title=""><i class="fa fa-envelope-o"></i>My Inbox</a> </li>
-                        <li> <a href="#" title=""><i class="fa fa-adjust"></i>task</a> </li>
-                        <li> <a href="#" title=""><i class="fa fa-calendar"></i>Calender</a> </li>
-                        <li> <a href="#" title=""><i class="fa fa-align-right"></i>Balance Report</a> </li>
-                    </ul>
-                    <span class="drop-bottom"><a href="#" title=""><i class="fa fa-sign-out"></i>log Out</a></span> </div>
-                </div>
-                <ul class="seting-area">
+        <Loader v-if="loaderState"/> 
 
-                    <li class="text-white">username</li>
-                <!-- <li class="langages">
-                    <a title="" href="#">Eng</a>
-                    <ul class="drop language">
-                        <li class="lang-selected"><a href="#"><i class="fa fa-check"></i> Eng</a></li>
-                        <li><a href="#">Rus</a></li>
-                        <li><a href="#">Jap</a></li>
-                        <li><a href="#">Arb</a></li>
-                    </ul>
-                </li> -->
-                <li class="setting-panel"><a title="" href="#"><i class="icon-equalizer"></i></a></li>
-            </ul>
-            </div>
-            
-        </div>
+        <MobileHeader/>        
+        
         <!-- responsive header -->
         <div class="panel-body">
             <div class="content-area mt-5">
@@ -240,10 +208,11 @@
 // @ is an alias to /src
 import firebase from '../firebase/init'
 import Loader from './shared/Loader.vue'
+import MobileHeader from '../components/MobileHeader.vue'
 
 export default {
   name: 'Home',
-  components: {Loader},
+  components: {Loader, MobileHeader},
 
   data(){
     
@@ -268,33 +237,16 @@ export default {
     }
   },
   methods:{
-
-showEvent ({ nativeEvent, event }) {
-        const open = () => {
-          this.selectedEvent = event
-          this.selectedElement = nativeEvent.target
-          requestAnimationFrame(() => requestAnimationFrame(() => this.selectedOpen = true))
-        }
-
-        if (this.selectedOpen) {
-          this.selectedOpen = false
-          requestAnimationFrame(() => requestAnimationFrame(() => open()))
-        } else {
-          open()
-        }
-
-        nativeEvent.stopPropagation()
-      },
-
-      calculationOfTotalRdvAmount(){
+      
+    calculationOfTotalRdvAmount(){
           return this.appointments.map(obj => obj.total).reduce((acc, currentValue) => acc + currentValue)
       },
 
-      filteredCompleteRdv(){
+    filteredCompleteRdv(){
           return this.appointments.filter(obj => obj.status == "complete").length
       },
       
-      filteredOngoingRdv(){
+    filteredOngoingRdv(){
           return this.appointments.filter(obj => obj.status == "create").length
       }
    },
