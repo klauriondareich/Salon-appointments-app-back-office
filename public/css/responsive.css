@@ -532,6 +532,7 @@
 
 
  @media screen and (max-width: 640px){
+
 	.email-box-nav{width: 23%;}
 	.email-message-inf > p {
 	    font-size: 12px;
@@ -948,9 +949,9 @@
 	  padding: 15px 20px;
 	}
 
-	.widget-controls {
+	/* .widget-controls {
 	  display: none;
-	}
+	} */
 
 	.widget-title > span {
 	  padding-top: 0;

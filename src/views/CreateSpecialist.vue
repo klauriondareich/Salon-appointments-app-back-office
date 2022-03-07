@@ -1,6 +1,7 @@
 <template>     
     <div class="main-content">
         <Loader v-if="loaderState"/>
+        <MobileHeader/> 
         <div class="panel-body">
             <div class="content-area mt-5">
                 <div class="sub-bar">
@@ -66,10 +67,12 @@
 
 import Loader from './shared/Loader.vue'
 import specMixin from '../mixins/specMixin'
+import MobileHeader from '../components/MobileHeader.vue'
+
 
 export default {
     name: "Specialist",
-    components: {Loader},
+    components: {Loader, MobileHeader},
     mixins: [specMixin],
 
     data(){
@@ -120,6 +123,8 @@ export default {
         },
 
         created(){
+
+            this.$store.state.sidebarState = false;
 
             this.loaderState = true;
 

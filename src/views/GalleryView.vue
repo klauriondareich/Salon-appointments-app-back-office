@@ -1,16 +1,8 @@
 <template>
    <div class="main-content">
         <Loader v-if="loaderState"/>
-            <div class="responsive-header">
-                <div class="logo-area">
- 
-                    <div class="user-head">
-                        <div class="admin">
-                            <div class="admin-avatar"> <img src="images/user-icon.png" alt=""> <i class="online"></i> </div>
-                        </div>
-                    </div>  
-                </div>
-            </div>
+            <MobileHeader/>        
+
             <!-- responsive header -->
             <div class="panel-body">
                 <div class="content-area mt-5">
@@ -66,10 +58,12 @@
 <script>
 import firebase from '../firebase/init'
 import Loader from './shared/Loader.vue'
+import MobileHeader from '../components/MobileHeader.vue'
+
 
 export default {
     name: "Gallery",
-    components: {Loader},
+    components: {Loader, MobileHeader},
 
     data(){
         return {
@@ -163,7 +157,9 @@ export default {
 
     },
     created(){
-        
+    
+        this.$store.state.sidebarState = false;
+
        this.gettingGalleryImages();     
     }
 }

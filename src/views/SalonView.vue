@@ -1,6 +1,9 @@
 <template>
     <div class="main-content">  
-       <Loader v-if="loaderState"/>                     
+       <Loader v-if="loaderState"/>
+
+        <MobileHeader/>        
+                     
         <div class="panel-body">
                         
           <div class="content-area mt-5">
@@ -154,10 +157,11 @@
 <script>
 import firebase from '../firebase/init'
 import Loader from './shared/Loader.vue'
+import MobileHeader from '../components/MobileHeader.vue'
 
 export default {
  name: 'Salon',
-   components: {Loader},
+  components: {Loader, MobileHeader},
 
   data(){
     
@@ -230,6 +234,8 @@ export default {
   },
 
   created(){
+
+       this.$store.state.sidebarState = false;
 
        this.salonId = localStorage.getItem("salon_id");
        this.loaderState = true;

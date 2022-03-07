@@ -1,6 +1,8 @@
 <template>
     <div class="main-content">
-            <Loader v-if="loaderState"/>
+                <Loader v-if="loaderState"/>
+
+                <MobileHeader/> 
                 <div class="panel-body">
                     <div class="content-area sortable-widt mt-5">
                         <div class="sub-bar">
@@ -114,10 +116,12 @@
 import firebase from '../firebase/init'
 import Loader from './shared/Loader.vue'
 import Modal from '../components/Dialog.vue'
+import MobileHeader from '../components/MobileHeader.vue'
+
 
 export default {
     name: "Appointments",
-    components: {Loader, Modal},
+    components: {Loader, Modal, MobileHeader},
 
     data(){
         return{
@@ -177,6 +181,9 @@ export default {
         }
     },
     created(){
+
+    this.$store.state.sidebarState = false;
+
 
     this.loaderState = true;
 

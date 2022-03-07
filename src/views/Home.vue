@@ -257,7 +257,8 @@ export default {
 
   created(){
 
-   
+      this.$store.state.sidebarState = false;
+      
       this.salonId = localStorage.getItem("salon_id");  
       this.loaderState = true;
       
@@ -305,11 +306,8 @@ export default {
 
 
 
-<style>
+<style scoped>
 
-.container-fluid{
-    overflow: hidden!important;
-}
 .my-event {
   overflow: hidden;
   text-overflow: ellipsis;

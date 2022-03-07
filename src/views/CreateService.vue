@@ -1,6 +1,9 @@
 <template>
   <div class="main-content">
     <Loader v-if="loaderState"/>
+
+    <MobileHeader/>        
+
     <div class="panel-body">
         <div class="content-area mt-5">
             <div class="sub-bar">
@@ -67,10 +70,12 @@
 import firebase from '../firebase/init'
 import Loader from './shared/Loader.vue'
 import VueNumeric from 'vue-numeric'
+import MobileHeader from '../components/MobileHeader.vue'
+
 
 export default {
     name: "createService",
-    components: {Loader, VueNumeric},
+    components: {Loader, VueNumeric, MobileHeader},
 
     data(){
         return {
@@ -182,6 +187,7 @@ export default {
         },
 
         created(){
+            this.$store.state.sidebarState = false;
             
             this.salonId = localStorage.getItem("salon_id");
 

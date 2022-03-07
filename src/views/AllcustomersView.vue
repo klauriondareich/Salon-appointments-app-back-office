@@ -1,6 +1,8 @@
 <template>
     <div class="main-content">
             <Loader v-if="loaderState"/>
+
+            <MobileHeader/>
         <div class="panel-body">
             <div class="content-area sortable-widt mt-5">
                 <div class="sub-bar">
@@ -43,7 +45,7 @@
                             </thead>
                             <tbody>
                                 <tr v-for="(item, index) in  searchCustomers()" :key="index">
-                                    <td><i class="fa fa-user"></i></td>
+                                    <td class="nb-user"><i class="fa fa-user"></i></td>
                                     <td>{{item.customer_name}}</td>
                                     <td>{{item.totalPayed}} FCFA</td>
                                     <td>{{item.nbRdv}}</td>
@@ -71,10 +73,12 @@
 <script>
 import firebase from '../firebase/init'
 import Loader from './shared/Loader.vue'
+import MobileHeader from '../components/MobileHeader.vue'
+
 
 export default {
   name: 'Allcustomers',
-  components: {Loader},
+  components: {Loader, MobileHeader},
 
   data(){
     return{
@@ -110,6 +114,8 @@ export default {
 
   },
   created(){
+
+    this.$store.state.sidebarState = false;
 
     this.salonId = localStorage.getItem("salon_id");
     this.loaderState = true;
