@@ -66,7 +66,7 @@
                             <v-app>
                                     <v-row>
                                         <v-col>
-                                            <v-sheet height="600">
+                                            <v-sheet height="auto">
                                                 <v-calendar
                                                 ref="calendar"
                                                 :now="today"
@@ -257,8 +257,6 @@ export default {
 
   created(){
 
-      this.$store.state.sidebarState = false;
-      
       this.salonId = localStorage.getItem("salon_id");  
       this.loaderState = true;
       

@@ -115,8 +115,6 @@ export default {
   },
   created(){
 
-    this.$store.state.sidebarState = false;
-
     this.salonId = localStorage.getItem("salon_id");
     this.loaderState = true;
 

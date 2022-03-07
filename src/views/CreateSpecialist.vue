@@ -124,7 +124,6 @@ export default {
 
         created(){
 
-            this.$store.state.sidebarState = false;
 
             this.loaderState = true;
 
