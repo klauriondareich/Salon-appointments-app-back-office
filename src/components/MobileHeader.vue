@@ -18,7 +18,7 @@
                 </div>
                 <ul class="seting-area">
 
-                    <li class="text-white">Madonna</li>
+                    <li class="text-white">{{username}}</li>
                 <!-- <li class="langages">
                     <a title="" href="#">Eng</a>
                     <ul class="drop language">
@@ -28,8 +28,12 @@
                         <li><a href="#">Arb</a></li>
                     </ul>
                 </li> -->
-                <li class="setting-panel"  @click="showSidebar()"><a title="" href="#"><i class="fa fa-bars"></i></a></li>
-                <li class="setting-panel" @click="hideSidebar()"><a title="" href="#"><i class="fa fa-close"></i></a></li>
+                <li  @click="showSidebar()" v-if="!this.$store.state.sidebarState">
+                    <span class="icon-style"><i class="fa fa-bars"></i></span>
+                </li>
+                <li @click="hideSidebar()" v-if="this.$store.state.sidebarState">
+                    <span class="icon-style"><i class="fa fa-close"></i></span>
+                </li>
             </ul>
             </div>
             
@@ -41,21 +45,37 @@ export default {
 
     name: "MobileHeader",
 
+    data(){
+        return {
+            username: null
+        }
+    },
+
     methods:{
-        
+
         showSidebar(){
   
           this.$store.state.sidebarState = true
         },
 
         hideSidebar(){
+            console.log("done")
   
           this.$store.state.sidebarState = false
         },
+    },
+
+    created(){
+        
+        this.username =  localStorage.getItem("username");
+
     }
 }
 </script>
 
-<style>
-
+<style scoped>
+    .icon-style i{
+        font-size: 18px;
+        color: #fff;
+    }
 </style>
