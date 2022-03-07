@@ -4,17 +4,15 @@
                 
                 <div class="user-head">
                 <div class="admin">
-                    <div class="admin-avatar"> <img src="images/user-icon.png" alt=""> <i class="online"></i> </div>
+                    <div class="admin-avatar" v-if="!isVisible" @click="isVisible = true">
+                        <img src="/images/user-icon.png" alt=""> <i class="online"></i> 
+                    </div>
+                    <div class="admin-avatar" v-if="isVisible" @click="isVisible = false">
+                        <img src="/images/user-icon.png" alt=""> <i class="online"></i> 
+                    </div>            
                 </div>
-                <div class="drop setting"> <span class="drop-head">stifen Doe <i>30 days trial</i></span>
-                    <ul class="drop-meta">
-                        <li> <a href="#" title=""><i class="fa fa-eyedropper"></i>Edit Profile</a> </li>
-                        <li> <a href="#" title=""><i class="fa fa-envelope-o"></i>My Inbox</a> </li>
-                        <li> <a href="#" title=""><i class="fa fa-adjust"></i>task</a> </li>
-                        <li> <a href="#" title=""><i class="fa fa-calendar"></i>Calender</a> </li>
-                        <li> <a href="#" title=""><i class="fa fa-align-right"></i>Balance Report</a> </li>
-                    </ul>
-                    <span class="drop-bottom"><a href="#" title=""><i class="fa fa-sign-out"></i>log Out</a></span> </div>
+                <div class="drop setting"  v-if="isVisible">                    
+                    <span class="drop-bottom"><a href="#" title=""><i class="fa fa-sign-out"></i>Se déconnecter</a></span> </div>
                 </div>
                 <ul class="seting-area">
 
@@ -47,20 +45,18 @@ export default {
 
     data(){
         return {
-            username: null
+            username: null,
+            isVisible: false,
         }
     },
 
     methods:{
 
         showSidebar(){
-  
           this.$store.state.sidebarState = true
         },
 
-        hideSidebar(){
-            console.log("done")
-  
+        hideSidebar(){  
           this.$store.state.sidebarState = false
         },
     },
