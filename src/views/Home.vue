@@ -305,7 +305,11 @@ export default {
 
 
 
-<style scoped>
+<style>
+
+.container-fluid{
+    overflow: hidden!important;
+}
 .my-event {
   overflow: hidden;
   text-overflow: ellipsis;

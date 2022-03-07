@@ -1,5 +1,5 @@
 <template>
-   <div class="responsive-header">
+   <div class="responsive-header pt-4">
             <div class="logo-area">
                 
                 <div class="user-head">
