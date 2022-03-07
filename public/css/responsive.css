@@ -139,14 +139,14 @@
 
 	.side-panel.active{top: 62px;}
 
-	.side-header {
+	/* .side-header {
 	  width: 250px;
 	  -webkit-transform: translate(-255px);
 	  -moz-transform: translate(-255px);
 	  -ms-transform: translate(-255px);
 	  -o-transform: translate(-255px);
 	  transform: translate(-255px);
-	}
+	} */
 
 	.panel-layout.boxed .side-header.slide-out:hover {
 	  left: -25px;
