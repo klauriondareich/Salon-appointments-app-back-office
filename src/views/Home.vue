@@ -146,7 +146,7 @@
                     </div>
                 </div>
 
-                <div class="row pt-5">
+                <div class="row pt-5 pb-5">
                     <div class="col-lg-8 col-sm-6">
                         <div class="widget">
                             <div class="widget-title">

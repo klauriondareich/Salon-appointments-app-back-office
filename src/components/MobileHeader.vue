@@ -12,7 +12,7 @@
                     </div>            
                 </div>
                 <div class="drop setting"  v-if="isVisible">                    
-                    <span class="drop-bottom"><a href="#" title=""><i class="fa fa-sign-out"></i>Se déconnecter</a></span> </div>
+                    <span class="drop-bottom"  @click="signOut()"><a href="#" title=""><i class="fa fa-sign-out"></i>Se déconnecter</a></span> </div>
                 </div>
                 <ul class="seting-area">
 
@@ -39,9 +39,12 @@
 </template>
 
 <script>
+import authMixin from '../mixins/authMixin'
+
 export default {
 
     name: "MobileHeader",
+    mixins: [authMixin],
 
     data(){
         return {

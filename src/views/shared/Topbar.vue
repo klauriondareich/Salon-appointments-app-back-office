@@ -49,10 +49,12 @@
 </template>
 
 <script>
-import firebase from '../../firebase/init'
+import authMixin from '../../mixins/authMixin'
 
 export default {
     name: 'Topbar',
+    mixins: [authMixin],
+    
     data(){
         return {
             username: null,
@@ -60,14 +62,7 @@ export default {
         }
     },
     methods:{
-        signOut(){
-            firebase.auth().signOut().then(() =>{
-                this.$router.replace("/");
-            })
-            .catch((error) =>{
-                console.log(error.message)
-            })
-        },
+        
     },
 
     created(){
