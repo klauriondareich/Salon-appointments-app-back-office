@@ -1,6 +1,6 @@
 <template>
   <header>
-    <div class="side-menus">
+    <div class="side-menus" v-if="this.$store.state.sidebarState">
         <div class="side-header">
             <div class="logo"><router-link to="/home"><img alt="" src="images/b-logo.png"></router-link></div>
             <nav class="slide-menu">
@@ -23,7 +23,11 @@
 
 <script>
 export default {
-
+  data(){
+    return{
+     
+    }
+  }
 }
 </script>
 
