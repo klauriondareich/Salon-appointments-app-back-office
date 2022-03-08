@@ -619,6 +619,10 @@ header {
   transform: rotate(-90deg);
 }
 
+.btn-close{
+  display: none;
+}
+
 .menu-item-has-children.active::before {
   -webkit-transform: rotate(0);
   -moz-transform: rotate(0);

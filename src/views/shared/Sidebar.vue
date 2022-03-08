@@ -3,7 +3,7 @@
     <div class="side-menus" v-if="this.$store.state.sidebarState">
         <div class="side-header">
             <div class="logo"><router-link to="/home"><img alt="" src="images/b-logo.png"></router-link></div>
-            <div class="float-right px-5" @click="hideSidebar()" v-if="this.$store.state.sidebarState">
+            <div class="float-right px-5 btn-close" @click="hideSidebar()" v-if="this.$store.state.sidebarState">
                   <span class="icon-style"><i class="fa fa-close"></i></span>
             </div>
             <nav class="slide-menu">

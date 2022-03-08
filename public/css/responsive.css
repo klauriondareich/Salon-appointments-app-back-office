@@ -1,6 +1,7 @@
 /*--- admin panel responsive sheet ---*/
 @media screen and (max-width: 1920px) and (min-width: 1600px){
-    .panel-widget{
+    
+	.panel-widget{
         width: 32.1%;
     }
     .pie-chart{max-height: 350px;}
@@ -532,6 +533,11 @@
 
 
  @media screen and (max-width: 640px){
+
+	.btn-close{
+		display: block;
+		font-size: 18px;
+	}
 
 	.email-box-nav{width: 23%;}
 	.email-message-inf > p {
