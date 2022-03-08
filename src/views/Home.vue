@@ -58,8 +58,107 @@
 
                 
         
-                    <div class="row ">
-                            <div class="widget">
+                    <div class="row">
+
+                        <div class="widget">
+                             <v-app>
+                                <v-row class="fill-height">
+                                    <v-col>
+                                        <v-sheet height="64">
+                                            <v-toolbar
+                                            flat
+                                            >
+                                            <v-toolbar-title v-if="$refs.calendar">
+                                                {{ $refs.calendar.title }}
+                                            </v-toolbar-title>
+                                            <v-btn
+                                                fab
+                                                text
+                                                small
+                                                color="grey darken-2"
+                                                @click="prev"
+                                            >
+                                                <span>
+                                                    <i class="fa fa-chevron-left"></i>
+                                                </span>
+                                            </v-btn>
+                                            <v-btn
+                                                fab
+                                                text
+                                                small
+                                                color="grey darken-2"
+                                                @click="next"
+                                            >
+                                                <span>
+                                                    <i class="fa fa-chevron-right"></i>
+                                                </span>
+                                            </v-btn>
+                                            
+                                            <v-spacer></v-spacer>
+                                            
+                                            </v-toolbar>
+                                        </v-sheet>
+                                    
+                                        <div class="text-center">
+                                            <v-dialog
+                                            v-model="selectedOpen"
+                                            width="500"
+                                            :close-on-content-click="false"
+                                            :activator="selectedElement"
+                                            offset-x
+                                            >
+                                            <v-card>
+                                                <v-card-title class="text-h5 grey lighten-2">
+                                                Détails
+                                                </v-card-title>
+
+                                            <v-card-text>
+                                                <span v-html="selectedEvent.name"></span>
+                                                </v-card-text>
+
+                                                <v-divider></v-divider>
+
+                                                <v-card-actions>
+                                                <v-spacer></v-spacer>
+                                                <v-btn
+                                                    color="primary"
+                                                    text
+                                                    @click="selectedOpen = false"
+                                                >
+                                                    Fermer
+                                                </v-btn>
+                                                </v-card-actions>
+                                            </v-card>
+                                            </v-dialog>
+                                        </div>
+                                
+                                        <v-sheet height="auto">
+                                            <v-calendar
+                                            ref="calendar"
+                                            v-model="focus"
+                                            color="warning"
+                                            :events="events"
+                                            type="day"
+                                            @click:event="showEvent"
+                                            :now="today"
+                                            :value="today"
+                                            :short-weekdays=boolvalue
+                                            :short-months=boolvalue
+                                            :show-month-on-first=boolvalue
+                                            :event-more=boolvalue
+                                            :event-overlap-mode="mode"
+                                            first-interval="5"
+                                            interval-count="18"
+                                            :event-height=value2
+                                            event-color="warning"
+                                            ></v-calendar>
+                                        </v-sheet>
+                                    </v-col>
+                                </v-row>
+                             </v-app>      
+                        </div>
+
+                            <!-- <div class="widget">
                                 <p class="font-weight-bold px-5 py-2">
                                      Mois de {{actual_month}}
                                 </p>
@@ -82,13 +181,13 @@
                                                 color="warning"
                                                 :event-height=value2
                                                 event-color="warning"
-                                                type="4day"
+                                                type="day"
                                                 ></v-calendar>
                                             </v-sheet>
                                         </v-col>
                                     </v-row>
                                 </v-app>
-                            </div>
+                            </div> -->
                     </div>
             
             
@@ -235,6 +334,15 @@ export default {
         totalCompleteRdv: 0,
         totalOngoingRdv: 0,
         salonId: null,
+        focus: '',
+        // type: 'day',
+      
+      selectedEvent: {},
+      selectedElement: null,
+      selectedOpen: false,
+    //   events: [],
+    //   colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
+    //   names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
     }
   },
   methods:{
@@ -249,10 +357,75 @@ export default {
       
     filteredOngoingRdv(){
           return this.appointments.filter(obj => obj.status == "create").length
-      }
+      },
+
+              
+      viewDay ({ date }) {
+        this.focus = date
+        this.type = 'day'
+      },
+      getEventColor (event) {
+        return event.color
+      },
+      setToday () {
+        this.focus = ''
+      },
+      prev () {
+        this.$refs.calendar.prev()
+      },
+      next () {
+        this.$refs.calendar.next()
+      },
+      showEvent ({ nativeEvent, event }) {
+        const open = () => {
+          this.selectedEvent = event
+          this.selectedElement = nativeEvent.target
+          requestAnimationFrame(() => requestAnimationFrame(() => this.selectedOpen = true))
+        }
+
+        if (this.selectedOpen) {
+          this.selectedOpen = false
+          requestAnimationFrame(() => requestAnimationFrame(() => open()))
+        } else {
+          open()
+        }
+
+        nativeEvent.stopPropagation()
+      },
+      updateRange ({ start, end }) {
+        const events = []
+
+        const min = new Date(`${start.date}T00:00:00`)
+        const max = new Date(`${end.date}T23:59:59`)
+        const days = (max.getTime() - min.getTime()) / 86400000
+        const eventCount = this.rnd(days, days + 20)
+
+        for (let i = 0; i < eventCount; i++) {
+          const allDay = this.rnd(0, 3) === 0
+          const firstTimestamp = this.rnd(min.getTime(), max.getTime())
+          const first = new Date(firstTimestamp - (firstTimestamp % 900000))
+          const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
+          const second = new Date(first.getTime() + secondTimestamp)
+
+          events.push({
+            name: this.names[this.rnd(0, this.names.length - 1)],
+            start: first,
+            end: second,
+            color: this.colors[this.rnd(0, this.colors.length - 1)],
+            timed: !allDay,
+          })
+        }
+
+        this.events = events
+      },
+      rnd (a, b) {
+        return Math.floor((b - a + 1) * Math.random()) + a
+      },
    },
   mounted () {
-      this.$refs.calendar.scrollToTime('6:00')
+      this.$refs.calendar.scrollToTime('6:00');
+
+      this.$refs.calendar.checkChange()
     },
  
 

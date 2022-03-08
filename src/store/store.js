@@ -7,7 +7,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     isConnected: false,
-    sidebarState: false,
+    sidebarState: true,
   }
 })
 
