@@ -545,7 +545,7 @@
 	.btn-st{
 		margin-top: 20px;
 		font-size: 14px!important;
-		margin-left: -25px;
+		/* margin-left: -25px; */
 		margin-bottom: 20px;
 	}
 
@@ -866,7 +866,7 @@
 	.vlaue-show li a {
 	  padding: 10px 20px;
 	  width: 100%;
-	  font-size: 15px;
+	  font-size: 14px;
 	}
 
 	.vlaue-show {
