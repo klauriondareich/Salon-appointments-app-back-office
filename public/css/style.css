@@ -619,10 +619,6 @@ header {
   transform: rotate(-90deg);
 }
 
-.btn-close{
-  display: none;
-}
-
 .menu-item-has-children.active::before {
   -webkit-transform: rotate(0);
   -moz-transform: rotate(0);
@@ -1574,7 +1570,7 @@ header {
 }
 
 .widget-title > h4::after {
-  background: rgba(0, 0, 0, 0) linear-gradient(to right, #7575f0 0%, #7575f0 100%) repeat scroll 0 0;
+  background: rgba(0, 0, 0, 0) linear-gradient(to right, #b275f0 0%, #7575f0 100%) repeat scroll 0 0;
   content: "";
   height: 20px;
   left: -25px;
@@ -1931,7 +1927,7 @@ header {
 .drop-bottom {
   background: #f4f4f4;
   color: #333;
-  float: left;
+  /* float: left; */
   padding: 10px;
   text-align: center;
   width: 100%;
@@ -3714,7 +3710,7 @@ a.message {
 }
 
 .about-info > p {
-  font-size: 15px;
+  font-size: 14px;
   line-height: 24px;
   padding-top: 13px;
 }

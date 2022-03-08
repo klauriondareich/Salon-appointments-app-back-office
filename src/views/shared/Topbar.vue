@@ -34,7 +34,7 @@
                                 <img src="/images/user-icon.png" alt=""> <i class="online"></i> 
                             </div>
                         </div>
-                        <div class="drop setting pb-3"> 
+                        <div class="setting pb-3" style="width:200px"  v-if="isVisible"> 
                             <!-- <router-link to="/user_profile" class="p-3">
                                         <i class="fa fa-edit"></i>Mon profil
                             </router-link>  -->
@@ -73,6 +73,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+    .drop-bottom:hover{
+        background: #20988e;
+    }
 </style>
