@@ -34,7 +34,7 @@
                                 <img src="/images/user-icon.png" alt=""> <i class="online"></i> 
                             </div>
                         </div>
-                        <div class="drop setting pb-3"  v-if="isVisible"> 
+                        <div class="drop setting pb-3"> 
                             <!-- <router-link to="/user_profile" class="p-3">
                                         <i class="fa fa-edit"></i>Mon profil
                             </router-link>  -->
@@ -58,7 +58,7 @@ export default {
     data(){
         return {
             username: null,
-            isVisible: false,
+            isVisible: true,
         }
     },
     methods:{

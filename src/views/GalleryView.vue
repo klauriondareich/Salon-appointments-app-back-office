@@ -34,8 +34,8 @@
                                        <button class="btn-danger btn-sm mb-4" @click="item.is_alert_visible = true">
                                             <i class="fa fa-trash"></i>
                                        </button>
-                                       <div class="alert alert-warning" style="position: absolute; top: 20; left: 0; width: 600px;" role="alert" v-if="item.is_alert_visible">
-                                             Voulez-vous supprimer cet élément?. 
+                                       <div class="alert alert-warning" style="position: absolute; top: 20; left: 0; width: auto;" role="alert" v-if="item.is_alert_visible">
+                                             Voulez-vous supprimer cet élément?. <br>
                                             <button class="btn-success btn-sm ml-2" @click="deleteImage(item.id)">Oui supprimer</button>
                                             <button class="btn-danger btn-sm ml-5" @click="item.is_alert_visible = false">Non</button>
                                         </div>

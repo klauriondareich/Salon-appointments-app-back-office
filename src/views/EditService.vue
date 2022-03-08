@@ -51,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="px-5">
+                <div class="px-2">
                     <div class="float-left">
                         <router-link to="/salon" class="btn-st rd-30 org-clr">Retour au salon</router-link>
                     </div>
