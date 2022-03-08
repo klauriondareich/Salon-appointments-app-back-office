@@ -9,12 +9,12 @@
           <div class="content-area mt-5">
             <div class="sub-bar">
               <div class="sub-title">
-                <h4>Salon</h4>
+                <h4>Mon Salon</h4>
                 <!-- <span>Welcome To web Admin Panel!</span> -->
               </div>
               <ul class="bread-crumb">
-                <li><a href="#" title="">Salon</a></li>
-                <li>Dashbord</li>
+                <li><router-link to="/home" title="">Accueil</router-link></li>
+                <li>Salon</li>
               </ul>
             </div>
             <div class="profile">
@@ -127,7 +127,7 @@
                       <div class="widget-peding" v-for="(item, index) in employees" :key="index">
                           <ul class="q-comments">
                               <li>
-                                  <div class="comenter"> <img :src="item.image" alt="specialist profile" class="img-thumbnail"> </div>
+                                  <div class="comenter"> <img :src="item.image" alt="specialist profile" class="img-thumbnail img-spec"> </div>
                                   <div class="comment-detail">
                                       <h5>{{item.name}}</h5>
                                       <p>{{item.desc}}</p>

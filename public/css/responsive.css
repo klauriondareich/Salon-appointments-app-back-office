@@ -112,7 +112,7 @@
 	}
 
 	.topbar {
-		display: none;
+		/* display: none; */
 	  }
 
 	.main-content {
@@ -534,6 +534,27 @@
 
  @media screen and (max-width: 640px){
 
+
+	.hide-menu-element{
+		display: none;
+	}
+
+	.img-spec{
+		margin-left: 10px;
+	}
+	.btn-st{
+		margin-top: 20px;
+		font-size: 14px!important;
+		margin-left: -25px;
+		margin-bottom: 20px;
+	}
+
+	.vlaue-show > li{
+		float: none;
+		width: 100%;
+		margin-bottom: 10px;
+	}
+
 	.btn-close{
 		display: block;
 		font-size: 18px;
@@ -587,7 +608,9 @@
 
 	.sub-title span {
 	  padding-left: 0;
-	  font-size: 9px;
+	  font-size: 14px;
+	  text-align: center;
+	  display: block;
 	}
 
 	.sub-title h4 {
@@ -622,7 +645,8 @@
 	}
 
 	.widget-peding {
-	  padding: 0 20px 20px 15px;
+	  /* padding: 0 20px 20px 15px; */
+	  padding: 0 0px 20px 0px;
 	  width: 100%;
 	}
 
@@ -840,7 +864,9 @@
 	}
 
 	.vlaue-show li a {
-	  padding: 5px 20px;
+	  padding: 10px 20px;
+	  width: 100%;
+	  font-size: 15px;
 	}
 
 	.vlaue-show {

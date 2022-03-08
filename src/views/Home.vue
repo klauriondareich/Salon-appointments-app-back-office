@@ -8,14 +8,14 @@
         <div class="panel-body">
             <div class="content-area mt-5">
                 <div class="sub-bar">
-                    <div class="sub-title">
-                        <h4>Salon Manager Dashboard:</h4>
-                        <span>Bienvenue Laurion Dareich</span>
-                    </div>
-                    <ul class="bread-crumb">
-                        <li><a href="#" title=""><i class="fa fa-home"></i></a></li>
+                     <ul class="bread-crumb">
+                        <li><router-link to="/home" title=""><i class="fa fa-home"></i></router-link></li>
                         <li>Dashbord</li>
                     </ul>
+                    <div class="sub-title">
+                        <h4>Salon Manager</h4> <br> <br>
+                         <span>Bienvenue {{username}}</span>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-sm-12">
@@ -230,6 +230,7 @@ export default {
         events: [
           
         ], 
+        username: null,
         totalAmountRdv: 0,
         totalCompleteRdv: 0,
         totalOngoingRdv: 0,
@@ -258,6 +259,7 @@ export default {
   created(){
 
       this.salonId = localStorage.getItem("salon_id");  
+      this.username = localStorage.getItem("username");  
       this.loaderState = true;
       
     // date du jour et mois

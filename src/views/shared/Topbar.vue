@@ -8,9 +8,9 @@
                             <img src="/images/b-logo.png" width="40" height="40" alt="">
                             BioutyCall
                         </router-link>
+                    </div>
                 </div>
-                </div>
-                <div class="col-lg-9">
+                <div class="col-lg-9 hide-menu-element">
                    
                     <ul class="seting-area">
                         <li class="text-white">{{username}}</li>
@@ -24,7 +24,7 @@
                         </li> -->
                     </ul>
                 </div>
-                <div class="col-lg-1">
+                <div class="col-lg-1 hide-menu-element">
                     <div class="user-head">
                         <div class="admin">
                             <div class="admin-avatar" v-if="!isVisible" @click="isVisible = true">

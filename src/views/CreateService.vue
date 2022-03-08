@@ -14,8 +14,8 @@
                     {{errorMessage}}
                 </p>
                 <ul class="bread-crumb">
-                    <li><a href="#" title="">Services</a></li>
-                    <li>Dashbord</li>
+                    <li><router-link to="/salon" title="">Mon salon</router-link></li>
+                    <li>service</li>
                 </ul>
             </div>
             <div class="inner-bg mb-5">

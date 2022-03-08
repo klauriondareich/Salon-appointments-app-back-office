@@ -11,6 +11,10 @@
                     <p class="text-danger p-2">
                         {{errorMessage}}
                     </p>
+                     <ul class="bread-crumb">
+                        <li><router-link to="/salon" title="">Mon salon</router-link></li>
+                        <li>spécialiste</li>
+                    </ul>
                    
                 </div>
                 <div class="inner-bg mb-5">
@@ -33,8 +37,9 @@
                                     <input type="file" accept="image/*" @change="uploadImage($event)">
                                 </label>
                             </div>
+                            <!-- style="border: 1px solid; height: 200px;" -->
                             <div class="col-md-2 col-sm-2 field">
-                                <div style="border: 1px solid; height: 200px;">
+                                <div>
                                     <img :src="specialistObj.image"  alt="specialist profile">
                                 </div>
                             </div>
