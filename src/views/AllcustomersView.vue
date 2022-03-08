@@ -36,8 +36,8 @@
                         <table class="prj-tbl striped table-responsive">
                             <thead class="color">
                                 <tr>
-                                    <th><em>#</em></th>
-                                    <th><em>Information du client</em></th>
+                                    <!-- <th><em>#</em></th> -->
+                                    <th><em>Informations du client</em></th>
                                     <th><em>Total payé</em></th>
                                     <th><em>Nombre de rdv</em></th>
                                 
@@ -45,7 +45,7 @@
                             </thead>
                             <tbody>
                                 <tr v-for="(item, index) in  searchCustomers()" :key="index">
-                                    <td class="nb-user"><i class="fa fa-user"></i></td>
+                                    <!-- <td class="nb-user"><i class="fa fa-user"></i></td> -->
                                     <td>{{item.customer_name}}</td>
                                     <td>{{item.totalPayed}} FCFA</td>
                                     <td>{{item.nbRdv}}</td>

@@ -11,8 +11,8 @@
                                 <!-- <span>Welcome To web Admin Panel!</span> -->
                             </div>
                             <ul class="bread-crumb">
-                                <li><a href="#" title="">Home</a></li>
-                                <li>Dashbord</li>
+                                <li><router-link to="/home" title="">Accueil</router-link></li>
+                                <li>Tous les rdv</li>
                             </ul>
                         </div>
                         <div class="widget">
@@ -50,8 +50,8 @@
                             <table class="prj-tbl striped table-responsive">
                                 <thead  class="color">
                                     <tr>
-                                        <th style="width: 8%;"><em>#</em></th>
-                                        <th style="width: 20%;"><em>Client</em></th>
+                                        <!-- <th style="width: 8%;"><em>#</em></th> -->
+                                        <th style="width: 20%;"><em>Information du client</em></th>
                                         <th style="width: 25%;"><em>Services</em></th>
                                         <th><em>Montant</em></th>
                                         <th><em>Date</em></th>
@@ -60,7 +60,7 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="(item, index) in appointments" :key="index">
-                                        <td><i class="fa fa-calendar"></i></td>
+                                        <!-- <td><i class="fa fa-calendar"></i></td> -->
                                         <td>{{item.customer_name}}</td>
                                         <td>
                                             {{item.work_name}}

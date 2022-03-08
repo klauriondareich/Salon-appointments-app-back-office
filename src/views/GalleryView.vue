@@ -8,7 +8,7 @@
                 <div class="content-area mt-5">
                    
                     <div class="row pt-5">
-                        <div class="inner-bg">
+                        <div class="inner-bg inner-bg-style">
                             <div class="col-md-12 col-sm-12 field"> 
                                 <span class="upload-image">Ajouter une nouvelle image</span>
                                 <label class="fileContainer"> <span>Ajouter</span>

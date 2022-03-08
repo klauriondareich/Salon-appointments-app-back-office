@@ -335,7 +335,7 @@
 	.main-table .table thead tr th {
 	    font-size: 13px;
 	    line-height: 37px;
-	    width: 10%;
+	    /* width: 10%; */
 	}
 
 	.side-menus .logo {
@@ -397,7 +397,7 @@
 	.info-meta > h4{font-size: 25px;}
 
 	.sub-bar {
-	  margin-bottom: 0;
+	  margin-bottom: 10px;
 	}
 	.inner-bg{margin-top: 30px;}
 
@@ -1071,6 +1071,10 @@
 	.inner-bg {
 	  padding: 25px;
 	}
+	.inner-bg-style {
+	  margin: auto;
+      width: 90%
+	}
 
 	.about-section h4 {
 	  font-size: 25px;
@@ -1284,7 +1288,7 @@
 	}
 
 	.upload-image {
-	  font-size: 10px;
+	  font-size: 14px;
 	}
 
 	.fileContainer > span {
@@ -1384,7 +1388,7 @@
 	.notifi-info {
 	    width: 80%;
 	}
-	.notifi-info > p{font-size: 13px;}
+	.notifi-info > p{font-size: 15px;}
 
 	.tab-style.style2 > ul > li > a,
 	.tab li a {
