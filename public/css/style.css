@@ -81,6 +81,10 @@ body {
   display: none;
 }
 
+.row-element-2{
+  display: none!important;
+}
+
 h1,
 h2,
 h3,

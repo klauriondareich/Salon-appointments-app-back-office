@@ -541,6 +541,13 @@
 	.hide-menu-element{
 		display: none;
 	}
+	.row-element-1{
+		display: none!important;
+	}
+	.row-element-2{
+		display: block!important;
+	}
+
 
 	.img-spec{
 		margin-left: 10px;

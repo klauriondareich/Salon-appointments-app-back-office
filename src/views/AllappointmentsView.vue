@@ -25,7 +25,7 @@
                             </div>
                             </div>
                         <!-- top info widgets -->
-                        <div class="row">
+                        <div class="row row-element-1">
                             <div class="col-6">
                                 <div class="pt-5">
                                     <input type="text" class="form-control" placeholder="Rechercher un client" v-model="searchItem" @input="searchCustomers">
@@ -33,6 +33,25 @@
                             </div>
                             <div class="col-6">
                                 <div class="pt-5 pr-3 float-right">
+                                    <label>Filtrer les rdv : </label>
+                                    <select style="background:#e9e9e9; padding-left: 10px;" @change="callOnChange($event)">
+                                        <!-- <option value="today">Aujourd'hui</option> -->
+                                        <option value="all">Tous les rdv</option>
+                                        <option value="yesterday">Hier</option>
+                                        <option value="under_month">Moins d'un mois</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- top info widgets -->
+                        <div class="row row-element-2">
+                            <div class="col-12">
+                                <div class="pt-5">
+                                    <input type="text" class="form-control" placeholder="Rechercher un client" v-model="searchItem" @input="searchCustomers">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="pr-3 float-right">
                                     <label>Filtrer les rdv : </label>
                                     <select style="background:#e9e9e9; padding-left: 10px;" @change="callOnChange($event)">
                                         <!-- <option value="today">Aujourd'hui</option> -->
