@@ -61,15 +61,15 @@
                           <ul>
                             <li style="border-bottom: 1px solid #eaeaea;">
                                 <img src="/images/airtel-money-small.jpg" alt="airtel money image">
-                                Numéro Airtel Money : {{userInfo.payout_mobile_airtel}}
+                                Airtel Money : {{userInfo.payout_mobile_airtel}}
                             </li>
                             <li style="border-bottom: 1px solid #eaeaea;">
                                 <img src="/images/moov-africa-small.png" alt="moov africa image">
-                                Numéro Moov : {{userInfo.payout_mobile_moov}}
+                                Moov : {{userInfo.payout_mobile_moov}}
                             </li>
                             <li style="border-bottom: 1px solid #eaeaea;">
                                 <img src="/images/pay-dunia-small.png" alt="pay dunia image">
-                                Numéro Pay Dunia : {{userInfo.payout_mobile_paydunia}}
+                                Pay Dunia : {{userInfo.payout_mobile_paydunia}}
                             </li>
                           </ul>
                         </div>
