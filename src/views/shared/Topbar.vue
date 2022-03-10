@@ -58,7 +58,7 @@ export default {
     data(){
         return {
             username: null,
-            isVisible: true,
+            isVisible: false,
         }
     },
     methods:{

@@ -77,6 +77,10 @@ body {
   /* padding: 0; */
 }
 
+.btn-close{
+  display: none;
+}
+
 h1,
 h2,
 h3,
