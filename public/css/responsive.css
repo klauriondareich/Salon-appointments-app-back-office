@@ -1472,7 +1472,7 @@
 	  display: inline-block;
 	  overflow-x: scroll;
 	  white-space: nowrap;
-	  width: 470px;
+	  /* width: 470px; */
 	}
 
 	.email-list-item {

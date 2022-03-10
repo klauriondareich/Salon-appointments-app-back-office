@@ -12,8 +12,8 @@
                     <h4>Dashboard:</h4>
                 </div>
                 <ul class="bread-crumb">
-                    <li><a href="#" title="">Home</a></li>
-                    <li>Dashbord</li>
+                    <li><router-link to="/home" title="">Accueil</router-link></li>
+                    <li>Commentaires</li>
                 </ul>
                 </div>
                 <div class="gap no-gap">
@@ -22,12 +22,12 @@
                     <div class="email-title">
                         <!-- <h4>Notation</h4> -->
                     <ul>
-                        <li>Nombre d'étoiles : <span>({{moyenneEtoile}})</span> <i v-for="index in moyenneEtoile" :key="index" class="fa fa-star text-warning"></i></li>
+                        <li style="text-align: left; padding-left: 20px;">Nombre d'étoiles : <span>({{moyenneEtoile}})</span> <i v-for="index in moyenneEtoile" :key="index" class="fa fa-star text-warning"></i></li>
                     </ul>
                     </div>
                     <div class="email-box-content">
                     <div class="email-list">
-                        <div class="email-list-inf">
+                        <!-- <div class="email-list-inf">
                         <div class="slc">
                             <select>
                             <option>Tous les commentaires</option>
@@ -35,7 +35,7 @@
                             <option>Mois passé</option>
                             </select>
                         </div>
-                        </div>
+                        </div> -->
                         <ul>
                             <li v-for="(item, index) in comments" :key="index" @click="getCurrentComment(item.comment)">
                                 <div class="email-list-item"> <i class="fa fa-comment"></i>
