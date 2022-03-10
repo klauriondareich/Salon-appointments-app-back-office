@@ -348,7 +348,9 @@ export default {
   methods:{
       
     calculationOfTotalRdvAmount(){
-          return this.appointments.map(obj => obj.total).reduce((acc, currentValue) => acc + currentValue)
+
+         if (this.appointments.length == 0) return 0;
+        return this.appointments.map(obj => obj.total).reduce((acc, currentValue) => acc + currentValue)
       },
 
     filteredCompleteRdv(){
@@ -446,7 +448,8 @@ export default {
     let date_formatted = this.today.split("-").join(".");
     
     // Script à revoir, le syst doit recupérer les rdv du jour et non tous les rdvwhere("stamp", "==", current_timestamp)
-     this.appointment.where("salon", "==", this.salonId).where("date", "==", date_formatted).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
+    // this.appointment.where("salon", "==", this.salonId).where("date", "==", date_formatted).orderBy("stamp", "desc")
+     this.appointment.where("salon", "==", this.salonId).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
       if(!snapshot.empty){
         this.appointments = [];
         this.events = [];
@@ -455,7 +458,8 @@ export default {
           let obj = doc.data();
           obj.id = doc.id;
 
-          this.appointments.push(obj);
+
+         if (obj.date === date_formatted) this.appointments.push(obj);
 
           let time_start =  obj.date.split(".").join("-") + " " + obj.time_start;
           let time_end =  obj.date.split(".").join("-") + " " + obj.time_end;
