@@ -217,9 +217,9 @@
                                             <!-- <a href="#" title="">delete</a> <a href="#" title="">edit</a>--> </div> 
                                     </td>
                                     <td>
-                                        <div class="owner-pic "> 
+                                        <!-- <div class="owner-pic "> 
                                             <img :src="item.employee_url" alt="" width="50" height="100" style="border-radius: 30px"> 
-                                        </div>
+                                        </div> -->
                                         <div class="owner-info">
                                             <h6>{{item.employee_name}} </h6>
                                             <span>{{item.time_start}} - {{item.time_end}}</span> </div>
@@ -228,6 +228,7 @@
                                     <td>
                                         <span v-if="item.status =='complete'" class="priority low">Terminé</span>
                                         <span v-if="item.status =='create'" class="priority medium">En attente</span>
+                                        <span v-if="item.status =='cancelled_by_user'" class="priority high ">Annulé</span>
                                     </td>
                                     <!-- <td>
                                         <div class="prj-team">
@@ -457,7 +458,7 @@ export default {
         snapshot.forEach((doc) =>{
           let obj = doc.data();
           obj.id = doc.id;
-
+           
 
          if (obj.date === date_formatted) this.appointments.push(obj);
 
