@@ -55,6 +55,7 @@
                     <span>Status du rdv : </span> 
                     <span v-if="details.status =='complete'" class="priority low">Terminé</span>
                     <span v-if="details.status =='create'" class="priority medium">En attente</span>
+                    <span v-if="details.status =='cancelled_by_user'" class="priority high ">Annulé</span>
                 </v-card-text>
 
                 <v-divider></v-divider>
