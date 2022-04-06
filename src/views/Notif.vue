@@ -4,15 +4,15 @@
             <div class="col-lg-12 col-sm-12">
                 <div class="widget">
                     <div class="widget-title no-margin">
-                        <h4>Toutes les notificaitoions</h4>
+                        <h4>Toutes les notifications</h4>
                     </div>
-                    <div class="news-feed-list">
+                    <div>
                         <div class="new-box" v-for="(item, index) in cancel_appointments" :key="index">
                             <div class="news-detail">
                                 <p>Votre client <span class="font-weight-bold">{{item.customer_name}}</span> a annulé son rdv</p>
                                 <p>Pour la prestation de <span class="font-weight-bold">{{item.work_name.split("\n").join(" / ")}}</span></p>
-                                <p>D'un montant <span class="font-weight-bold">{{item.total}} FCFA</span></p>
-                                <p>Date de rdv : <span class="font-weight-bold">{{item.stamp | formatDate}}</span></p>
+                                <p>D'un montant de <span class="font-weight-bold">{{item.total}} FCFA</span></p>
+                                <p>Date du rdv : <span class="font-weight-bold">{{item.stamp | formatDate}}</span></p>
                                 <span v-if="item.status =='cancelled_by_user'" class="priority high ">Annulé</span>
                             </div>
                         </div>
