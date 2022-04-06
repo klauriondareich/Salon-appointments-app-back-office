@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-lg-9">
                     <ul class="notify-area">
-                        <li></li>
+                       
                         <!-- <li>
                             <div class="nav-icon3"> <span></span> <span></span> <span></span> <span></span> </div>
                             <i class="fa fa-navicon nav-icon3"></i>
@@ -21,6 +21,25 @@
                             <router-link to="/appointments/notif" title="Notifications"><i class="fa fa-bell-o"></i></router-link><span class="red-bg">{{nb_notif}}</span>
                         </li>
                         <li class="text-white">{{username}}</li>
+                        <li>
+                            <div class="user-head">
+                                <div class="admin">
+                                    <div class="admin-avatar" v-if="!isVisible" @click="isVisible = true">
+                                        <img src="/images/user-icon.png" alt=""> <i class="online"></i> 
+                                    </div>
+                                    <div class="admin-avatar" v-if="isVisible" @click="isVisible = false">
+                                        <img src="/images/user-icon.png" alt=""> <i class="online"></i> 
+                                    </div>
+                                </div>
+                                <!-- <div class="setting pb-3" style="width:200px"  v-if="isVisible"> 
+                                    <router-link to="/user_profile" class="p-3">
+                                                <i class="fa fa-edit"></i>Mon profil
+                                    </router-link> 
+                                    
+                                    <span class="drop-bottom"><a href="#" title="" @click="signOut()"><i class="fa fa-sign-out"></i>Se déconnecter</a></span> 
+                                </div> -->
+                        </div>
+                        </li>
                         <!-- <li class="langages">
                             <a href="#" title="">Eng</a>
                             <ul class="drop language">
@@ -46,7 +65,7 @@
                         <li></li>
                     </ul>
                 </div> -->
-                <div class="col-lg-1 hide-menu-element">
+                <!-- <div class="col-lg-1 hide-menu-element">
                     <div class="user-head">
                         <div class="admin">
                             <div class="admin-avatar" v-if="!isVisible" @click="isVisible = true">
@@ -57,14 +76,14 @@
                             </div>
                         </div>
                         <div class="setting pb-3" style="width:200px"  v-if="isVisible"> 
-                            <!-- <router-link to="/user_profile" class="p-3">
+                            <router-link to="/user_profile" class="p-3">
                                         <i class="fa fa-edit"></i>Mon profil
-                            </router-link>  -->
+                            </router-link> 
                             
                             <span class="drop-bottom"><a href="#" title="" @click="signOut()"><i class="fa fa-sign-out"></i>Se déconnecter</a></span> 
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -102,6 +121,7 @@ export default {
       if(!snapshot.empty){
           this.nb_notif = snapshot.size;
         }
+      else this.nb_notif = 0;
     })
 
   }

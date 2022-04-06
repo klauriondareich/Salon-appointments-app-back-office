@@ -13,7 +13,8 @@
                                 <p>Pour la prestation de <span class="font-weight-bold">{{item.work_name.split("\n").join(" / ")}}</span></p>
                                 <p>D'un montant de <span class="font-weight-bold">{{item.total}} FCFA</span></p>
                                 <p>Date du rdv : <span class="font-weight-bold">{{item.stamp | formatDate}}</span></p>
-                                <span v-if="item.status =='cancelled_by_user'" class="priority high ">Annulé</span>
+                                <p>Nouvelle date : <span class="font-weight-bold">04/09/2022</span></p>
+                                <span v-if="item.status =='cancelled_by_user'" class="priority high ">Reporté</span>
                             </div>
                         </div>
                     </div>
@@ -38,25 +39,25 @@ export default {
     return{
        cancel_appointments: [],
        appointCancelRef: firebase.firestore().collection("appointment"), 
-
     }
   },
 
   created(){
-      console.log("initi")
-      this.appointCancelRef.where("status", "==", "cancelled_by_user").orderBy("stamp", "desc").onSnapshot((snapshot) =>{
+      
+      this.appointCancelRef.where("status", "==", "cancelled_by_user").orderBy("stamp", "desc").get().then((snapshot) =>{
+      
       if(!snapshot.empty){
+          
             this.cancel_appointments = [];
-
+          
             snapshot.forEach((doc) =>{
                 let obj = doc.data();
                 obj.id = doc.id;
-
-                console.log("obj", obj)
-                this.cancel_appointments.push(obj)
-            })
+                this.appointCancelRef.doc(obj.id).update({"read": true});
+                this.cancel_appointments.push(obj);
+            });
+            
          }
-         else console.log("madesso")
     })
 
   }

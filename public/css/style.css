@@ -989,9 +989,10 @@ header {
 }
 
 .notify-area {
-  display: inline-block;
+  /* display: inline-block; */
   list-style: outside none none;
   vertical-align: middle;
+  float: right;
 }
 
 .notify-area > li,
