@@ -18,7 +18,7 @@
                             <i class="fa fa-navicon nav-icon3"></i>
                         </li> -->
                         <li class="notifications">
-                            <router-link to="/appointments/notif" title="Notifications"><i class="fa fa-bell-o"></i></router-link><span class="red-bg">02</span>
+                            <router-link to="/appointments/notif" title="Notifications"><i class="fa fa-bell-o"></i></router-link><span class="red-bg">{{nb_notif}}</span>
                         </li>
                         <li class="text-white">{{username}}</li>
                         <!-- <li class="langages">
@@ -72,6 +72,7 @@
 
 <script>
 import authMixin from '../../mixins/authMixin'
+import firebase from '../../firebase/init'
 
 export default {
     name: 'Topbar',
@@ -81,17 +82,29 @@ export default {
         return {
             username: null,
             isVisible: false,
+            cancel_appointments: [],
+            appointCancelRef: firebase.firestore().collection("appointment"), 
+            last_size: 0,
+            first_size: 0,
+            nb_notif: 0,
+            salonRef: firebase.firestore().collection("salons"), 
         }
     },
     methods:{
         
     },
+    
+  created(){
+      
+      this.username = localStorage.getItem("username");
+      this.appointCancelRef.where("status", "==", "cancelled_by_user").where("read", "==", false).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
+      
+      if(!snapshot.empty){
+          this.nb_notif = snapshot.size;
+        }
+    })
 
-    created(){
-        
-        this.username =  localStorage.getItem("username");
-
-    }
+  }
 }
 </script>
 
