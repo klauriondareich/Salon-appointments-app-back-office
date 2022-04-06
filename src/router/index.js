@@ -110,7 +110,16 @@ const routes = [
           role:"manager"
         },
         component: () => import(/* webpackChunkName: "createService" */ '../views/ProfileView.vue')
-      }
+      },
+      {
+        path: '/appointments/notif',
+        name: 'Notifications',
+        meta:{
+          requiresAuth: true,
+          role:"manager"
+        },
+        component: () => import(/* webpackChunkName: "allcustomers" */ '../views/Notif.vue')
+      },
     ]
   },
   {
