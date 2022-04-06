@@ -10,9 +10,16 @@
                         </router-link>
                     </div>
                 </div>
-                <div class="col-lg-9 hide-menu-element">
-                   
-                    <ul class="seting-area">
+                <div class="col-lg-9">
+                    <ul class="notify-area">
+                        <li></li>
+                        <!-- <li>
+                            <div class="nav-icon3"> <span></span> <span></span> <span></span> <span></span> </div>
+                            <i class="fa fa-navicon nav-icon3"></i>
+                        </li> -->
+                        <li class="notifications">
+                            <router-link to="/appointments/notif" title="Notifications"><i class="fa fa-bell-o"></i></router-link><span class="red-bg">02</span>
+                        </li>
                         <li class="text-white">{{username}}</li>
                         <!-- <li class="langages">
                             <a href="#" title="">Eng</a>
@@ -24,6 +31,21 @@
                         </li> -->
                     </ul>
                 </div>
+                <!-- <div class="col-lg-9 hide-menu-element">
+                   
+                    <ul class="seting-area">
+                        <li class="text-white">{{username}}</li>
+                        <li class="langages">
+                            <a href="#" title="">Eng</a>
+                            <ul class="drop language">
+                                <li class="lang-selected"><a href="#"><i class="fa fa-check"></i> Eng</a></li>
+                                <li><a href="#">Français</a></li>
+                            
+                            </ul>
+                        </li>
+                        <li></li>
+                    </ul>
+                </div> -->
                 <div class="col-lg-1 hide-menu-element">
                     <div class="user-head">
                         <div class="admin">
