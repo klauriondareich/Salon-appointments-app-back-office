@@ -27,14 +27,14 @@
                 <div class="col-md-8 col-sm-12 col-xs-12">
                   <div class="row">
                     
-                    <div class="col-md-6 col-sm-6">
+                    <!-- <div class="col-md-6 col-sm-6">
                       <ul class="profile-socials">
                         <li><a class="facebook" href="#" title=""><i class="fa fa-facebook"></i></a></li>
                         <li><a class="twitter" href="#" title=""><i class="fa fa-twitter"></i></a></li>
                         <li><a class="vk" href="#" title=""><i class="fa fa-vk"></i></a></li>
                         <li><a class="tumblr" href="#" title=""><i class="fa fa-tumblr"></i></a></li>
                       </ul>
-                    </div>
+                    </div> -->
                     <div class="col-md-12">
                       <div class="sub-area">
                         <ul>
@@ -83,12 +83,12 @@
                     </div>
                     <div class="widget-peding">
                         <div class="toggle toggle-style3" v-for="(item, index) in categories" :key="index">
-                          <div class="toggle-item brd-5" v-if="item.works != 0">
+                          <div class="toggle-item brd-5">
                               <h3 class="active font-weight-bold"><i class="fa fa-paint-brush"></i>{{item.name}}</h3>
                               <div class="content">
                                 <div class="widget-peding">
                                   <div class="rcnt-activt">
-                                    <ul v-for="(element, index2) in item.works" :key="index2" >
+                                    <ul v-for="(element, index2) in item.works" :key="index2">
                                       <li class="clr1 ">{{element.name}} ({{element.duration}} min)   
                                         <span class="pl-3 pr-3">
                                           <router-link :to="'edit/' + element.id">
@@ -166,7 +166,7 @@ export default {
   data(){
     
     return{
-       salonObj: {works:[]},
+       salonObj: {categoriesId:[], works:[]},
        salonRef: firebase.firestore().collection("salons"), 
        salonId: null,
        loaderState: false,
@@ -180,16 +180,26 @@ export default {
        services: [],
        employees: [],
        turnover: 0,
+       categoriesId: [],
     }
   },
 
   methods:{
+
+      updateCategoryInSalon(categoryId){
+
+        // First checking if the Id doesn't exist in salonObj
+
+        if (!this.salonObj.categoriesId.includes(categoryId)) this.categoriesId.push(categoryId);
+        this.salonRef.doc(this.salonId).update({categoriesId: this.categoriesId})
+      },
 
     /* 
       This func get as input a service of type object
       and check if the service belong to the salon.
       The property works contains all the ids of the services linked to the salon
     */
+
     getSalonOnlyservices(service){
 
       let base_arr = this.salonObj.works;
@@ -252,7 +262,7 @@ export default {
                
            }
           else{
-            console.log("not exist")
+            console.log("Salon does not exist")
           }
 
        });
@@ -280,8 +290,8 @@ export default {
       if(!snapshot.empty){
         
          snapshot.forEach((doc) =>{
-            let obj = doc.data();
-            obj.id = doc.id;
+            let category = doc.data();
+            category.id = doc.id;
 
            
 
@@ -305,15 +315,18 @@ export default {
 
                  })
 
-                  obj.works = servicesOfACategory;
+                  category.works = servicesOfACategory;
                   this.loaderState = false
                }
 
-               
+              if (category.works && category.works.length!=0) {
+                this.updateCategoryInSalon(category.id);
+                this.categories.push(category)
+              }
             })
-
-            this.categories.push(obj);
          });
+
+
       }
     });
 
