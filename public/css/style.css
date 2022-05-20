@@ -1086,10 +1086,10 @@ header {
 
 .sub-title h4 {
   display: inline-block;
-  font-size: 15px;
+  font-size: 17px;
   vertical-align: middle;
   width: auto;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
 }
 
 .sub-title span {

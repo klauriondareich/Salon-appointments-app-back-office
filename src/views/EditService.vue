@@ -11,10 +11,10 @@
                     <p class="text-danger p-2">
                         {{errorMessage}}
                     </p>
-                    <ul class="bread-crumb">
-                        <li><a href="#" title="">Services</a></li>
-                        <li>Dashbord</li>
-                    </ul>
+                   <ul class="bread-crumb">
+                        <li><router-link to="/salon" title="">Mon Salon</router-link></li>
+                        <li>Services</li>
+                   </ul>
                 </div>
                 <div class="inner-bg mb-5">
                     
