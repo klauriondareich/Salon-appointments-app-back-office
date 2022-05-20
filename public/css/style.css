@@ -10253,7 +10253,7 @@ ul.notify-area > li > i {
 
 .author-name {
   display: inline-block;
-  margin-top: 25px;
+  /* margin-top: 25px; */
   width: 100%;
 }
 
@@ -10270,7 +10270,9 @@ ul.notify-area > li > i {
 }
 
 .testimon::before {
-  background: #dadada none repeat scroll 0 0;
+  /* background: #dadada none repeat scroll 0 0; */
+  background: #dadada1a none repeat scroll 0 0;
+  border: 1px solid #dadada;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
