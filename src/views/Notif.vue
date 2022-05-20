@@ -14,7 +14,7 @@
                                 <p>D'un montant de <span class="font-weight-bold">{{item.total}} FCFA</span></p>
                                 <p>Date du rdv : <span class="font-weight-bold">{{item.stamp | formatDate}}</span></p>
                                 <p>Nouvelle date : <span class="font-weight-bold">04/09/2022</span></p>
-                                <span v-if="item.status =='cancelled_by_user'" class="priority high ">Reporté</span>
+                                <span v-if="item.status =='cancelled_by_user'" class="priority high ">Annulé</span>
                             </div>
                         </div>
                     </div>
