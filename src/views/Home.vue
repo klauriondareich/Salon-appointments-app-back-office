@@ -10,10 +10,10 @@
                 <div class="sub-bar">
                      <ul class="bread-crumb">
                         <li><router-link to="/home" title=""><i class="fa fa-home"></i></router-link></li>
-                        <li>Dashbord</li>
+                        <li>Accueil</li>
                     </ul>
                     <div class="sub-title">
-                        <h4>Salon Manager</h4> <br> <br>
+                        <h4>DASHBOARD</h4> <br> <br>
                          <span>Bienvenue {{username}}</span>
                     </div>
                 </div>
@@ -55,156 +55,145 @@
                     </div>
                     </div>
                 </div>
-
-                
         
-                    <div class="row">
+                <div class="row">
 
-                        <div class="widget">
-                             <v-app>
-                                <v-row class="fill-height">
-                                    <v-col>
-                                        <v-sheet height="64">
-                                            <v-toolbar
-                                            flat
-                                            >
-                                            <v-toolbar-title v-if="$refs.calendar">
-                                                {{ $refs.calendar.title }}
-                                            </v-toolbar-title>
-                                            <v-btn
-                                                fab
-                                                text
-                                                small
-                                                color="grey darken-2"
-                                                @click="prev"
-                                            >
-                                                <span>
-                                                    <i class="fa fa-chevron-left"></i>
-                                                </span>
-                                            </v-btn>
-                                            <v-btn
-                                                fab
-                                                text
-                                                small
-                                                color="grey darken-2"
-                                                @click="next"
-                                            >
-                                                <span>
-                                                    <i class="fa fa-chevron-right"></i>
-                                                </span>
-                                            </v-btn>
-                                            
-                                            <v-spacer></v-spacer>
-                                            
-                                            </v-toolbar>
-                                        </v-sheet>
-                                    
-                                        <div class="text-center">
-                                            <v-dialog
-                                            v-model="selectedOpen"
-                                            width="500"
-                                            :close-on-content-click="false"
-                                            :activator="selectedElement"
-                                            offset-x
-                                            >
-                                            <v-card>
-                                                <v-card-title class="text-h5 grey lighten-2">
-                                                Détails
-                                                </v-card-title>
-
-                                            <v-card-text>
-                                                <span v-html="selectedEvent.name"></span>
-                                                </v-card-text>
-
-                                                <v-divider></v-divider>
-
-                                                <v-card-actions>
-                                                <v-spacer></v-spacer>
-                                                <v-btn
-                                                    color="primary"
-                                                    text
-                                                    @click="selectedOpen = false"
-                                                >
-                                                    Fermer
-                                                </v-btn>
-                                                </v-card-actions>
-                                            </v-card>
-                                            </v-dialog>
-                                        </div>
-                                
-                                        <v-sheet height="auto">
-                                            <v-calendar
-                                            ref="calendar"
-                                            v-model="focus"
-                                            color="warning"
-                                            :events="events"
-                                            type="day"
-                                            @click:event="showEvent"
-                                            :now="today"
-                                            :value="today"
-                                            :short-weekdays=boolvalue
-                                            :short-months=boolvalue
-                                            :show-month-on-first=boolvalue
-                                            :event-more=boolvalue
-                                            :event-overlap-mode="mode"
-                                            first-interval="5"
-                                            interval-count="18"
-                                            :event-height=value2
-                                            event-color="warning"
-                                            ></v-calendar>
-                                        </v-sheet>
-                                    </v-col>
-                                </v-row>
-                             </v-app>      
-                        </div>
-
-                            <!-- <div class="widget">
-                                <p class="font-weight-bold px-5 py-2">
-                                     Mois de {{actual_month}}
-                                </p>
+                    <div class="widget">
                             <v-app>
-                                    <v-row>
-                                        <v-col>
-                                            <v-sheet height="auto">
-                                                <v-calendar
-                                                ref="calendar"
-                                                :now="today"
-                                                :value="today"
-                                                :short-weekdays=boolvalue
-                                                :short-months=boolvalue
-                                                :show-month-on-first=boolvalue
-                                                :event-more=boolvalue
-                                                :event-overlap-mode="mode"
-                                                first-interval="5"
-                                                interval-count="18"
-                                                :events="events"
-                                                color="warning"
-                                                :event-height=value2
-                                                event-color="warning"
-                                                type="day"
-                                                ></v-calendar>
-                                            </v-sheet>
-                                        </v-col>
-                                    </v-row>
-                                </v-app>
-                            </div> -->
-                    </div>
-            
-            
+                            <v-row class="fill-height">
+                                <v-col>
+                                    <v-sheet height="64">
+                                        <v-toolbar
+                                        flat
+                                        >
+                                        <v-toolbar-title v-if="$refs.calendar">
+                                            {{ $refs.calendar.title }}
+                                        </v-toolbar-title>
+                                        <v-btn
+                                            fab
+                                            text
+                                            small
+                                            color="grey darken-2"
+                                            @click="prev"
+                                        >
+                                            <span>
+                                                <i class="fa fa-chevron-left"></i>
+                                            </span>
+                                        </v-btn>
+                                        <v-btn
+                                            fab
+                                            text
+                                            small
+                                            color="grey darken-2"
+                                            @click="next"
+                                        >
+                                            <span>
+                                                <i class="fa fa-chevron-right"></i>
+                                            </span>
+                                        </v-btn>
+                                        
+                                        <v-spacer></v-spacer>
+                                        
+                                        </v-toolbar>
+                                    </v-sheet>
+                                
+                                    <div class="text-center">
+                                        <v-dialog
+                                        v-model="selectedOpen"
+                                        width="500"
+                                        :close-on-content-click="false"
+                                        :activator="selectedElement"
+                                        offset-x
+                                        >
+                                        <v-card>
+                                            <v-card-title class="text-h5 grey lighten-2">
+                                            Détails
+                                            </v-card-title>
 
+                                        <v-card-text>
+                                            <span v-html="selectedEvent.name"></span>
+                                            </v-card-text>
+
+                                            <v-divider></v-divider>
+
+                                            <v-card-actions>
+                                            <v-spacer></v-spacer>
+                                            <v-btn
+                                                color="primary"
+                                                text
+                                                @click="selectedOpen = false"
+                                            >
+                                                Fermer
+                                            </v-btn>
+                                            </v-card-actions>
+                                        </v-card>
+                                        </v-dialog>
+                                    </div>
+                            
+                                    <v-sheet height="auto">
+                                        <v-calendar
+                                        ref="calendar"
+                                        v-model="focus"
+                                        color="warning"
+                                        :events="events"
+                                        type="day"
+                                        @click:event="showEvent"
+                                        :now="today"
+                                        :value="today"
+                                        :short-weekdays=boolvalue
+                                        :short-months=boolvalue
+                                        :show-month-on-first=boolvalue
+                                        :event-more=boolvalue
+                                        :event-overlap-mode="mode"
+                                        first-interval="5"
+                                        interval-count="18"
+                                        :event-height=value2
+                                        event-color="warning"
+                                        ></v-calendar>
+                                    </v-sheet>
+                                </v-col>
+                            </v-row>
+                            </v-app>      
+                    </div>
+                </div>
+
+                <div class="gap no-gap pt-5">
+                  <div class="inner-bg">
+                    <div class="element-title">
+                      <h4>Commentaires récents</h4>
+                      <span>Les derniers commentaires de vos clients</span> 
+                    </div>
+                    <div class="row remove-ext">
+                      <div class="col-md-3" v-for="(item, index) in comments.slice(0,4)" :key="index">
+                        <div class="testimon style4">
+                          <div class="testi-meta">
+                            <p class="text-left">{{item.comment}}</p>
+                            <div class="author-name">
+                              <div class="testi-avatar"> <img src="/images/commentor.png" alt=""> </div>
+                              <div class="author-name">
+                                <h5>{{item.username}}</h5>
+                                <span>{{item.stamp | formatDate}}</span> </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>       
+            
                 <div class="widget mt-5">
                     <div class="widget-title no-margin">
                         <h4>Liste des Rendez-vous du jour</h4> 
                     </div>
                     <div class="widget">
                         <table class="prj-tbl striped bordered table-responsive">
-                            <thead>
+                            <thead class="color">
                                 <tr>
-                                    <th style="width:2%">NO.</th>
-                                    <th>Service</th>
-                                    <th>Spécilaiste</th>
-                                    <th>Client</th>
-                                    <th>Status</th>
+                                    <th style="width:2%" class="text-white">NO.</th>
+                                    <th class="text-white">Service</th>
+                                    <th class="text-white">Spécilaiste</th>
+                                    <th class="text-white">Client</th>
+                                    <th class="text-white">Status</th>
                                     <!-- <th>Project Team</th> -->
                                 </tr>
                             </thead>
@@ -244,61 +233,8 @@
                         </table>
                         <p class="text-center p-3" v-if="appointments.length == 0">Aucun rendez vous pour le moment!</p>
                     </div>
-                </div>
-
-                <div class="row pt-5 pb-5">
-                    <div class="col-lg-8 col-sm-6">
-                        <div class="widget">
-                            <div class="widget-title">
-                                <h4>Commentaires récents</h4>      
-                            </div>
-                            <div class="widget-peding">
-                                <ul class="q-comments recent">
-                                    <li v-for="(item, index) in comments.slice(0,3)" :key="index">
-                                        <div class="comenter"> <img src="images/resources/q-comment1.jpg" alt=""> </div>
-                                        <div class="comment-detail">
-                                            <h5>{{item.username}}</h5>
-                                            <p>{{item.comment}}</p>
-                                        </div>
-                                        <ul class="comment-date">
-                                            <li><span>{{item.stamp | formatDate}}</span></li>
-                                        </ul>
-                                        <router-link to="/comments" class="approved float-right" href="#" title="">Voir le commentaire</router-link>
-                                    </li>
-                                </ul>
-                                <p class="text-center p-3" v-if="comments.length == 0">Aucun commentaires récents!</p>
-                            </div>
-                        </div>
-                        <!-- user list -->
-                    </div>
-                    <!-- recent comment widget -->
-                    <!-- <div class="col-lg-4 col-sm-6">
-                        <div class="widget">
-                            <div class="widget-title">
-                                <h4>Rendez-vous mensuels</h4>
-                                <ul class="widget-controls">
-                            <li title="Refresh" class="refresh-content"><i class="fa fa-refresh"></i></li>
-                            <li title="Maximize" class="expand-content"><i class="icon-frame"></i></li>
-                            <li title="More Options" class="more-option"><i class="ti-more-alt"></i></li>
-                        </ul>
-                            </div>
-                            <div class="donut-chart">
-                                <ul class="total">
-                                    <li>Google Plus<span>25A</span></li>
-                                    <li>Direct Access<span>1034</span></li>
-                                </ul>
-                                <canvas id="canvasDoughnut"></canvas>
-                                <ul class="total">
-                                    <li>Facebook<span>779</span></li>
-                                    <li>Twitter<span>489</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                  
-                    </div> -->
-
-                    
-                </div>                            
+                </div> 
+                                  
             </div>
         </div>
     </div>

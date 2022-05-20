@@ -6,7 +6,16 @@
             <!-- responsive header -->
             <div class="panel-body">
                 <div class="content-area mt-5">
-                   
+                   <div class="sub-bar">
+                    <div class="sub-title">
+                        <h4>GALERIE</h4>
+                        <!-- <span>Welcome To web Admin Panel!</span> -->
+                    </div>
+                    <ul class="bread-crumb">
+                        <li><router-link to="/home" title="">Accueil</router-link></li>
+                        <li>Galerie</li>
+                    </ul>
+                    </div>
                     <div class="row pt-5">
                         <div class="inner-bg inner-bg-style">
                             <div class="col-md-12 col-sm-12 field"> 
@@ -158,7 +167,7 @@ export default {
     },
     created(){
     
-        this.$store.state.sidebarState = false;
+        // this.$store.state.sidebarState = false;
 
        this.gettingGalleryImages();     
     }

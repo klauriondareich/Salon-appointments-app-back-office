@@ -9,7 +9,7 @@
           <div class="content-area mt-5">
             <div class="sub-bar">
               <div class="sub-title">
-                <h4>Mon Salon</h4>
+                <h4>MON SALON</h4>
                 <!-- <span>Welcome To web Admin Panel!</span> -->
               </div>
               <ul class="bread-crumb">

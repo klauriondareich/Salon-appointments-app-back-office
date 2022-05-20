@@ -7,12 +7,12 @@
             <div class="content-area sortable-widt mt-5">
                 <div class="sub-bar">
                     <div class="sub-title">
-                        <h4>Dashboard:</h4>
+                        <h4>MES CLIENTS</h4>
                         <!-- <span>Welcome To web Admin Panel!</span> -->
                     </div>
                     <ul class="bread-crumb">
-                        <li><a href="#" title="">Home</a></li>
-                        <li>Dashbord</li>
+                        <li><router-link to="/home" title="">Accueil</router-link></li>
+                        <li>Clients</li>
                     </ul>
                 </div>
                 <div class="widget">
