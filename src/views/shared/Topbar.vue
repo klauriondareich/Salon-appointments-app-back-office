@@ -4,10 +4,10 @@
             <div class="row">
                 <div class="col-lg-2">
                     <div class="logo">
-                        <router-link to="/home" title="">
-                            <img src="/images/b-logo.png" width="40" height="40" alt="">
+                        <a href="#" title="">
+                            <img src="/images/b-logo.png" width="40" height="40" alt="logo bioutycall">
                             BioutyCall
-                        </router-link>
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-9">
