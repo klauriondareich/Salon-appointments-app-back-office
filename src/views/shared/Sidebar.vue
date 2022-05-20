@@ -45,5 +45,8 @@ export default {
 </script>
 
 <style>
-
+    a.router-link-active,
+    a.router-link-exact-active {
+      background-color: #f3f3f3;
+    }
 </style>
