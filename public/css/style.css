@@ -61,7 +61,8 @@ body {
   font-family: "Open Sans", sans-serif;
   position: relative;
   font-weight: 400;
-  color: #888;
+  /* color: #888; */
+  color:#414141;
   font-size: 14px;
 }
 
@@ -93,7 +94,8 @@ h5,
 h6 {
   font-family: "Open Sans";
   margin: 0;
-  color: #1a1a1a;
+  /* color: #1a1a1a; */
+  color:#414141;
 }
 
 p {
@@ -8533,7 +8535,8 @@ ul.notify-area > li > i {
   padding: 11px 0;
   position: relative;
   font-size: 15px;
-  color: #1a1a1a;
+  /* color: #1a1a1a; */
+  color:#414141;
 }
 
 .rcnt-activt > ul > li a {
@@ -9974,8 +9977,8 @@ ul.notify-area > li > i {
 
 .info5o5 > p {
   font-size: 16px;
-  font-style: italic;
-  padding-bottom: 37px;
+  /* font-style: italic; */
+  /* padding-bottom: 37px; */
   padding-top: 18px;
   line-height: 26px;
 }

@@ -7,79 +7,82 @@
         <div class="panel-body">
                         
           <div class="content-area mt-5">
-            <div class="sub-bar">
-              <div class="sub-title">
-                <h4>MON SALON</h4>
-                <!-- <span>Welcome To web Admin Panel!</span> -->
+              <div class="sub-bar">
+                <div class="sub-title">
+                  <h4>MON SALON</h4>
+                  <!-- <span>Welcome To web Admin Panel!</span> -->
+                </div>
+                <ul class="bread-crumb">
+                  <li><router-link to="/home" title="">Accueil</router-link></li>
+                  <li>Salon</li>
+                </ul>
               </div>
-              <ul class="bread-crumb">
-                <li><router-link to="/home" title="">Accueil</router-link></li>
-                <li>Salon</li>
-              </ul>
-            </div>
-            <div class="profile">
-              <div class="row merged">
-                <div class="col-md-3 col-sm-12 col-xs-12">
-                  <div> 
-                      <img :src="salonObj.image" alt="salon image" >
+
+              <div class="row">
+                <div class="gap no-bottom">
+                  <div class="page5o5">
+                    <div class="avatar5o5"> <img :src="salonObj.image" alt="salon image"> </div>
+                    <div class="info5o5">
+                      <div class="fixed-bg" style="background-image:url(images/resources/505-bg.png); background-repeat: no-repeat;"></div>
+                      <span>{{salonObj.name}}</span>
+                      <p ><i class="fa fa-info-circle"></i> : {{salonObj.desc}}</p>
+                      <p ><i class="fa fa-map-marker"></i> {{salonObj.address}}</p>
+                      <p ><i class="fa fa-phone"></i> {{salonObj.phone}}</p>
+                      <p ><i class="fa fa-wordpress"></i>: {{salonObj.website || 'pas de site web'}}</p>
+
+                      <router-link to="/specialist" title="" class="btn-st grn-clr mt-2">Créer un nouveau service</router-link>
+
+                    </div>
                   </div>
                 </div>
-                <div class="col-md-8 col-sm-12 col-xs-12">
-                  <div class="row">
-                    
-                    <!-- <div class="col-md-6 col-sm-6">
-                      <ul class="profile-socials">
-                        <li><a class="facebook" href="#" title=""><i class="fa fa-facebook"></i></a></li>
-                        <li><a class="twitter" href="#" title=""><i class="fa fa-twitter"></i></a></li>
-                        <li><a class="vk" href="#" title=""><i class="fa fa-vk"></i></a></li>
-                        <li><a class="tumblr" href="#" title=""><i class="fa fa-tumblr"></i></a></li>
-                      </ul>
-                    </div> -->
-                    <div class="col-md-12">
-                      <div class="sub-area">
-                        <ul>
-                          <li>Heure de travail</li>
-                          <li><i class="fa fa-clock-o"></i> {{salonObj.open_time}}</li>
-                          <li><i class="fa fa-clock-o"></i> {{salonObj.close_time}}</li>
-                        </ul>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 pt-5">
+                    <div class="info-section">
+                      <div class="panel-widget">
+                        <div class="b-meta"> 
+                          <i class="fa fa-calendar"></i>
+                          <div class="info-meta">
+                            <h4>{{appointments.length}}</h4>
+                            <p>FCFA</p>
+                            <span>Total RDV</span> 
+                          </div>
+                          <span class="ten blue"></span> 
+                        </div>
+                      </div>
+                      <div class="panel-widget">
+                          <div class="b-meta">
+                            <i class="fa fa-dollar"></i>
+                            <div class="info-meta">
+                              <h4>{{turnover}}</h4>
+                              <p>FCFA</p>
+                              <span>Chiffre d'affaire (FCFA)</span> </div>
+                            <span class="ten purpal"></span>
+                          </div>
+                      </div>
+                      <div class="panel-widget">
+                          <div class="b-meta">
+                            <i class="fa fa-paint-brush"></i>
+                            <div class="info-meta">
+                              <h4>{{salonObj.works.length}}</h4>
+                              <p>FCFA</p>
+                              <span>Services</span> </div>
+                            <span class="ten green"></span> 
+                          </div>
                       </div>
                     </div>
-                  </div>
                 </div>
-                    <div class="col-md-12">
-                    <div class="about">
-                        <div class="row">
-                            <div class="col-md-6">
-                            <div class="about-info">
-                                <h4>Salon : {{salonObj.name}}</h4>
-                                <p v-if="salonObj.desc"><i class="fa fa-info-circle"></i> : {{salonObj.desc}}</p>
-                                <p v-if="salonObj.address"><i class="fa fa-map-marker"></i> {{salonObj.address}}</p>
-                                <p v-if="salonObj.phone"><i class="fa fa-phone"></i> {{salonObj.phone}}</p>
-                                <p v-if="salonObj.website"><i class="fa fa-wordpress"></i>: {{salonObj.website}}</p>
-                            </div>
-                            </div>
-                            <div class="col-md-6">
-                            <ul class="vlaue-show">
-                                <li> <span>{{appointments.length}}</span> <a href="#" title="">Total RDV</a> </li>
-                                <li> <span>{{turnover}}</span> <a href="#" title="">Chiffre d'affaire (FCFA)</a> </li>
-                                <li> <span>{{salonObj.works.length}}</span> <a href="#" title="">Services</a> </li>
-                            </ul>
-                            </div>
-                        </div> 
-                    </div>
-                    </div>
               </div>
-            </div>
-        
-            <div class="row">
-              
+
+              <div class="row">
                 <div class="col-md-12">
                     <div class="widget">
                     <div class="widget-title">
                         <h4>Services du salon</h4>
-                        <ul class="widget-controls">
+                        <!-- <ul class="widget-controls">
                         <router-link to="/service" title="" class="btn-st rd-30 btn-md ">Ajouter des services</router-link>
-                        </ul>
+                        </ul> -->
                     </div>
                     <div class="widget-peding">
                         <div class="toggle toggle-style3" v-for="(item, index) in categories" :key="index">
@@ -108,20 +111,17 @@
                     </div>
                     <!-- user list --> 
                     </div>
-          
-
-    
-                    
-                    <!-- quick action widget --> 
                 </div>
-            </div>
+              </div>
+        
+          
             <div class="row">
               <div class="col-lg-8 col-sm-8">
                   <div class="widget">
                       <div class="widget-title">
                           <h4>Mes spécialistes</h4>
                           <ul class="widget-controls">
-                            <router-link to="/specialist" title="" class="btn-st rd-30 btn-md ">Ajouter un nouveau</router-link>
+                            <router-link to="/specialist" title="" class="btn-st grn-clr">Ajouter un nouveau</router-link>
                           </ul>
                       </div>
                       <div class="widget-peding" v-for="(item, index) in employees" :key="index">
