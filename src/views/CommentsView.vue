@@ -16,54 +16,33 @@
                     <li>Commentaires</li>
                 </ul>
                 </div>
-                <div class="gap no-gap">
-                <div class="email-box-wrap inner-bg">
-                    <div class="email-box-nav">
-                    <div class="email-title">
-                        <!-- <h4>Notation</h4> -->
-                    <ul>
-                        <li style="text-align: left; padding-left: 20px;">Nombre d'étoiles : <span>({{moyenneEtoile}})</span> <i v-for="index in moyenneEtoile" :key="index" class="fa fa-star text-warning"></i></li>
-                    </ul>
+
+                 <div class="gap no-gap pt-5">
+                  <div class="inner-bg">
+                    <div class="element-title">
+                      <h4>Tous les Commentaires</h4>
+                      <span>Tous les commentaires de vos clients</span> 
                     </div>
-                    <div class="email-box-content">
-                    <div class="email-list">
-                        <!-- <div class="email-list-inf">
-                        <div class="slc">
-                            <select>
-                            <option>Tous les commentaires</option>
-                            <option>Semaine dernière</option>
-                            <option>Mois passé</option>
-                            </select>
+                    <div class="row remove-ext">
+                      <div class="col-md-4" v-for="(item, index) in comments" :key="index">
+                        <div class="testimon style4">
+                          <div class="testi-meta">
+                            <p class="text-left">{{item.comment}}</p>
+                            <div class="author-name">
+                              <div class="testi-avatar"> <img src="/images/commentor.png" alt=""> </div>
+                              <div class="author-name">
+                                <h5>{{item.username}}</h5>
+                                <span>{{item.stamp | formatDate}}</span> </div>
+                            </div>
+                          </div>
                         </div>
-                        </div> -->
-                        <ul>
-                            <li v-for="(item, index) in comments" :key="index" @click="getCurrentComment(item.comment)">
-                                <div class="email-list-item"> <i class="fa fa-comment"></i>
-                                <div class="email-message-inf">
-                                    <h4>@{{item.username}}</h4>
-                                    <span>{{item.stamp | formatDate}}</span>
-                                    <p>{{item.comment}}...</p>
-                                </div>
-                                </div>
-                            </li>
-                        </ul>
+                      </div>
                     </div>
-                    <div class="email-compose">
-                        <div class="email-compose-info"> <span>Vue de commentaire</span>
-                        
-                        </div>
-                        <form>
-                        <textarea v-model="currentComment" disabled>
-                                    
-                        </textarea>
-                        </form>
-                        
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-            
+                  </div>
+                </div>       
+
+                <!-- <li style="text-align: left; padding-left: 20px;">Nombre d'étoiles : <span>({{moyenneEtoile}})</span> <i v-for="index in moyenneEtoile" :key="index" class="fa fa-star text-warning"></i></li> -->
+
             </div>
         </div>
     </div>
