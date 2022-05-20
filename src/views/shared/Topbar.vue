@@ -18,7 +18,7 @@
                         </li>
                         <li class="text-white mt-3">{{username}}</li>
                         <li class="mt-2" id="mr-minus">
-                            <button class="btn-st grn-clr" style="background: #333;">Se déconnecter</button>
+                            <button class="btn-st grn-clr" style="background: #333;" @click="signOut()">Se déconnecter</button>
                         </li>
                     </ul>
                 </div>
@@ -48,7 +48,14 @@ export default {
         }
     },
     methods:{
-        
+        signOut(){
+            firebase.auth().signOut().then(() =>{
+                this.$router.replace("/");
+            })
+            .catch((error) =>{
+                console.log(error.message)
+            })
+        },
     },
     
   created(){
