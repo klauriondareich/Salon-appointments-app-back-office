@@ -1,14 +1,14 @@
 <template>
-  <header>
-    <div class="side-menus" v-if="this.$store.state.sidebarState">
+  <header :class="classValue">
+    <div class="side-menus">
         <div class="side-header">
             <div class="logo">
-              <router-link to="/home">
+              <a href ="/">
                 <img alt="" style="visibility: hidden" src="images/b-logo.png">
-              </router-link>
+              </a>
             </div>
-            <div class="float-right px-5 btn-close" @click="hideSidebar()" v-if="this.$store.state.sidebarState">
-                  <span class="icon-style"><i class="fa fa-close"></i></span>
+            <div class="float-right px-5 btn-close" @click="classValue = 'hide-sidebar'">
+                <span class="icon-style"><i class="fa fa-close"></i></span>
             </div>
             <nav class="slide-menu">
                 <ul class="parent-menu">                                           
@@ -32,14 +32,12 @@
 export default {
   data(){
     return{
-     
+      classValue : 'show-sidebar',
     }
   },
 
   methods:{
-     hideSidebar(){  
-          this.$store.state.sidebarState = false
-    },
+     
   }
 }
 </script>
@@ -48,5 +46,11 @@ export default {
     a.router-link-active,
     a.router-link-exact-active {
       background-color: #f3f3f3;
+    }
+    .hide-sidebar{
+      display: none;
+    }
+    .show-sidebar{
+      display: block;
     }
 </style>
