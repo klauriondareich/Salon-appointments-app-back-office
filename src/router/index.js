@@ -120,6 +120,15 @@ const routes = [
         },
         component: () => import(/* webpackChunkName: "allcustomers" */ '../views/Notif.vue')
       },
+      {
+        path: '/payments',
+        name: 'Payments',
+        meta:{
+          requiresAuth: true,
+          role:"manager"
+        },
+        component: () => import(/* webpackChunkName: "payments" */ '../views/Payments.vue')
+      },
     ]
   },
   {
