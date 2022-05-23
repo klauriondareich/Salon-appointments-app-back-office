@@ -8,13 +8,13 @@
         <div class="panel-body">
             <div class="content-area mt-5">
                 <div class="sub-bar">
-                <div class="sub-title">
-                    <h4>NOTES & COMMENTAIRES:</h4>
-                </div>
-                <ul class="bread-crumb">
-                    <li><router-link to="/home" title="">Accueil</router-link></li>
-                    <li>Commentaires</li>
-                </ul>
+                  <div class="sub-title">
+                      <h4>NOTES & COMMENTAIRES:</h4>
+                  </div>
+                  <ul class="bread-crumb">
+                      <li><router-link to="/home" title="">Accueil</router-link></li>
+                      <li>Commentaires</li>
+                  </ul>
                 </div>
 
                  <div class="gap no-gap pt-5">
