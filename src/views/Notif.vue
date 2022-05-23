@@ -1,7 +1,7 @@
 <template>
     <div class="main-content">
         <div class="panel-body">
-            <div class="col-lg-12 col-sm-12">
+            <div class="col-lg-8 col-sm-8 m-auto">
                 <div class="widget">
                     <div class="widget-title no-margin">
                         <h4>Toutes les notifications</h4>
