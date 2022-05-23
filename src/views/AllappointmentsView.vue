@@ -8,7 +8,6 @@
                         <div class="sub-bar">
                             <div class="sub-title">
                                 <h4>MES RENDEZ-VOUS</h4>
-                                <!-- <span>Welcome To web Admin Panel!</span> -->
                             </div>
                             <ul class="bread-crumb">
                                 <li><router-link to="/home" title="">Accueil</router-link></li>
@@ -90,27 +89,6 @@
                                         <td><i>{{item.stamp | formatDate}}</i></td>
                                         <td>
                                            <Modal :details="item"/> 
-                                            <!-- <ul>
-                                                <div v-if="item.isVisible" style="position:absolute;right: 0;">
-
-                                                <div class="tip-left tooltip">
-                                                    <div class="tooltip-inner" style="text-align:left; max-width: 300px;">
-                                                        <p v-if="item.isVisible" @click="item.isVisible = false">
-                                                            <a href="#" ><i class="fa fa-eye-slash text-danger"></i></a>
-                                                        </p> 
-                                                        <span>Discount: {{item.discount}} </span> <br>
-                                                        <span>CouponId:  {{item.CouponId}}</span> <br>
-                                                        <span>Mode de paiement :   {{item.payment}}</span> <br>
-                                                        <span>Notation :   {{item.rate}} <i v-if="item.rate" class="fa fa-star text-warning"></i></span> <br>
-                                                        <span>Status du rdv : </span> 
-                                                        <span v-if="item.status =='complete'" class="priority low">Terminé</span>
-                                                        <span v-if="item.status =='create'" class="priority medium">En attente</span>
-                                                    </div>
-                                                </div>
-                                                </div>
-                                                <li v-if="!item.isVisible" @click="item.isVisible = true"><a href="#" ><i class="icon-eye"></i></a></li>
-                                                <li v-if="item.isVisible" @click="item.isVisible = false"><a href="#" ><i class="fa fa-eye-slash"></i></a></li>
-                                            </ul> -->
                                         </td>
                                     </tr>
                                     <tr class="p-5" v-if="this.appointments.length == 0">
