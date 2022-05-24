@@ -115,8 +115,8 @@
               </div>
         
           
-            <div class="row">
-              <div class="col-lg-8 col-sm-8">
+            <div class="row mb-5">
+              <div class="col-lg-8 col-sm-8  mb-5">
                   <div class="widget">
                       <div class="widget-title">
                           <h4>Mes spécialistes</h4>

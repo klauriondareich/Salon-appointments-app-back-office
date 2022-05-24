@@ -9,7 +9,8 @@
                                 <img src="/images/b-logo.png" width="40" height="40" alt="logo bioutycall">
                                 BioutyCall
                             </a>
-                            <span class="burger-menu" @click="classValue = 'show-sidebar'"><i class="fa fa-bars"></i></span>
+                            <span class="burger-menu" v-if="classValue == 'hide-sidebar'" @click="classValue = 'show-sidebar'"><i class="fa fa-bars"></i></span>
+                            <span class="burger-menu"  v-if="classValue == 'show-sidebar'" @click="classValue = 'hide-sidebar'"><i class="fa fa-close"></i></span>
                         </div>
                         <div>
                             
@@ -33,16 +34,16 @@
 
         <header :class="classValue">
             <div class="side-menus">
-                <div class="side-header">
+                <div class="side-header pt-5">
                     <!-- <div class="logo">
                     <a href ="/">
                         <img alt="" src="images/b-logo.png">
                     </a>
                     </div> -->
-                    <div class="float-right px-5 btn-close" @click="classValue = 'hide-sidebar'">
+                    <!-- <div class="float-right px-5 btn-close" @click="classValue = 'hide-sidebar'">
                         <span class="icon-style"><i class="fa fa-close"></i></span>
-                    </div>
-                    <nav class="slide-menu">
+                    </div> -->
+                    <nav class="slide-menu pt-5">
                         <ul class="parent-menu">                                           
                             <li><router-link to="/home"><i class="fa fa-home"></i><span>Accueil</span></router-link></li>
                             <li><router-link to="/salon"><i class="fa fa-building"></i><span>Mon salon</span></router-link></li>
@@ -80,7 +81,7 @@ export default {
             first_size: 0,
             nb_notif: 0,
             salonRef: firebase.firestore().collection("salons"), 
-            classValue : 'show-sidebar',
+            classValue : 'hide-sidebar',
         }
     },
     methods:{
