@@ -9,6 +9,10 @@
                                 <img src="/images/b-logo.png" width="40" height="40" alt="logo bioutycall">
                                 BioutyCall
                             </a>
+                            <span class="burger-menu" @click="classValue = 'show-sidebar'"><i class="fa fa-bars"></i></span>
+                        </div>
+                        <div>
+                            
                         </div>
                     </div>
                     <div class="col-lg-9">
@@ -30,11 +34,11 @@
         <header :class="classValue">
             <div class="side-menus">
                 <div class="side-header">
-                    <div class="logo">
+                    <!-- <div class="logo">
                     <a href ="/">
-                        <img alt="" style="visibility: hidden" src="images/b-logo.png">
+                        <img alt="" src="images/b-logo.png">
                     </a>
-                    </div>
+                    </div> -->
                     <div class="float-right px-5 btn-close" @click="classValue = 'hide-sidebar'">
                         <span class="icon-style"><i class="fa fa-close"></i></span>
                     </div>
@@ -49,6 +53,7 @@
                             <li><router-link to="/comments"><i class="fa fa-comment"></i><span>Notes et commentaires</span></router-link></li>
                             <li><router-link to="/gallery"><i class="fa fa-photo"></i><span>Galerie</span></router-link></li>
                             <li><router-link to="/user_profile"><i class="fa fa-user"></i><span>Mon profil</span></router-link></li>
+                            <li> <button class="btn-sm grn-clr logout-btn ml-5 mt-3" style="background: #333;color:#fff;" @click="signOut()">Se déconnecter</button></li>
                         </ul>
                     </nav>
                 </div>
@@ -117,5 +122,16 @@ export default {
     }
     .show-sidebar{
       display: block;
+    }
+    .burger-menu{
+      font-size: 17px; 
+      color: #fff;
+      float: right;
+      padding-top: 10px;
+      padding-right: 20px;
+      display: none;
+    }
+    .logout-btn{
+        display: none;
     }
 </style>

@@ -14,7 +14,7 @@
                     </ul>
                     <div class="sub-title">
                         <h4>DASHBOARD</h4> <br> <br>
-                         <span>Bienvenue {{username}}</span>
+                         <span class="welcome">Bienvenue {{username}}</span>
                     </div>
                 </div>
                 <div class="row">
@@ -370,9 +370,9 @@ export default {
 
   created(){
 
-      this.salonId = localStorage.getItem("salon_id");  
-      this.username = localStorage.getItem("username");  
-      this.loaderState = true;
+    this.salonId = localStorage.getItem("salon_id");  
+    this.username = localStorage.getItem("username");  
+    this.loaderState = true;
       
     // Duplicated codes must be optimized
     // date du jour et mois
