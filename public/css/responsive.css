@@ -2,7 +2,8 @@
 @media screen and (max-width: 1920px) and (min-width: 1600px){
     
 	.panel-widget{
-        width: 32.1%;
+        /* width: 32.1%; */
+		width: 31.4%;
     }
     .pie-chart{max-height: 350px;}
 	.browser-static > li{font-size: 14px;}
@@ -1384,6 +1385,28 @@
 
 
  @media screen and (max-width: 480px){
+
+
+	.notify-area{
+		display: none;
+	}
+
+	.side-header{
+		/* z-index: 99 !important; */
+	}
+	.logout-btn{
+		display: block;
+	}
+	.burger-menu{
+		display: block!important;
+	}
+	.welcome{
+		display: none!important;
+	}
+	/* .side-header{
+		display: none;
+	} */
+
 	.chat-input-bar {
 	  margin-top: 0;
 	}
