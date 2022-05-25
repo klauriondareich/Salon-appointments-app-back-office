@@ -1404,9 +1404,8 @@
 		display: none!important;
 	}
 	/* .side-header{
-		display: none;
+		display: block;
 	} */
-
 	.chat-input-bar {
 	  margin-top: 0;
 	}
