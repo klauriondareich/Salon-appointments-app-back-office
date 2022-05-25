@@ -23,7 +23,6 @@
                   <div class="page5o5">
                     <div class="avatar5o5"> <img :src="salonObj.image" alt="salon image"> </div>
                     <div class="info5o5">
-                      <div class="fixed-bg" style="background-image:url(images/resources/505-bg.png); background-repeat: no-repeat;"></div>
                       <span>{{salonObj.name}}</span>
                       <p ><i class="fa fa-info-circle"></i> : {{salonObj.desc}}</p>
                       <p ><i class="fa fa-map-marker"></i> {{salonObj.address}}</p>
