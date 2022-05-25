@@ -81,7 +81,7 @@ export default {
             first_size: 0,
             nb_notif: 0,
             salonRef: firebase.firestore().collection("salons"), 
-            classValue : 'hide-sidebar',
+            classValue : 'show-sidebar',
         }
     },
     methods:{
@@ -106,7 +106,7 @@ export default {
       else this.nb_notif = 0;
     })
 
-  }
+  },
 }
 </script>
 
