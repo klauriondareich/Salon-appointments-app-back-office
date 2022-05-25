@@ -142,8 +142,10 @@ export default {
         this.loaderState = false;
 
       }
-
-      else console.log("not data now")
+       else{
+            console.log("no customers");
+            this.loaderState = false;
+        }
     });
 
 

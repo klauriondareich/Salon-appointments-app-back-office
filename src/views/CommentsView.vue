@@ -24,6 +24,7 @@
                       <span>Tous les commentaires de vos clients</span> 
                     </div>
                     <div class="row remove-ext">
+                      <p class="text-center p-3" v-if="comments.length == 0">Aucun commentaire pour le moment!</p>
                       <div class="col-md-4" v-for="(item, index) in comments" :key="index">
                         <div class="testimon style4">
                           <div class="testi-meta">
@@ -75,8 +76,11 @@ export default {
         },
 
         calculNbEtoiles(arr_stars){
-           let sum =  arr_stars.reduce((acc, current_value) =>  acc + current_value);
-           this.moyenneEtoile = Math.round(sum/arr_stars.length);
+
+          if (arr_stars.length != 0){
+            let sum =  arr_stars.reduce((acc, current_value) =>  acc + current_value);
+            this.moyenneEtoile = Math.round(sum/arr_stars.length);
+          } 
         }
     },
     created(){
@@ -98,9 +102,11 @@ export default {
                 if(obj.rate_text) this.comments.push({username: obj.customer_name, comment: obj.rate_text, stamp:obj.stamp, id:obj.id})
             });
              this.loaderState = false;
-          }
+        }
 
-         this.calculNbEtoiles(stars)
+         this.calculNbEtoiles(stars);
+         this.loaderState = false;
+
         });
     }
 }

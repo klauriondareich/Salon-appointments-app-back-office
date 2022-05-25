@@ -67,10 +67,6 @@
                                 <img src="/images/moov-africa-small.png" alt="moov africa image">
                                 Moov : {{userInfo.payout_mobile_moov}}
                             </li>
-                            <li style="border-bottom: 1px solid #eaeaea;">
-                                <img src="/images/pay-dunia-small.png" alt="pay dunia image">
-                                Pay Dunia : {{userInfo.payout_mobile_paydunia}}
-                            </li>
                           </ul>
                         </div>
                       </div>
@@ -129,7 +125,8 @@ export default {
             }
           }
           else {
-            console.log("user doesn't exist")
+            console.log("user doesn't exist");
+             this.loaderState = false;
           }
         })
     

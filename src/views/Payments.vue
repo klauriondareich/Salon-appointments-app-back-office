@@ -6,6 +6,7 @@
                     <div class="widget-title no-margin">
                         <h4>Historique de paiement</h4>
                     </div>
+                    <p class="text-center p-3" v-if="cancel_appointments.length == 0">Aucune transaction pour le moment!</p>
                     <div>
                         <div class="new-box" v-for="(item, index) in cancel_appointments" :key="index" style="border-bottom:1px solid #8080803b">
                             <div class="news-detail">

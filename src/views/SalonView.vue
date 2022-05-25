@@ -21,12 +21,14 @@
               <div class="row">
                 <div class="gap no-bottom">
                   <div class="page5o5">
-                    <div class="avatar5o5"> <img :src="salonObj.image" alt="salon image"> </div>
+                    <div class="avatar5o5"> 
+                      <img :src="salonObj.image" alt="salon image"> 
+                    </div>
                     <div class="info5o5">
                       <span>{{salonObj.name}}</span>
-                      <p ><i class="fa fa-info-circle"></i> : {{salonObj.desc}}</p>
-                      <p ><i class="fa fa-map-marker"></i> {{salonObj.address}}</p>
-                      <p ><i class="fa fa-phone"></i> {{salonObj.phone}}</p>
+                      <p ><i class="fa fa-info-circle"></i> : {{salonObj.desc || "pas de description"}}</p>
+                      <p ><i class="fa fa-map-marker"></i> {{salonObj.address || "pas d'adresse" }}</p>
+                      <p ><i class="fa fa-phone"></i> {{salonObj.phone || 'pas de phone' }}</p>
                       <p ><i class="fa fa-wordpress"></i>: {{salonObj.website || 'pas de site web'}}</p>
 
                       <router-link to="/specialist" title="" class="btn-st grn-clr mt-2">Créer un nouveau service</router-link>
@@ -108,6 +110,8 @@
                           </div>
                         </div>
                     </div>
+                    <p class="text-center p-3" v-if="categories.length == 0">Aucun service pour le moment!</p>
+
                     <!-- user list --> 
                     </div>
                 </div>
@@ -142,6 +146,8 @@
                               </li>
                           </ul>
                       </div>
+                      <p class="text-center p-3" v-if="employees.length == 0">Aucun spécialiste pour le moment!</p>
+
                   </div>
                     
                 </div>
@@ -261,7 +267,8 @@ export default {
                
            }
           else{
-            console.log("Salon does not exist")
+            console.log("Salon does not exist");
+            this.loaderState = false;
           }
 
        });
