@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "baber-test"
-  }
+    "default": "manager-bioutycall"
+  },
+  "targets": {}
 }

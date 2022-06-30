@@ -5,15 +5,18 @@ import 'firebase/storage';
 import 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA6SdpsUu_Xum2TXxpdjAJueTchKqOYqUA",
-  authDomain: "baber-test.firebaseapp.com",
-  projectId: "baber-test",
-  storageBucket: "baber-test.appspot.com",
-  messagingSenderId: "300507373279",
-  appId: "1:300507373279:web:2841e872e7feb54e11936a",
-  measurementId: "G-PVHEM95NKZ"
+  apiKey: "AIzaSyCk-7oMvivFqNd7Xg2w2ccobh6J78ANMwc",
+  authDomain: "bioutycall-6a71e.firebaseapp.com",
+  projectId: "bioutycall-6a71e",
+  storageBucket: "bioutycall-6a71e.appspot.com",
+  messagingSenderId: "322009058902",
+  appId: "1:322009058902:web:3278c543c5396ce901b5f7",
+  measurementId: "G-NV34T7YGP6"
 };
 
 // Initialize Firebase
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 export default firebaseApp
+
+
+//firebase deploy --only hosting:manager-bioutycall

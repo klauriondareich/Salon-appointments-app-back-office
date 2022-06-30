@@ -123,10 +123,6 @@ export default {
         },
 
         created(){
-
-
-            this.loaderState = true;
-
             this.getAllServices();
         }
 

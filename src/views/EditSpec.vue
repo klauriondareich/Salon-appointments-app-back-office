@@ -46,7 +46,7 @@
                             <div class="col-md-12 col-sm-12">
                                 <span style="display:block;" class="font-weight-bold pb-3">Choisir des services: </span>
                                 <div class="form-check form-check-inline" v-for="(item, index) in allServices" :key="index">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" :value="item.id" @change="getIdFromCheckBox($event)">
+                                    <input class="form-check-input" type="checkbox" :checked="isSelectedFunc(item.id)" id="inlineCheckbox1" :value="item.id" @change="getIdFromCheckBox($event)">
                                     <label class="form-check-label" for="inlineCheckbox1">{{item.name}}</label>
                                 </div>
                             </div>
@@ -79,7 +79,8 @@ export default {
 
     data(){
         return {               
-
+                short_image_url: null,
+                isSelected: false
             }
 
         },
@@ -95,7 +96,9 @@ export default {
 
                     this.loaderState = true;
 
-                    this.buildImageUrl();
+                    this.specialistObj.image = this.short_image_url;
+
+                    if (this.file !== null) this.buildImageUrl();
 
                     this.employeeRef.doc(this.id_spec).update(this.specialistObj).then(() =>{
                         this.$router.replace({name:'Salon'});
@@ -106,10 +109,22 @@ export default {
 
             },
 
+            
             getIdFromCheckBox(event){
 
-                this.specialistObj.works.push({"id": event.target.value})
+                if (!this.specialistObj.works.includes(event.target.value)) this.specialistObj.works.push({"id": event.target.value})
             },
+
+            // check if the services belong to the specialist
+            // if true checked it
+            isSelectedFunc(id){
+                
+                this.isSelected = false;
+                 this.specialistObj.works.forEach((obj) =>{
+                  if (obj.id == id) this.isSelected = true;
+                })
+               return this.isSelected
+            }
 
         },
 
@@ -125,12 +140,18 @@ export default {
                     this.specialistObj.desc = doc.data().desc;
                     this.specialistObj.name = doc.data().name;
 
+                    this.short_image_url = doc.data().image;
+
+                    console.log("Img", doc.data().image);
+
                     this.Storage.child("img/" + doc.data().image.split("/")[1]).getDownloadURL().then((url) =>{
                      this.specialistObj.image =  url;
 
                     }).catch(() => alert("L'image du salon n'a pas pu charger"))
                
                     this.specialistObj.works = doc.data().works;
+
+                    console.log("works", this.specialistObj.works);
                 }
             })
 

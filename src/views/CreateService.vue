@@ -47,7 +47,7 @@
                             </select>
                         </div>
                         <div class="col-md-12 col-sm-12 field">
-                            <label>Description <span>*</span> </label>
+                            <label>Description <span></span> </label>
                             <input placeholder="" type="text" v-model="serviceObj.desc">
                         </div>
                     </div>
@@ -146,7 +146,7 @@ export default {
                     "duration": null,
                     "name": "",
                     "price": 0,
-                    "visible": false
+                    "visible": true
                 }
 
             }
@@ -157,7 +157,7 @@ export default {
 
             addService(){
                 
-                 if (this.serviceObj.desc != "" && this.serviceObj.name != "" && this.serviceObj.duration != null && this.serviceObj.duration != null){
+                 if (this.serviceObj.name != "" && this.serviceObj.duration != null && this.serviceObj.duration != null){
                     this.loaderState = true;
                     this.workRef.add(this.serviceObj).then((response) =>{
                      this.salonRef.doc(this.salonId).get().then((doc)=>{

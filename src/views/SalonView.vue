@@ -31,7 +31,7 @@
                       <p ><i class="fa fa-phone"></i> {{salonObj.phone || 'pas de phone' }}</p>
                       <p ><i class="fa fa-wordpress"></i>: {{salonObj.website || 'pas de site web'}}</p>
 
-                      <router-link to="/specialist" title="" class="btn-st grn-clr mt-2">Créer un nouveau service</router-link>
+                      <router-link to="/service" title="" class="btn-st grn-clr mt-2">Créer un nouveau service</router-link>
 
                     </div>
                   </div>
@@ -46,7 +46,6 @@
                           <i class="fa fa-calendar"></i>
                           <div class="info-meta">
                             <h4>{{appointments.length}}</h4>
-                            <p>FCFA</p>
                             <span>Total RDV</span> 
                           </div>
                           <span class="ten blue"></span> 
@@ -57,7 +56,7 @@
                             <i class="fa fa-dollar"></i>
                             <div class="info-meta">
                               <h4>{{turnover}}</h4>
-                              <p>FCFA</p>
+
                               <span>Chiffre d'affaire (FCFA)</span> </div>
                             <span class="ten purpal"></span>
                           </div>
@@ -67,7 +66,7 @@
                             <i class="fa fa-paint-brush"></i>
                             <div class="info-meta">
                               <h4>{{salonObj.works.length}}</h4>
-                              <p>FCFA</p>
+
                               <span>Services</span> </div>
                             <span class="ten green"></span> 
                           </div>
@@ -194,6 +193,11 @@ export default {
       updateCategoryInSalon(categoryId){
 
         // First checking if the Id doesn't exist in salonObj
+        // Is done to allow to filter salon by category
+
+        console.log("salonObj", this.salonObj);
+
+        //Push has to be done = fixing bugs relating to categories updating.
 
         if (!this.salonObj.categoriesId.includes(categoryId)) this.categoriesId.push(categoryId);
         this.salonRef.doc(this.salonId).update({categoriesId: this.categoriesId})
@@ -262,6 +266,7 @@ export default {
                }).catch(() => alert("L'image du salon n'a pas pu charger"))
                
                 this.salonObj = obj;
+                this.salonObj.categoriesId = [];
 
                this.getSpecialists(obj.employee);
                
@@ -309,6 +314,7 @@ export default {
                if(!snapshot.empty){
 
                  let bool = false;
+                 console.log("tested 1")
 
                  snapshot.forEach((doc) =>{
 
@@ -326,8 +332,9 @@ export default {
                }
 
               if (category.works && category.works.length!=0) {
+                this.categories.push(category);
                 this.updateCategoryInSalon(category.id);
-                this.categories.push(category)
+                console.log("tested 2")
               }
             })
          });

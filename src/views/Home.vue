@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
+                    <!-- <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="top-widget">
                         <i class="fa fa-clock-o"></i>
                         <div class="informative">
@@ -53,7 +53,7 @@
                         <em>Rendez-vous restants</em>
                         </div>
                     </div>
-                    </div>
+                    </div> -->
                 </div>
         
                 <div class="row">
