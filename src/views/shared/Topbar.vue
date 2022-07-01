@@ -89,9 +89,9 @@ export default {
             firebase.auth().signOut().then(() =>{
                 this.$router.replace("/");
             })
-            .catch((error) =>{
-                console.log(error.message)
-            })
+            // .catch((error) =>{
+            //     console.log(error.message)
+            // })
         },
     },
     

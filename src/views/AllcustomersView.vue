@@ -142,7 +142,7 @@ export default {
 
       }
        else{
-            console.log("no customers");
+            // console.log("no customers");
             this.loaderState = false;
         }
     });

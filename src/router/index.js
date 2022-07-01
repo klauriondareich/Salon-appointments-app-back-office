@@ -175,9 +175,9 @@ router.beforeEach((to, from, next) =>{
           else next();
         }
       }
-      else {
-        console.log("user doesn't exist")
-      }
+      // else {
+      //   console.log("user doesn't exist")
+      // }
     })
     
   }

@@ -125,7 +125,7 @@ export default {
             }
           }
           else {
-            console.log("user doesn't exist");
+            // console.log("user doesn't exist");
              this.loaderState = false;
           }
         })

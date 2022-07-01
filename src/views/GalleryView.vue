@@ -93,11 +93,6 @@ export default {
             })
         },
 
-        getImageId(event){
-
-            console.log(event.target.value);
-        },
-
         addInCollection(obj){
 
             this.loaderState = true;

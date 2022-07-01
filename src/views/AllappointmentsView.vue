@@ -149,8 +149,6 @@ export default {
             })
         },
 
-        // Petit lien
-        // site web Bioutycall
 
         filterYesterday(currentDate) {
             this.appointments = this.appointmentsBis.filter((item) =>{
@@ -197,7 +195,7 @@ export default {
         })
       }
       else{
-            console.log("no appointments");
+            // console.log("no appointments");
             this.loaderState = false;
         }
     });
