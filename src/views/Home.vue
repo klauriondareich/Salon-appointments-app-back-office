@@ -107,11 +107,17 @@
                                         >
                                         <v-card>
                                             <v-card-title class="text-h5 grey lighten-2">
-                                            Détails
+                                            infos
                                             </v-card-title>
 
-                                        <v-card-text>
-                                            <span v-html="selectedEvent.name"></span>
+                                            <v-card-text>
+                                
+                                              <span v-html="selectedEvent.name"></span> <br>
+                                              Montant : <span v-html="selectedEvent.amount"></span> FCFA <br>
+                                              Client : <span v-html="selectedEvent.customer"></span> <br>
+                                              Payé par : <span v-html="selectedEvent.payment"></span> <br>
+                                              Spécialiste : <span v-html="selectedEvent.specialist"></span> <br>
+                                              
                                             </v-card-text>
 
                                             <v-divider></v-divider>
@@ -219,14 +225,6 @@
                                         <span v-if="item.status =='create'" class="priority medium">En attente</span>
                                         <span v-if="item.status =='cancelled_by_user'" class="priority high ">Annulé</span>
                                     </td>
-                                    <!-- <td>
-                                        <div class="prj-team">
-                                            <span title="Jhon Doe"><img src="images/resources/activity-1.jpg" alt=""></span>
-                                            <span title="Sarah"><img src="images/resources/activity-2.jpg" alt=""></span>
-                                            <span title="Daniel"><img src="images/resources/activity-3.jpg" alt=""></span>
-                                            <span title="Wraber"><img src="images/resources/activity-4.jpg" alt=""></span>
-                                        </div>
-                                    </td> -->
                                 </tr>
                                 
                             </tbody>
@@ -385,7 +383,7 @@ export default {
 
     let date_formatted = this.today.split("-").join(".");
     
-    // Script à revoir, le syst doit recupérer les rdv du jour et non tous les rdvwhere("stamp", "==", current_timestamp)
+    
     // this.appointment.where("salon", "==", this.salonId).where("date", "==", date_formatted).orderBy("stamp", "desc")
      this.appointment.where("salon", "==", this.salonId).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
       if(!snapshot.empty){
@@ -402,7 +400,8 @@ export default {
           let time_start =  obj.date.split(".").join("-") + " " + obj.time_start;
           let time_end =  obj.date.split(".").join("-") + " " + obj.time_end;
           this.events.push({name: obj.work_name, start: time_start,
-            end: time_end,});
+            end: time_end, amount: obj.total, customer: obj.customer_name, 
+            specialist :obj.employee_name, payment: obj.payment});
             
             if(obj.rate_text) this.comments.push({username: obj.customer_name, comment: obj.rate_text, stamp:obj.stamp})
         });
