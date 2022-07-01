@@ -129,7 +129,6 @@ export default {
             this.customersWithDouble.push(obj);
 
             // Suppression des doublons sur les noms des clients
-            //console.log("Customer", this.customer_name, doc.data().customer_name);
             
             if (this.customer_name != doc.data().customer_name){
                 this.Obj = obj;

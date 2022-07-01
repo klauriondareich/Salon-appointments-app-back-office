@@ -26,7 +26,7 @@
                             </div>
                             <div class="col-md-6 col-sm-6 field">
                                 <label>Prix <span>*</span> </label>
-                                <vue-numeric currency="FCFA" separator="." currency-symbol-position="suffix" v-model="serviceObj.price"></vue-numeric>
+                                <vue-numeric currency="FCFA" output-type="String" separator="." currency-symbol-position="suffix" v-model="serviceObj.price"></vue-numeric>
                             </div>
                             <div class="col-md-6 col-sm-6 field">
                                 <label>Catégorie <span>*</span> </label>
