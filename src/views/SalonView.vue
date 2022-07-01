@@ -195,10 +195,6 @@ export default {
         // First checking if the Id doesn't exist in salonObj
         // Is done to allow to filter salon by category
 
-        console.log("salonObj", this.salonObj);
-
-        //Push has to be done = fixing bugs relating to categories updating.
-
         if (!this.salonObj.categoriesId.includes(categoryId)) this.categoriesId.push(categoryId);
         this.salonRef.doc(this.salonId).update({categoriesId: this.categoriesId})
       },
@@ -248,6 +244,7 @@ export default {
         })
         this.loaderState = false
       }
+      this.loaderState = false;
     }
 
   },
@@ -272,7 +269,6 @@ export default {
                
            }
           else{
-            console.log("Salon does not exist");
             this.loaderState = false;
           }
 
@@ -314,7 +310,6 @@ export default {
                if(!snapshot.empty){
 
                  let bool = false;
-                 console.log("tested 1")
 
                  snapshot.forEach((doc) =>{
 
@@ -334,7 +329,6 @@ export default {
               if (category.works && category.works.length!=0) {
                 this.categories.push(category);
                 this.updateCategoryInSalon(category.id);
-                console.log("tested 2")
               }
             })
          });
@@ -343,7 +337,6 @@ export default {
       }
     });
 
-    
   }
 }
 </script>

@@ -105,7 +105,10 @@ export default {
                         this.loaderState = true;
                     })
                 }
-                else this.errorMessage = "Tous ces champs sont obligatoires"
+                else {
+                        this.errorMessage = "Champs obligatoires non remplis";
+                        this.loaderState = false;
+                    }
 
             },
 
@@ -120,17 +123,20 @@ export default {
             isSelectedFunc(id){
                 
                 this.isSelected = false;
+                let services_id = [];
+                let checked = false;
+
                  this.specialistObj.works.forEach((obj) =>{
-                  if (obj.id == id) this.isSelected = true;
+                    services_id.push(obj.id);
+                    checked = services_id.includes(id);
                 })
-               return this.isSelected
+
+                return checked;
             }
 
         },
 
         created(){
-
-            // this.loaderState = true;
 
 
             this.id_spec = this.$route.params.id;
@@ -142,8 +148,6 @@ export default {
 
                     this.short_image_url = doc.data().image;
 
-                    console.log("Img", doc.data().image);
-
                     this.Storage.child("img/" + doc.data().image.split("/")[1]).getDownloadURL().then((url) =>{
                      this.specialistObj.image =  url;
 
@@ -151,7 +155,6 @@ export default {
                
                     this.specialistObj.works = doc.data().works;
 
-                    console.log("works", this.specialistObj.works);
                 }
             })
 
