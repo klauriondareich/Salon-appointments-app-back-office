@@ -37,13 +37,13 @@
                     </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="top-widget">
-                        <i class="fa fa-trophy"></i>
-                        <div class="informative">
-                        <span>{{totalCompleteRdv}}</span>
-                        <em>Rendez-vous terminés</em>
-                        </div>
-                    </div>
+                      <div class="top-widget">
+                          <i class="fa fa-trophy"></i>
+                          <div class="informative">
+                          <span>{{totalCompleteRdv}}</span>
+                          <em>Rendez-vous terminés</em>
+                          </div>
+                      </div>  
                     </div>
                     <!-- <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="top-widget">
@@ -56,112 +56,173 @@
                     </div> -->
                 </div>
         
-                <div class="row">
-
-                    <div class="widget">
-                            <v-app>
-                            <v-row class="fill-height">
-                                <v-col>
-                                    <v-sheet height="64">
-                                        <v-toolbar
-                                        flat
-                                        >
-                                        <v-toolbar-title v-if="$refs.calendar">
-                                            {{ $refs.calendar.title }}
-                                        </v-toolbar-title>
-                                        <v-btn
-                                            fab
-                                            text
-                                            small
-                                            color="grey darken-2"
-                                            @click="prev"
-                                        >
-                                            <span>
-                                                <i class="fa fa-chevron-left"></i>
-                                            </span>
-                                        </v-btn>
-                                        <v-btn
-                                            fab
-                                            text
-                                            small
-                                            color="grey darken-2"
-                                            @click="next"
-                                        >
-                                            <span>
-                                                <i class="fa fa-chevron-right"></i>
-                                            </span>
-                                        </v-btn>
-                                        
-                                        <v-spacer></v-spacer>
-                                        
-                                        </v-toolbar>
-                                    </v-sheet>
-                                
-                                    <div class="text-center">
-                                        <v-dialog
-                                        v-model="selectedOpen"
-                                        width="500"
-                                        :close-on-content-click="false"
-                                        :activator="selectedElement"
-                                        offset-x
-                                        >
-                                        <v-card>
-                                            <v-card-title class="text-h5 grey lighten-2">
-                                            infos
-                                            </v-card-title>
-
-                                            <v-card-text>
-                                
-                                              <span v-html="selectedEvent.name"></span> <br>
-                                              Montant : <span v-html="selectedEvent.amount"></span> FCFA <br>
-                                              Client : <span v-html="selectedEvent.customer"></span> <br>
-                                              Payé par : <span v-html="selectedEvent.payment"></span> <br>
-                                              Spécialiste : <span v-html="selectedEvent.specialist"></span> <br>
-                                              
-                                            </v-card-text>
-
-                                            <v-divider></v-divider>
-
-                                            <v-card-actions>
-                                            <v-spacer></v-spacer>
-                                            <v-btn
-                                                color="primary"
-                                                text
-                                                @click="selectedOpen = false"
-                                            >
-                                                Fermer
-                                            </v-btn>
-                                            </v-card-actions>
-                                        </v-card>
-                                        </v-dialog>
-                                    </div>
+                <button class="btn-st grn-clr mt-5 mb-4" v-if="showCalendar" @click="switchView()">Voir dans le calendrier</button>
+                <button class="btn-st grn-clr mt-5 mb-4" v-if="!showCalendar" @click="switchView()">Voir en bloc</button>
+                <div class="row row-border " v-if="showCalendar">
+                    <div class="col-lg-3 col-md-3 col-sm-12" v-for="(item, index) in events" :key="index">
+                      <div class="rdv-widget">
+                          <div class="informative">
                             
-                                    <v-sheet height="auto">
-                                        <v-calendar
-                                        ref="calendar"
-                                        v-model="focus"
-                                        color="warning"
-                                        :events="events"
-                                        type="day"
-                                        @click:event="showEvent"
-                                        :now="today"
-                                        :value="today"
-                                        :short-weekdays=boolvalue
-                                        :short-months=boolvalue
-                                        :show-month-on-first=boolvalue
-                                        :event-more=boolvalue
-                                        :event-overlap-mode="mode"
-                                        first-interval="5"
-                                        interval-count="18"
-                                        :event-height=value2
-                                        event-color="warning"
-                                        ></v-calendar>
-                                    </v-sheet>
-                                </v-col>
-                            </v-row>
-                            </v-app>      
+                            <p><span>Service :</span> {{item.name}}</p>
+                            <!-- <p><span>Heure :</span> {{item.time_start}} {{item.time_end}}</p> -->
+                            <p><span>Montant :</span> {{item.amount}} (FCFA)</p>
+                            <p><span>Client : </span>{{item.customer}}</p>
+                            <p><span>Spécialiste :</span> {{item.specialist}}</p>
+                            <p><span>Payé par :</span> {{item.payment}}</p>
+                          </div>
+                      </div>   
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12" v-for="(item, index) in events" :key="index">
+                      <div class="rdv-widget">
+                          <div class="informative">
+                            
+                            <p><span>Service :</span> {{item.name}}</p>
+                            <!-- <p><span>Heure :</span> {{item.time_start}} {{item.time_end}}</p> -->
+                            <p><span>Montant :</span> {{item.amount}} (FCFA)</p>
+                            <p><span>Client : </span>{{item.customer}}</p>
+                            <p><span>Spécialiste :</span> {{item.specialist}}</p>
+                            <p><span>Payé par :</span> {{item.payment}}</p>
+                          </div>
+                      </div>   
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12" v-for="(item, index) in events" :key="index">
+                      <div class="rdv-widget">
+                          <div class="informative">
+                            
+                            <p><span>Service :</span> {{item.name}}</p>
+                            <!-- <p><span>Heure :</span> {{item.time_start}} {{item.time_end}}</p> -->
+                            <p><span>Montant :</span> {{item.amount}} (FCFA)</p>
+                            <p><span>Client : </span>{{item.customer}}</p>
+                            <p><span>Spécialiste :</span> {{item.specialist}}</p>
+                            <p><span>Payé par :</span> {{item.payment}}</p>
+                          </div>
+                      </div>   
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12" v-for="(item, index) in events" :key="index">
+                      <div class="rdv-widget">
+                          <div class="informative">
+                            
+                            <p><span>Service :</span> {{item.name}}</p>
+                            <!-- <p><span>Heure :</span> {{item.time_start}} {{item.time_end}}</p> -->
+                            <p><span>Montant :</span> {{item.amount}} (FCFA)</p>
+                            <p><span>Client : </span>{{item.customer}}</p>
+                            <p><span>Spécialiste :</span> {{item.specialist}}</p>
+                            <p><span>Payé par :</span> {{item.payment}}</p>
+                          </div>
+                      </div>   
+                    </div>
+                    
+                   
+                                
+                
+                </div>
+                <div class="row">
+                    <div class="widget" v-if="!showCalendar">
+                        <v-app>
+                          <v-row class="fill-height">
+                              <v-col>
+                                  <v-sheet height="64">
+                                      <v-toolbar
+                                      flat
+                                      >
+                                      <v-toolbar-title v-if="$refs.calendar">
+                                          {{ $refs.calendar.title }}
+                                      </v-toolbar-title>
+                                      <v-btn
+                                          fab
+                                          text
+                                          small
+                                          color="grey darken-2"
+                                          @click="prev"
+                                      >
+                                          <span>
+                                              <i class="fa fa-chevron-left"></i>
+                                          </span>
+                                      </v-btn>
+                                      <v-btn
+                                          fab
+                                          text
+                                          small
+                                          color="grey darken-2"
+                                          @click="next"
+                                      >
+                                          <span>
+                                              <i class="fa fa-chevron-right"></i>
+                                          </span>
+                                      </v-btn>
+                                      
+                                      <v-spacer></v-spacer>
+                                      
+                                      </v-toolbar>
+                                  </v-sheet>
+                              
+                                  <div class="text-center">
+                                      <v-dialog
+                                      v-model="selectedOpen"
+                                      width="500"
+                                      :close-on-content-click="false"
+                                      :activator="selectedElement"
+                                      offset-x
+                                      >
+                                      <v-card>
+                                          <v-card-title class="text-h5 grey lighten-2">
+                                          infos
+                                          </v-card-title>
+
+                                          <v-card-text>
+                              
+                                            <span v-html="selectedEvent.name"></span> <br>
+                                            Montant : <span v-html="selectedEvent.amount"></span> FCFA <br>
+                                            Client : <span v-html="selectedEvent.customer"></span> <br>
+                                            Payé par : <span v-html="selectedEvent.payment"></span> <br>
+                                            Spécialiste : <span v-html="selectedEvent.specialist"></span> <br>
+                                            
+                                          </v-card-text>
+
+                                          <v-divider></v-divider>
+
+                                          <v-card-actions>
+                                          <v-spacer></v-spacer>
+                                          <v-btn
+                                              color="primary"
+                                              text
+                                              @click="selectedOpen = false"
+                                          >
+                                              Fermer
+                                          </v-btn>
+                                          </v-card-actions>
+                                      </v-card>
+                                      </v-dialog>
+                                  </div>
+                          
+                                  <v-sheet height="auto">
+                                      <v-calendar
+                                      ref="calendar"
+                                      v-model="focus"
+                                      color="warning"
+                                      :events="events"
+                                      type="day"
+                                      @click:event="showEvent"
+                                      :now="today"
+                                      :value="today"
+                                      :short-weekdays=boolvalue
+                                      :short-months=boolvalue
+                                      :show-month-on-first=boolvalue
+                                      :event-more=boolvalue
+                                      :event-overlap-mode="mode"
+                                      first-interval="5"
+                                      interval-count="18"
+                                      :event-height=value2
+                                      event-color="warning"
+                                      ></v-calendar>
+                                  </v-sheet>
+                              </v-col>
+                          </v-row>
+                        </v-app>      
                     </div>
                 </div>
+  
+              
 
                 <div class="gap no-gap pt-5">
                   <div class="inner-bg">
@@ -270,6 +331,7 @@ export default {
         totalOngoingRdv: 0,
         salonId: null,
         focus: '',
+        showCalendar: false,
         // type: 'day',
       
       selectedEvent: {},
@@ -281,6 +343,14 @@ export default {
     }
   },
   methods:{
+
+    switchView(){
+      if (this.showCalendar) {
+        this.showCalendar = false;
+        return
+      }
+      this.showCalendar = true;
+    },
       
     calculationOfTotalRdvAmount(){
 
@@ -384,7 +454,6 @@ export default {
     let date_formatted = this.today.split("-").join(".");
     
     
-    // this.appointment.where("salon", "==", this.salonId).where("date", "==", date_formatted).orderBy("stamp", "desc")
      this.appointment.where("salon", "==", this.salonId).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
       if(!snapshot.empty){
         this.appointments = [];

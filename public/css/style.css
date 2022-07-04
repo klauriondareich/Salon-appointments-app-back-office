@@ -1484,6 +1484,10 @@ header {
   float: right;
   font-style: normal;
 }
+.row-border{
+  border: 1px solid #eaeaea;
+  border-radius: 2px;
+}
 
 /*--- outgoing projects widget ---*/
 
@@ -5551,7 +5555,20 @@ a.btn-st.black {
   border-bottom: 0 none;
   border-top-width: 2px;
 }
-
+.rdv-widget {
+  background: #fff none repeat scroll 0 0;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  padding: 25px 20px;
+  width: 100%;
+  border-bottom: 1px solid #20988e;
+}
+.rdv-widget span{
+  font-weight: bold;
+}
 .tab-style.style3 > ul > li > a i {
   font-size: 18px;
   line-height: initial;
