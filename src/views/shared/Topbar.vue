@@ -67,6 +67,7 @@
 import authMixin from '../../mixins/authMixin'
 import firebase from '../../firebase/init'
 
+
 export default {
     name: 'Topbar',
     mixins: [authMixin],
@@ -86,9 +87,12 @@ export default {
     },
     methods:{
         signOut(){
-            firebase.auth().signOut().then(() =>{
-                this.$router.replace("/");
-            })
+            
+             this.$swal('Hello Vue world!!!');
+
+            // firebase.auth().signOut().then(() =>{
+            //     this.$router.replace("/");
+            // })
             // .catch((error) =>{
             //     console.log(error.message)
             // })

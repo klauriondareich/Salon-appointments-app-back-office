@@ -6,10 +6,13 @@ import router from './router'
 import firebase from "./firebase/init"
 import vuetify from '@/plugins/vuetify' // path to vuetify export
 import store from './store/store'
-
+import VueSweetalert2 from 'vue-sweetalert2'
 
 
 Vue.use(VueRouter)
+
+Vue.use(VueSweetalert2);
+
 
 Vue.config.productionTip = false
 
