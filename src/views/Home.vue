@@ -58,64 +58,53 @@
         
                 <button class="btn-st grn-clr mt-5 mb-4" v-if="showCalendar" @click="switchView()">Voir dans le calendrier</button>
                 <button class="btn-st grn-clr mt-5 mb-4" v-if="!showCalendar" @click="switchView()">Voir en bloc</button>
-                <div class="row row-border " v-if="showCalendar">
-                    <div class="col-lg-3 col-md-3 col-sm-12" v-for="(item, index) in events" :key="index">
-                      <div class="rdv-widget">
-                          <div class="informative">
-                            
-                            <p><span>Service :</span> {{item.name}}</p>
-                            <!-- <p><span>Heure :</span> {{item.time_start}} {{item.time_end}}</p> -->
-                            <p><span>Montant :</span> {{item.amount}} (FCFA)</p>
-                            <p><span>Client : </span>{{item.customer}}</p>
-                            <p><span>Spécialiste :</span> {{item.specialist}}</p>
-                            <p><span>Payé par :</span> {{item.payment}}</p>
-                          </div>
-                      </div>   
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-12" v-for="(item, index) in events" :key="index">
-                      <div class="rdv-widget">
-                          <div class="informative">
-                            
-                            <p><span>Service :</span> {{item.name}}</p>
-                            <!-- <p><span>Heure :</span> {{item.time_start}} {{item.time_end}}</p> -->
-                            <p><span>Montant :</span> {{item.amount}} (FCFA)</p>
-                            <p><span>Client : </span>{{item.customer}}</p>
-                            <p><span>Spécialiste :</span> {{item.specialist}}</p>
-                            <p><span>Payé par :</span> {{item.payment}}</p>
-                          </div>
-                      </div>   
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-12" v-for="(item, index) in events" :key="index">
-                      <div class="rdv-widget">
-                          <div class="informative">
-                            
-                            <p><span>Service :</span> {{item.name}}</p>
-                            <!-- <p><span>Heure :</span> {{item.time_start}} {{item.time_end}}</p> -->
-                            <p><span>Montant :</span> {{item.amount}} (FCFA)</p>
-                            <p><span>Client : </span>{{item.customer}}</p>
-                            <p><span>Spécialiste :</span> {{item.specialist}}</p>
-                            <p><span>Payé par :</span> {{item.payment}}</p>
-                          </div>
-                      </div>   
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-12" v-for="(item, index) in events" :key="index">
-                      <div class="rdv-widget">
-                          <div class="informative">
-                            
-                            <p><span>Service :</span> {{item.name}}</p>
-                            <!-- <p><span>Heure :</span> {{item.time_start}} {{item.time_end}}</p> -->
-                            <p><span>Montant :</span> {{item.amount}} (FCFA)</p>
-                            <p><span>Client : </span>{{item.customer}}</p>
-                            <p><span>Spécialiste :</span> {{item.specialist}}</p>
-                            <p><span>Payé par :</span> {{item.payment}}</p>
-                          </div>
-                      </div>   
-                    </div>
-                    
-                   
-                                
                 
-                </div>
+                <div class="widget mt-5" v-if="showCalendar">
+                  <div class="widget-title no-margin">
+                      <h4>Liste des Rendez-vous du jour</h4> 
+                  </div>
+                  <div class="widget">
+                      <table class="prj-tbl striped bordered table-responsive">
+                          <thead class="color">
+                              <tr>
+                                  <th style="width:2%" class="text-white">NO.</th>
+                                  <th class="text-white">Service</th>
+                                  <th class="text-white">Spécilaiste</th>
+                                  <th class="text-white">Client</th>
+                                  <th class="text-white">Status</th>
+                                  <!-- <th>Project Team</th> -->
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr v-for="(item, index) in appointments" :key="index">
+                                  <td><span class="sr">{{++index}}</span></td>
+                                  <td style="width: 40%;">
+                                      <div class="project-title">
+                                          <h5>{{item.work_name}}</h5>
+                                          <!-- <a href="#" title="">delete</a> <a href="#" title="">edit</a>--> </div> 
+                                  </td>
+                                  <td>
+                                      <!-- <div class="owner-pic "> 
+                                          <img :src="item.employee_url" alt="" width="50" height="100" style="border-radius: 30px"> 
+                                      </div> -->
+                                      <div class="owner-info">
+                                          <h6>{{item.employee_name}} </h6>
+                                          <span>{{item.time_start}} - {{item.time_end}}</span> </div>
+                                  </td>
+                                  <td><span class="progres">{{item.customer_name}}</span></td>
+                                  <td>
+                                      <span v-if="item.status =='complete'" class="priority low">Terminé</span>
+                                      <span v-if="item.status =='create'" class="priority medium">En attente</span>
+                                      <span v-if="item.status =='cancelled_by_user'" class="priority high ">Annulé</span>
+                                  </td>
+                              </tr>
+                              
+                          </tbody>
+                      </table>
+                      <p class="text-center p-3" v-if="appointments.length == 0">Aucun rendez vous pour le moment!</p>
+                  </div>
+                </div> 
+
                 <div class="row">
                     <div class="widget" v-if="!showCalendar">
                         <v-app>
@@ -247,52 +236,6 @@
                     </div>
                   </div>
                 </div>       
-            
-                <div class="widget mt-5">
-                    <div class="widget-title no-margin">
-                        <h4>Liste des Rendez-vous du jour</h4> 
-                    </div>
-                    <div class="widget">
-                        <table class="prj-tbl striped bordered table-responsive">
-                            <thead class="color">
-                                <tr>
-                                    <th style="width:2%" class="text-white">NO.</th>
-                                    <th class="text-white">Service</th>
-                                    <th class="text-white">Spécilaiste</th>
-                                    <th class="text-white">Client</th>
-                                    <th class="text-white">Status</th>
-                                    <!-- <th>Project Team</th> -->
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(item, index) in appointments" :key="index">
-                                    <td><span class="sr">{{++index}}</span></td>
-                                    <td style="width: 40%;">
-                                        <div class="project-title">
-                                            <h5>{{item.work_name}}</h5>
-                                            <!-- <a href="#" title="">delete</a> <a href="#" title="">edit</a>--> </div> 
-                                    </td>
-                                    <td>
-                                        <!-- <div class="owner-pic "> 
-                                            <img :src="item.employee_url" alt="" width="50" height="100" style="border-radius: 30px"> 
-                                        </div> -->
-                                        <div class="owner-info">
-                                            <h6>{{item.employee_name}} </h6>
-                                            <span>{{item.time_start}} - {{item.time_end}}</span> </div>
-                                    </td>
-                                    <td><span class="progres">{{item.customer_name}}</span></td>
-                                    <td>
-                                        <span v-if="item.status =='complete'" class="priority low">Terminé</span>
-                                        <span v-if="item.status =='create'" class="priority medium">En attente</span>
-                                        <span v-if="item.status =='cancelled_by_user'" class="priority high ">Annulé</span>
-                                    </td>
-                                </tr>
-                                
-                            </tbody>
-                        </table>
-                        <p class="text-center p-3" v-if="appointments.length == 0">Aucun rendez vous pour le moment!</p>
-                    </div>
-                </div> 
                                   
             </div>
         </div>
