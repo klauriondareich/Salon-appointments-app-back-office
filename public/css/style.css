@@ -7395,6 +7395,9 @@ ul.notify-area > li > i {
   position: relative;
   width: 100%;
 }
+.yellow-class{
+  background-color: #ffff00;
+}
 
 .testimonial-section > img {
   float: left;

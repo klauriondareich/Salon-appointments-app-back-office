@@ -16,10 +16,13 @@
                         </div>
                         <div class="widget">
                             <div class="widget-peding">
-                                <div class="notifi"> <i class="fa fa-calendar"></i>
-                                <div class="notifi-info">
-                                    <p>Visualisation de tous les rendez-vous (rdv) du système</p>
-                                    <span>Nombre total : {{appointments.length}} </span></div>
+                                <div class="notifi"> 
+                                    <i class="fa fa-calendar"></i>
+                                    <div class="notifi-info">
+                                        <p>Visualisation de tous les rendez-vous (rdv) du système</p>
+                                        <span>Nombre total : {{appointments.length}} </span> <br>
+                                        Chiffre d'affaire (FCFA) :<span class="yellow-class"> {{totalAmount}} </span>
+                                    </div>
                                 </div>
                             </div>
                             </div>
@@ -34,15 +37,17 @@
                                 <div class="pt-5 pr-3 float-right">
                                     <label>Filtrer les rdv : </label>
                                     <select style="background:#e9e9e9; padding-left: 10px;" @change="callOnChange($event)">
-                                        <!-- <option value="today">Aujourd'hui</option> -->
                                         <option value="all">Tous les rdv</option>
+                                        <option value="today">Aujourd'hui</option>
                                         <option value="yesterday">Hier</option>
+                                        <option value="two_weeks">2 semaines</option>
                                         <option value="under_month">Moins d'un mois</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <!-- top info widgets -->
+                        <!-- for mobiles -->
                         <div class="row row-element-2">
                             <div class="col-12">
                                 <div class="pt-5">
@@ -53,9 +58,10 @@
                                 <div class="pr-3 float-right">
                                     <label>Filtrer les rdv : </label>
                                     <select style="background:#e9e9e9; padding-left: 10px;" @change="callOnChange($event)">
-                                        <!-- <option value="today">Aujourd'hui</option> -->
                                         <option value="all">Tous les rdv</option>
+                                        <option value="today">Aujourd'hui</option>
                                         <option value="yesterday">Hier</option>
+                                        <option value="two_weeks">2 semaines</option>
                                         <option value="under_month">Moins d'un mois</option>
                                     </select>
                                 </div>
@@ -115,7 +121,6 @@ import Loader from './shared/Loader.vue'
 import Modal from '../components/Dialog.vue'
 import MobileHeader from '../components/MobileHeader.vue'
 
-
 export default {
     name: "Appointments",
     components: {Loader, Modal, MobileHeader},
@@ -128,7 +133,8 @@ export default {
             appointment: firebase.firestore().collection("appointment"),
             searchItem: null,
             dialog: false,
-            salonId: null
+            salonId: null,
+            totalAmount: 0,
         }
     },
     methods:{
@@ -137,42 +143,86 @@ export default {
              this.appointments = this.appointmentsBis.filter(data => !this.searchItem || data.customer_name.toLowerCase().includes(this.searchItem.toLowerCase()))
         },
 
-        underOneMonth(currentDate) {
+        initFilters(currentDate, item){
+            let oldDate = new Date(item.stamp);
+            const diffTime = Math.abs(currentDate - oldDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            return diffDays
+        },
+
+        filterUnderOneMonth(currentDate) {
             this.appointments = this.appointmentsBis.filter((item) =>{
 
-                    let oldDate = new Date(item.stamp);
-                    const diffTime = Math.abs(currentDate - oldDate);
-                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                let diffDays = this.initFilters(currentDate, item);
 
                 if (diffDays < 31) return item
 
-            })
+            });
+
+            this.calculTurnover();    
         },
 
+        calculTurnover(){
+             // Calculation of the turnover (chiffre d'affaire)
+             if (this.appointments.length == 0) {
+                this.totalAmount = 0;
+                return
+             }
+            this.totalAmount = this.appointments.map(obj => obj.total).reduce((acc, currentValue) => acc + currentValue);
+        },
+
+        filterToday(currentDate){
+
+            this.appointments = this.appointmentsBis.filter((item) =>{
+
+                let diffDays = this.initFilters(currentDate, item);
+
+                if (diffDays == 0) return item
+
+            });
+
+            this.calculTurnover();    
+        },
 
         filterYesterday(currentDate) {
             this.appointments = this.appointmentsBis.filter((item) =>{
 
-                    let oldDate = new Date(item.stamp);
-                    const diffTime = Math.abs(currentDate - oldDate);
-                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                let diffDays = this.initFilters(currentDate, item);
 
                 if (diffDays < 2) return item
 
-            })
+            });
+
+            this.calculTurnover();    
         },
 
-        viewAll(){
+         filterTwoWeeks(currentDate) {
+            this.appointments = this.appointmentsBis.filter((item) =>{
+
+                let diffDays = this.initFilters(currentDate, item);
+
+                if (diffDays == 14) return item
+
+            });
+
+            this.calculTurnover();    
+        },
+
+        viewAllappointments(){
             this.appointments = this.appointmentsBis;
+            this.calculTurnover();   
         },
 
+        // Called when the value of the filter changed
         callOnChange(event){
        
             let currentDate = new Date();
             
-            if (event.target.value == "under_month") this.underOneMonth(currentDate);
+            if (event.target.value == "under_month") this.filterUnderOneMonth(currentDate);
             else if (event.target.value == "yesterday") this.filterYesterday(currentDate);
-            else if (event.target.value == "all") this.viewAll();
+            else if (event.target.value == "all") this.viewAllappointments();
+            else if (event.target.value == "today") this.filterToday(currentDate);
+            else if (event.target.value == "two_weeks") this.filterTwoWeeks(currentDate);
         }
     },
     created(){
@@ -192,7 +242,7 @@ export default {
           this.appointments.push(obj);
           this.appointmentsBis.push(obj);
           this.loaderState = false;
-        })
+        });
       }
       else{
             // console.log("no appointments");
