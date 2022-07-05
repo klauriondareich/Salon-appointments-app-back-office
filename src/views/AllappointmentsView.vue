@@ -41,7 +41,8 @@
                                         <option value="today">Aujourd'hui</option>
                                         <option value="yesterday">Hier</option>
                                         <option value="two_weeks">2 semaines</option>
-                                        <option value="under_month">Moins d'un mois</option>
+                                        <option value="30_days">30 jours</option>
+                                        <option value="one_year">Une année</option>
                                     </select>
                                 </div>
                             </div>
@@ -208,6 +209,30 @@ export default {
             this.calculTurnover();    
         },
 
+        filter30Days(currentDate) {
+            this.appointments = this.appointmentsBis.filter((item) =>{
+
+                let diffDays = this.initFilters(currentDate, item);
+
+                if (diffDays == 30) return item
+
+            });
+
+            this.calculTurnover();    
+        },
+
+         filterOneYear(currentDate) {
+            this.appointments = this.appointmentsBis.filter((item) =>{
+
+                let diffDays = this.initFilters(currentDate, item);
+
+                if (diffDays >= 365) return item
+
+            });
+
+            this.calculTurnover();    
+        },
+
         viewAllappointments(){
             this.appointments = this.appointmentsBis;
             this.calculTurnover();   
@@ -223,6 +248,8 @@ export default {
             else if (event.target.value == "all") this.viewAllappointments();
             else if (event.target.value == "today") this.filterToday(currentDate);
             else if (event.target.value == "two_weeks") this.filterTwoWeeks(currentDate);
+            else if (event.target.value == "30_days") this.filter30Days(currentDate);
+            else if (event.target.value == "one_year") this.filterOneYear(currentDate);
         }
     },
     created(){
