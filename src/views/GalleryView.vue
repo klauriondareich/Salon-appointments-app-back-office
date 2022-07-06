@@ -38,7 +38,7 @@
                                     <p class="text-center" v-if="images.length == 0">Votre galerie est vide ...</p>
                                     <li v-for="(item, index) in images" :key="index">
                                         <a href="#">
-                                            <img :src="item.imageUrl" alt="image">
+                                            <img :src="item.imageUrl" alt="image" class="img-fluid">
                                         </a>
                                        <button class="btn-danger btn-sm mb-4" @click="item.is_alert_visible = true">
                                             <i class="fa fa-trash"></i>

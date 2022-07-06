@@ -9336,7 +9336,7 @@ ul.notify-area > li > i {
   margin-bottom: 6px;
   margin-right: 6px;
   overflow: hidden;
-  width: 31.8%;
+  width: 23.8%;
 }
 
 .insta-widget > li > a {
@@ -9517,6 +9517,10 @@ ul.notify-area > li > i {
   text-align: right;
   vertical-align: middle;
   float: right;
+}
+
+.img-fluid{
+  height: 300px!important;
 }
 
 .nxt-prv-arrow > a {
