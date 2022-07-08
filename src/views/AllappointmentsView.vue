@@ -268,6 +268,7 @@ export default {
           obj.isVisible = false;
           this.appointments.push(obj);
           this.appointmentsBis.push(obj);
+          this.viewAllappointments();
           this.loaderState = false;
         });
       }

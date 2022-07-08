@@ -69,7 +69,7 @@
                               <tr>
                                   <th style="width:2%" class="text-white">NO.</th>
                                   <th class="text-white">Service</th>
-                                  <th class="text-white">Spécilaiste</th>
+                                  <th class="text-white">Spécialiste</th>
                                   <th class="text-white">Client</th>
                                   <th class="text-white">Status</th>
                                   <!-- <th>Project Team</th> -->
@@ -380,6 +380,7 @@ export default {
  
 
   created(){
+
 
     this.salonId = localStorage.getItem("salon_id");  
     this.username = localStorage.getItem("username");  
