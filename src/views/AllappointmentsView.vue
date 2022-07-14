@@ -29,7 +29,7 @@
                         <!-- top info widgets -->
                         <div class="row row-element-1">
                             <div class="col-6">
-                                <div class="pt-5">
+                                <div class="pt-5 mb-4">
                                     <input type="text" class="form-control" placeholder="Rechercher un client" v-model="searchItem" @input="searchCustomers">
                                 </div>
                             </div>
@@ -48,6 +48,108 @@
                             </div>
                         </div>
                         <!-- top info widgets -->
+
+                        <v-app>
+                            <v-card>
+                                
+                                <v-tabs
+                                    v-model="tabs"
+                                    centered
+                                    center-active
+                                    >
+                                    <v-tab>
+                                        Rendez-vous
+                                    </v-tab>
+                                    <v-tab>
+                                        Rendez-vous instantanés
+                                    </v-tab>
+                                </v-tabs>
+                                <v-tabs-items v-model="tabs">
+                                    <v-tab-item>
+                                        <div class="widget" style="margin-top: 10px;">
+                                            <table class="prj-tbl striped bordered table-responsive">
+                                                <thead  class="color">
+                                                    <tr>
+                                                        <!-- <th style="width: 8%;"><em>#</em></th> -->
+                                                        <th style="width: 20%;"><em>Information du client</em></th>
+                                                        <th style="width: 25%;"><em>Services</em></th>
+                                                        <th><em>Montant</em></th>
+                                                        <th><em>Date</em></th>
+                                                        <th style="width: 3%;" ><em></em></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr v-for="(item, index) in appointments" :key="index">
+                                                        <!-- <td><i class="fa fa-calendar"></i></td> -->
+                                                        <td>{{item.customer_name}}</td>
+                                                        <td>
+                                                            {{item.work_name}}
+                                                        </td>
+                                                        <td>
+                                                            {{item.total}}
+                                                        </td>
+                                                        <td><i>{{item.stamp | formatDate}}</i></td>
+                                                        <td>
+                                                        <Modal :details="item"/>  
+                                                        </td>
+                                                        
+                                                    </tr>
+                                                    <tr class="p-5" v-if="this.appointments.length == 0">
+                                                        <td><i class="fa fa-user"></i></td>
+                                                        <td></td>
+                                                        <td> Aucun rendez-vous trouvé ...</td>
+                                                        <td></td>   
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </v-tab-item>
+                                    <v-tab-item>
+                                       <div class="widget" style="margin-top: 10px;">
+                                            <table class="prj-tbl striped table-responsive">
+                                                <thead  class="color">
+                                                    <tr>
+                                                        <!-- <th style="width: 8%;"><em>#</em></th> -->
+                                                        <th style="width: 20%;"><em>Information du client</em></th>
+                                                        <th style="width: 25%;"><em>Services</em></th>
+                                                        <th><em>Montant</em></th>
+                                                        <th><em>Date</em></th>
+                                                        <th style="width: 3%;"><em></em></th>
+                                                         <th style="width: 3%;"><em></em></th>
+                                                        <th style="width: 1%;"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr v-for="(item, index) in instant_appointments" :key="index">
+                                                        <!-- <td><i class="fa fa-calendar"></i></td> -->
+                                                        <td>{{item.customer_name}}</td>
+                                                        <td>
+                                                            {{item.work_name}}
+                                                        </td>
+                                                        <td>
+                                                            {{item.total}}
+                                                        </td>
+                                                        <td><i>{{item.stamp | formatDate}}</i></td>
+                                                        <td>
+                                                        <Modal :details="item"/> 
+                                                        </td>
+                                                        <td><button class="btn-st black">Valider</button></td>
+                                                    </tr>
+                                                    <tr class="p-5" v-if="this.instant_appointments.length == 0">
+                                                        <td><i class="fa fa-user"></i></td>
+                                                        <td></td>
+                                                        <td> Aucun rendez-vous trouvé ...</td>
+                                                        <td></td>   
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </v-tab-item>
+                                
+                                </v-tabs-items>
+                            </v-card>
+                        </v-app>
+                        
                         <!-- for mobiles -->
                         <div class="row row-element-2">
                             <div class="col-12">
@@ -68,47 +170,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="widget">
-                            <div class="widget-title no-margin">
-                                <h4>Liste des rendez-vous</h4>
-                            </div>
-                            <table class="prj-tbl striped table-responsive">
-                                <thead  class="color">
-                                    <tr>
-                                        <!-- <th style="width: 8%;"><em>#</em></th> -->
-                                        <th style="width: 20%;"><em>Information du client</em></th>
-                                        <th style="width: 25%;"><em>Services</em></th>
-                                        <th><em>Montant</em></th>
-                                        <th><em>Date</em></th>
-                                        <th style="width: 8%;"><em>action</em></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="(item, index) in appointments" :key="index">
-                                        <!-- <td><i class="fa fa-calendar"></i></td> -->
-                                        <td>{{item.customer_name}}</td>
-                                        <td>
-                                            {{item.work_name}}
-                                        </td>
-                                        <td>
-                                            {{item.total}}
-                                        </td>
-                                        <td><i>{{item.stamp | formatDate}}</i></td>
-                                        <td>
-                                           <Modal :details="item"/> 
-                                        </td>
-                                    </tr>
-                                    <tr class="p-5" v-if="this.appointments.length == 0">
-                                        <td><i class="fa fa-user"></i></td>
-                                        <td></td>
-                                        <td> Aucun client trouvé ...</td>
-                                        <td></td>   
-                                    </tr>
-                                </tbody>
-                            </table>
-                            
-                        </div>
-                        <!-- our project widget -->
+                        
                         
                         
                     </div>
@@ -130,12 +192,14 @@ export default {
         return{
             appointments: [],
             appointmentsBis: [],
+            instant_appointments: [],
             loaderState: false,
             appointment: firebase.firestore().collection("appointment"),
             searchItem: null,
             dialog: false,
             salonId: null,
             totalAmount: 0,
+            tabs: null,
         }
     },
     methods:{
@@ -259,7 +323,8 @@ export default {
 
     this.salonId = localStorage.getItem("salon_id");
 
-     this.appointment.where("salon", "==", this.salonId).orderBy("stamp", "desc").get().then((snapshot) =>{
+    // Getting normal appointmements
+    this.appointment.where("salon", "==", this.salonId).orderBy("stamp", "desc").get().then((snapshot) =>{
       if(!snapshot.empty){
         this.appointments = [];
         snapshot.forEach((doc) =>{
@@ -269,6 +334,28 @@ export default {
           this.appointments.push(obj);
           this.appointmentsBis.push(obj);
           this.viewAllappointments();
+          this.loaderState = false;
+        });
+      }
+      else{
+            // console.log("no appointments");
+            this.loaderState = false;
+        }
+    });
+
+
+    // Getting instant appointments
+    this.appointment.where("instant_appoint", "==", true).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
+      if(!snapshot.empty){
+        this.instant_appointments = [];
+        snapshot.forEach((doc) =>{
+          let obj = doc.data();
+          obj.id = doc.id;
+          obj.isVisible = false;
+          console.log("obj", obj)
+          this.instant_appointments.push(obj);
+          //this.appointmentsBis.push(obj);
+         // this.viewAllappointments();
           this.loaderState = false;
         });
       }

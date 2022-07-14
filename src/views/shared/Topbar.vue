@@ -49,7 +49,6 @@
                             <li><router-link to="/salon"><i class="fa fa-building"></i><span>Mon salon</span></router-link></li>
                             <li><router-link to="/appointments"><i class="fa fa-calendar"></i><span>Tous les rendez-vous</span></router-link></li>
                             <li><router-link to="/allcustomers"><i class="fa fa-users"></i><span>Tous les clients</span></router-link></li>
-                            <!-- <li><router-link to="/statistics"><i class="fa fa-bar-chart"></i><span>Statistiques</span></router-link></li> -->
                             <li><router-link to="/payments"><i class="fa fa-credit-card"></i><span>Paiements</span></router-link></li>
                             <li><router-link to="/comments"><i class="fa fa-comment"></i><span>Notes et commentaires</span></router-link></li>
                             <li><router-link to="/gallery"><i class="fa fa-photo"></i><span>Galerie</span></router-link></li>
