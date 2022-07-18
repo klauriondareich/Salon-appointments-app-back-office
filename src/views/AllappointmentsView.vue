@@ -70,17 +70,15 @@
                                             <table class="prj-tbl striped bordered table-responsive">
                                                 <thead  class="color">
                                                     <tr>
-                                                        <!-- <th style="width: 8%;"><em>#</em></th> -->
-                                                        <th style="width: 20%;"><em>Information du client</em></th>
-                                                        <th style="width: 25%;"><em>Services</em></th>
+                                                        <th><em>Information du client</em></th>
+                                                        <th><em>Services</em></th>
                                                         <th><em>Montant</em></th>
                                                         <th><em>Date</em></th>
-                                                        <th style="width: 3%;" ><em></em></th>
+                                                        <th><em></em></th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody> 
                                                     <tr v-for="(item, index) in appointments" :key="index">
-                                                        <!-- <td><i class="fa fa-calendar"></i></td> -->
                                                         <td>{{item.customer_name}}</td>
                                                         <td>
                                                             {{item.work_name}}
@@ -109,19 +107,17 @@
                                             <table class="prj-tbl striped table-responsive">
                                                 <thead  class="color">
                                                     <tr>
-                                                        <!-- <th style="width: 8%;"><em>#</em></th> -->
-                                                        <th style="width: 20%;"><em>Information du client</em></th>
-                                                        <th style="width: 25%;"><em>Services</em></th>
+                                                        <th><em>Information du client</em></th>
+                                                        <th><em>Services</em></th>
                                                         <th><em>Montant</em></th>
                                                         <th><em>Date</em></th>
-                                                        <th style="width: 3%;"><em></em></th>
-                                                         <th style="width: 3%;"><em></em></th>
-                                                        <th style="width: 1%;"></th>
+                                                        <th><em></em></th>
+                                                        <th><em></em></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr v-for="(item, index) in instant_appointments" :key="index">
-                                                        <!-- <td><i class="fa fa-calendar"></i></td> -->
+                                                        
                                                         <td>{{item.customer_name}}</td>
                                                         <td>
                                                             {{item.work_name}}
@@ -133,7 +129,10 @@
                                                         <td>
                                                         <Modal :details="item"/> 
                                                         </td>
-                                                        <td><button class="btn-st black">Valider</button></td>
+                                                        <td>
+                                                            <button class="btn-st black" v-if="!item.allSalonIds.includes(salonId)" @click="validate_instant_appoint(item.id)">Valider</button>
+                                                            <button class="btn-st org-clr" v-if="item.allSalonIds.includes(salonId)">En Attente</button>
+                                                        </td>
                                                     </tr>
                                                     <tr class="p-5" v-if="this.instant_appointments.length == 0">
                                                         <td><i class="fa fa-user"></i></td>
@@ -194,7 +193,7 @@ export default {
             appointmentsBis: [],
             instant_appointments: [],
             loaderState: false,
-            appointment: firebase.firestore().collection("appointment"),
+            appointmentRef: firebase.firestore().collection("appointment"),
             searchItem: null,
             dialog: false,
             salonId: null,
@@ -203,6 +202,28 @@ export default {
         }
     },
     methods:{
+
+        validate_instant_appoint(appoint_id){
+            this.appointmentRef.doc(appoint_id).get().then((doc)=>{
+                if (doc.exists){
+                    let obj = doc.data();
+                    obj.id = doc.id;
+                    console.log("obj2", obj)
+                    let new_array = obj.allSalonIds;
+                    
+                    // check if the salon Id does not exist in the array and push
+                    if (!this.new_array.includes(this.salonId)) {
+
+                        new_array.push(this.salonId);
+                        console.log("new_array", new_array);
+                        this.appointmentRef.doc(appoint_id).update({"allSalonIds": new_array})
+                    }
+                }
+                else{
+                    this.loaderState = false;
+                }
+             });
+        },
 
         searchCustomers(){
              this.appointments = this.appointmentsBis.filter(data => !this.searchItem || data.customer_name.toLowerCase().includes(this.searchItem.toLowerCase()))
@@ -215,6 +236,7 @@ export default {
             return diffDays
         },
 
+        // Filter all appointments less than one month
         filterUnderOneMonth(currentDate) {
             this.appointments = this.appointmentsBis.filter((item) =>{
 
@@ -227,6 +249,7 @@ export default {
             this.calculTurnover();    
         },
 
+        // calculate the turnover based on all appointments of the salon
         calculTurnover(){
              // Calculation of the turnover (chiffre d'affaire)
              if (this.appointments.length == 0) {
@@ -236,6 +259,7 @@ export default {
             this.totalAmount = this.appointments.map(obj => obj.total).reduce((acc, currentValue) => acc + currentValue);
         },
 
+        // Filter all appointments of today
         filterToday(currentDate){
 
             this.appointments = this.appointmentsBis.filter((item) =>{
@@ -249,6 +273,7 @@ export default {
             this.calculTurnover();    
         },
 
+        // Filter all appointments of yesterday
         filterYesterday(currentDate) {
             this.appointments = this.appointmentsBis.filter((item) =>{
 
@@ -261,6 +286,7 @@ export default {
             this.calculTurnover();    
         },
 
+        // Filter all appointments that date two weeks
          filterTwoWeeks(currentDate) {
             this.appointments = this.appointmentsBis.filter((item) =>{
 
@@ -273,6 +299,7 @@ export default {
             this.calculTurnover();    
         },
 
+        // Filter all appointments that date 30 days
         filter30Days(currentDate) {
             this.appointments = this.appointmentsBis.filter((item) =>{
 
@@ -285,6 +312,7 @@ export default {
             this.calculTurnover();    
         },
 
+        // Filter all appointments that date one year
          filterOneYear(currentDate) {
             this.appointments = this.appointmentsBis.filter((item) =>{
 
@@ -297,6 +325,7 @@ export default {
             this.calculTurnover();    
         },
 
+        // reset filters and display all appointments
         viewAllappointments(){
             this.appointments = this.appointmentsBis;
             this.calculTurnover();   
@@ -324,7 +353,7 @@ export default {
     this.salonId = localStorage.getItem("salon_id");
 
     // Getting normal appointmements
-    this.appointment.where("salon", "==", this.salonId).orderBy("stamp", "desc").get().then((snapshot) =>{
+    this.appointmentRef.where("salon", "==", this.salonId).orderBy("stamp", "desc").get().then((snapshot) =>{
       if(!snapshot.empty){
         this.appointments = [];
         snapshot.forEach((doc) =>{
@@ -345,14 +374,13 @@ export default {
 
 
     // Getting instant appointments
-    this.appointment.where("instant_appoint", "==", true).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
+    this.appointmentRef.where("instant_appoint", "==", true).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
       if(!snapshot.empty){
         this.instant_appointments = [];
         snapshot.forEach((doc) =>{
           let obj = doc.data();
           obj.id = doc.id;
           obj.isVisible = false;
-          console.log("obj", obj)
           this.instant_appointments.push(obj);
           //this.appointmentsBis.push(obj);
          // this.viewAllappointments();
@@ -369,5 +397,7 @@ export default {
 </script>
 
 <style>
-
+    .theme--light.v-application{
+        background-color: transparent!important;
+    }
 </style>

@@ -5823,9 +5823,9 @@ table .progress {
   margin-right: 0;
 }
 
-table tbody tr td:last-child {
+/* table tbody tr td:last-child {
   padding-right: 40px;
-}
+} */
 
 .widget-title.dark {
   background: #414141 none repeat scroll 0 0;
