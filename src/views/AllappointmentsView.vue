@@ -107,7 +107,7 @@
                                             <table class="prj-tbl striped table-responsive">
                                                 <thead  class="color">
                                                     <tr>
-                                                        <th><em>Information du client</em></th>
+                                                        <th><em>Information du client x</em></th>
                                                         <th><em>Services</em></th>
                                                         <th><em>Montant</em></th>
                                                         <th><em>Date</em></th>
@@ -130,7 +130,7 @@
                                                         <Modal :details="item"/> 
                                                         </td>
                                                         <td>
-                                                            <button class="btn-st black" v-if="!item.allSalonIds.includes(salonId)" @click="validate_instant_appoint(item.id)">Valider</button>
+                                                            <button class="btn-st black" v-if="!item.allSalonIds.includes(salonId)" @click="validate_instant_appoint(item.id, item.total)">Valider</button>
                                                             <button class="btn-st org-clr" v-if="item.allSalonIds.includes(salonId)">En Attente</button>
                                                         </td>
                                                     </tr>
@@ -194,29 +194,32 @@ export default {
             instant_appointments: [],
             loaderState: false,
             appointmentRef: firebase.firestore().collection("appointment"),
+            salonRef: firebase.firestore().collection("salons"), 
+            servicesRef: firebase.firestore().collection("work"),
             searchItem: null,
             dialog: false,
             salonId: null,
             totalAmount: 0,
             tabs: null,
+            salonServices: [],
+            filtersArr: []
         }
     },
     methods:{
 
-        validate_instant_appoint(appoint_id){
+        
+        validate_instant_appoint(appoint_id, amount){
             this.appointmentRef.doc(appoint_id).get().then((doc)=>{
                 if (doc.exists){
                     let obj = doc.data();
                     obj.id = doc.id;
-                    console.log("obj2", obj)
                     let new_array = obj.allSalonIds;
                     
                     // check if the salon Id does not exist in the array and push
-                    if (!this.new_array.includes(this.salonId)) {
+                    if (!new_array.includes(this.salonId)) {
 
                         new_array.push(this.salonId);
-                        console.log("new_array", new_array);
-                        this.appointmentRef.doc(appoint_id).update({"allSalonIds": new_array})
+                        this.appointmentRef.doc(appoint_id).update({"allSalonIds": new_array, "amount":amount})
                     }
                 }
                 else{
@@ -343,7 +346,66 @@ export default {
             else if (event.target.value == "two_weeks") this.filterTwoWeeks(currentDate);
             else if (event.target.value == "30_days") this.filter30Days(currentDate);
             else if (event.target.value == "one_year") this.filterOneYear(currentDate);
-        }
+        },
+
+        // Allows to get instant_appointments if the service of this belongs to salon services array
+        serviceBelongToSalon(){
+
+            this.salonRef.doc(this.salonId).get().then((doc)=>{
+                if (doc.exists){
+                  this.instant_appointments = [];
+                    let obj = doc.data();
+                     //let arr = [];
+                    obj.works.forEach((item) =>{
+
+                        //Getting services of the salon
+                        this.servicesRef.doc(item).get().then((doc) =>{
+                        
+                            let obj2 = doc.data();
+
+                               
+                               // Getting instant appointments
+
+                                this.appointmentRef.where("instant_appoint", "==", true).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
+                                if(!snapshot.empty){
+                                    
+                                    snapshot.forEach((doc) =>{
+
+                                        let obj3 = doc.data();
+                                        obj3.id = doc.id;
+                                        obj3.isVisible = false;
+
+                                        console.log("service : ", obj2.name, "work_name : ", obj3.work_name, obj2.name == obj3.work_name)
+
+                                        if (obj2.name == obj3.work_name) {
+
+                                            this.instant_appointments.push(obj3);
+                                            console.log("obj3", obj3)
+                                        }
+                                        this.appointmentsBis.push(obj);
+                                        this.viewAllappointments();
+                                        this.loaderState = false;
+                                    });
+                                    
+                                }
+                                else{
+                                        // console.log("no appointments");
+                                        this.loaderState = false;
+                                    }
+                                });
+                        });
+
+                        
+                        
+                    })
+                    
+                }
+                else{
+                    this.loaderState = false;
+                }
+
+            });
+        }, 
     },
     created(){
 
@@ -351,6 +413,8 @@ export default {
     this.loaderState = true;
 
     this.salonId = localStorage.getItem("salon_id");
+
+    this.serviceBelongToSalon();
 
     // Getting normal appointmements
     this.appointmentRef.where("salon", "==", this.salonId).orderBy("stamp", "desc").get().then((snapshot) =>{
@@ -373,25 +437,6 @@ export default {
     });
 
 
-    // Getting instant appointments
-    this.appointmentRef.where("instant_appoint", "==", true).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
-      if(!snapshot.empty){
-        this.instant_appointments = [];
-        snapshot.forEach((doc) =>{
-          let obj = doc.data();
-          obj.id = doc.id;
-          obj.isVisible = false;
-          this.instant_appointments.push(obj);
-          //this.appointmentsBis.push(obj);
-         // this.viewAllappointments();
-          this.loaderState = false;
-        });
-      }
-      else{
-            // console.log("no appointments");
-            this.loaderState = false;
-        }
-    });
   }
 }
 </script>
