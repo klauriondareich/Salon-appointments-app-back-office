@@ -348,7 +348,7 @@ export default {
             else if (event.target.value == "one_year") this.filterOneYear(currentDate);
         },
 
-        // Allows to get instant_appointments if the service of this belongs to salon services array
+        // Allows to get instant_appointments if the service of this one belongs to salon services array
         serviceBelongToSalon(){
 
             this.salonRef.doc(this.salonId).get().then((doc)=>{
@@ -380,10 +380,11 @@ export default {
                                         if (obj2.name == obj3.work_name) {
 
                                             this.instant_appointments.push(obj3);
-                                            console.log("obj3", obj3)
+                                            console.log("obj3", obj3);
+                                            //this.appointmentsBis.push(obj3);
+                                            //this.viewAllappointments();
                                         }
-                                        this.appointmentsBis.push(obj);
-                                        this.viewAllappointments();
+                                        
                                         this.loaderState = false;
                                     });
                                     
