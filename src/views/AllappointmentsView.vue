@@ -390,6 +390,7 @@ export default {
                                     this.beepBg = true;
                                    
                                 }
+                                
                                 localStorage.setItem("firstLoad", "no");
                                 
                             
