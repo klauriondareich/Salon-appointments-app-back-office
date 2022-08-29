@@ -216,7 +216,10 @@ export default {
                     if (!new_array.includes(this.salonId)) {
 
                         new_array.push(this.salonId);
-                        this.appointmentRef.doc(appoint_id).update({"allSalonIds": new_array, "amount":amount})
+                        this.instant_appointments = [];
+                        this.appointmentRef.doc(appoint_id).update({"allSalonIds": new_array, "amount":amount}).then(
+                            this.serviceBelongToSalon()
+                        )
                     }
                 }
                 else{
@@ -234,7 +237,7 @@ export default {
         pauseBeep(){
             this.beepFile.pause();
             this.beepBg = false;
-            console.log("clicked")
+            console.log("pause called")
         },
 
         searchCustomers(){
@@ -376,27 +379,21 @@ export default {
                                // Getting instant appointments
 
                                 this.appointmentRef.where("instant_appoint", "==", true).where("salon", "==", "").orderBy("stamp", "desc").onSnapshot((snapshot) =>{
-                                
-                                // Call song and background Image
-                                // stop after clicking or pressing a button
 
-                               
-
+                                 // call a beep sound when a new instant appoint noticed
                                 console.log("snap called", localStorage.getItem("firstLoad"));
                                 if (localStorage.getItem("firstLoad") == "no"){
-                                     console.log("beep called")
                                     this.beepFile.loop = true;
                                     this.playBeep();
-                                    this.beepBg = true;
+                                    this.beepBg = true; // Show background color
                                    
                                 }
-                                
+
                                 localStorage.setItem("firstLoad", "no");
                                 
                             
-                                setTimeout(function(){
-                                    this.pauseBeep();
-                                }, 15)
+                                // Pause beep after 15 seconds
+                                setTimeout(this.pauseBeep, 15000)
                               
                                 
                                 if(!snapshot.empty){
