@@ -220,7 +220,7 @@
                       <span>Les derniers commentaires de vos clients</span> 
                     </div>
                     <div class="row remove-ext">
-                      <div class="col-md-3" v-for="(item, index) in comments.slice(0,4)" :key="index">
+                      <div class="col-md-4" v-for="(item, index) in comments.slice(0,4)" :key="index">
                         <div class="testimon style4">
                           <div class="testi-meta">
                             <p class="text-left">{{item.comment}}</p>

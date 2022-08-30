@@ -362,7 +362,8 @@ export default {
 
         // Allows to get instant_appointments if the service of this one belongs to salon services array
         serviceBelongToSalon(){
-
+             // Feature to optimized
+            // The approach is too complex
             this.salonRef.doc(this.salonId).get().then((doc)=>{
                 if (doc.exists){
                   this.instant_appointments = [];
@@ -416,6 +417,7 @@ export default {
                                             //     else console.log("can't be booked")
                                             // })
 
+                                           
                                             this.appointmentRef.where("instant_appoint", "==", true).where("salon", "==", this.salonId).get().then((query) =>{
 
                                                 if (!query.empty){

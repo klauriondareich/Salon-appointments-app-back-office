@@ -10219,7 +10219,7 @@ ul.notify-area > li > i {
   float: left;
   padding: 30px 50px 30px 30px;
   position: relative;
-  width: 100%;
+  width: 300px;
   margin-bottom: 40px;
 }
 
@@ -10235,7 +10235,7 @@ ul.notify-area > li > i {
 
 .testi-meta {
   display: table-cell;
-  padding-top: 23px;
+  /* padding-top: 23px; */
   position: relative;
   vertical-align: top;
 }
@@ -10412,7 +10412,7 @@ ul.notify-area > li > i {
 }
 
 .testimon.style4::before {
-  height: 60%;
+  /* height: 60%; */
   width: 100%;
 }
 
@@ -10449,9 +10449,9 @@ ul.notify-area > li > i {
   width: 61px;
 }
 
-.testimon.style4 .testi-meta {
+/* .testimon.style4 .testi-meta {
   padding-top: 35px;
-}
+} */
 
 /*--- testimonial style 5 ---*/
 
