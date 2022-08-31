@@ -105,9 +105,11 @@ export default {
 
     created(){
 
-      this.loaderState = true;
+      this.loaderState = false;
       
       if(firebase.auth().currentUser){
+
+        this.loaderState = true;
 
         let managerRef = firebase.firestore().collection("managers");
         let uid = firebase.auth().currentUser.uid;
@@ -123,10 +125,6 @@ export default {
               this.userInfo = doc.data();
               this.loaderState = false
             }
-          }
-          else {
-            // console.log("user doesn't exist");
-             this.loaderState = false;
           }
         })
     

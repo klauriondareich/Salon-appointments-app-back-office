@@ -121,7 +121,12 @@ export default {
     this.customersWithoutDouble = [];
         this.customersWithDouble = [];
      this.appointment.where("salon", "==", this.salonId).orderBy("stamp", "desc").get().then((snapshot) =>{
-      if(!snapshot.empty){
+
+        this.loaderState = false;
+
+        if(!snapshot.empty){
+
+        this.loaderState = true;
 
         snapshot.forEach((doc) =>{
             let obj = doc.data();
@@ -141,10 +146,6 @@ export default {
         this.loaderState = false;
 
       }
-       else{
-            // console.log("no customers");
-            this.loaderState = false;
-        }
     });
 
 

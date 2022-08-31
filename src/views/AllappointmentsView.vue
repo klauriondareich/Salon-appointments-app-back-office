@@ -210,7 +210,6 @@ export default {
 
             localStorage.setItem("firstLoad", "no");
 
-            console.log("appoint_id", appoint_id, amount);
             this.appointmentRef.doc(appoint_id).get().then((doc)=>{
                 if (doc.exists){
                     let obj = doc.data();
@@ -261,16 +260,6 @@ export default {
                         if (!this.instant_appointments.includes(parseTimeStart)) this.instant_appointments.push(data);    
                     });
 
-                     // this.allTimesStart.forEach((item)=>{
-                    //     let parseTimeStart = Date.parse(`2022-08-01T${appObj.time_start}`);
-                    //     let parseTimeEnd = Date.parse(`2022-08-01T${appObj.time_end}`);
-                    //     if (!(item >= parseTimeStart && item <= parseTimeEnd)){
-                    //         console.log("obj", appObj);
-                    //         //this.instant_appointments.push(appObj);
-                    //     }
-                    // });
-                    
-                    // console.log("allTimesStart", this.allTimesStart)
                 }
             })
         },
@@ -282,7 +271,6 @@ export default {
                     
                     querySnapshot.forEach((doc) =>{
                         let docData = doc.data();
-                        console.log("data3", docData);
                         let timeStart =  Date.parse(`2022-08-01T${docData.time_start}`);
                         // The condition allows to Avoid having duplicate values in the array
                         if (!this.allTimesStart.includes(timeStart)) this.allTimesStart.push(timeStart)
@@ -426,115 +414,7 @@ export default {
             else if (event.target.value == "two_weeks") this.filterTwoWeeks(currentDate);
             else if (event.target.value == "30_days") this.filter30Days(currentDate);
             else if (event.target.value == "one_year") this.filterOneYear(currentDate);
-        },
-
-        // Allows to get instant_appointments if the service of this one belongs to salon services array
-        /*serviceBelongToSalon(){
-             // Feature to be optimized
-            // The approach is too complex
-            this.salonRef.doc(this.salonId).get().then((doc)=>{
-                if (doc.exists){
-                  this.instant_appointments = [];
-                    let obj = doc.data();
-                     //let arr = [];
-                    obj.works.forEach((item) =>{
-
-                        //Getting services of the salon
-                        this.servicesRef.doc(item).get().then((doc) =>{
-                        
-                            let obj2 = doc.data();
-
-                               
-                               // Getting instant appointments
-
-                                this.appointmentRef.where("instant_appoint", "==", true).where("salon", "==", "").orderBy("stamp", "desc").onSnapshot((snapshot) =>{
-
-                                 // call a beep sound when a new instant appoint noticed
-                                if (localStorage.getItem("firstLoad") == "no"){
-                                    this.beepFile.loop = true;
-                                    this.playBeep();
-                                    this.beepBg = true; // Show background color
-                                   
-                                }
-
-                                localStorage.setItem("firstLoad", "no");
-                                
-                            
-                                // Pause beep after 15 seconds
-                                setTimeout(this.pauseBeep, 15000)
-                              
-                                
-                                if(!snapshot.empty){
-                                    
-                                    snapshot.forEach((doc) =>{
-
-                                        let obj3 = doc.data();
-                                        obj3.id = doc.id;
-                                        obj3.isVisible = false;
-
-                                        if (obj2.name == obj3.work_name) {
-                                           
-                                            this.appointmentRef.where("instant_appoint", "==", true).get().then((query) =>{
-
-                                                if (!query.empty){
-                                                    query.forEach((doc) =>{
-
-                                                        let doc_timeStart = doc.data().time_start;
-                                                        let doc_end = doc.data().time_end;
-                                                        console.log(doc_timeStart, doc_end);
-                                                        
-                                                        let parse1 = Date.parse(`2022-08-01T${doc_timeStart}`);
-                                                        let parse2 = Date.parse(`2022-08-01T${doc_end}`);
-
-                                                        let test =  Date.parse(`2022-08-01T${obj3.time_start}`);
-
-                                                        
-                                                        if (test >= parse1 && test <= parse2){
-
-                                                            
-                                                        //    console.log("can't book", obj3.time_start, "-", obj3.time_end);
-                                                        }
-                                                        else {
-                                                            this.instant_appointments.push(obj3);
-                                                            // console.log("can book :", obj3.time_start, "-", obj3.time_end )
-                                                        }
-                                                        
-                                                       
-
-                                                    })
-                                                }
-                                                else console.log("no data")
-                                            })
-
-                                            
-                                            //console.log("obj3", obj3);
-
-                                            //this.appointmentsBis.push(obj3);
-                                            //this.viewAllappointments();
-                                        }
-                                        
-                                        this.loaderState = false;
-                                    });
-                                    
-                                }
-                                else{
-                                        // console.log("no appointments");
-                                        this.loaderState = false;
-                                    }
-                                });
-                        });
-
-                        
-                        
-                    })
-                    
-                }
-                else{
-                    this.loaderState = false;
-                }
-
-            });
-        },*/
+        }
     },
     created(){
 
@@ -545,8 +425,6 @@ export default {
     localStorage.setItem("firstLoad", "yes");
 
     this.verifyingAvailability();
-
-    //this.gettingInstantsAppointments();
 
     // Getting normal appointmements
     this.appointmentRef.where("salon", "==", this.salonId).orderBy("stamp", "desc").get().then((snapshot) =>{
@@ -566,8 +444,7 @@ export default {
             });
         }
       
-    });
-
+    })
 
   }
 }

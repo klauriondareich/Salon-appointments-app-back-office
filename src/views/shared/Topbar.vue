@@ -86,15 +86,14 @@ export default {
     },
     methods:{
         signOut(){
-            
-             this.$swal('Hello Vue world!!!');
 
-            // firebase.auth().signOut().then(() =>{
-            //     this.$router.replace("/");
-            // })
-            // .catch((error) =>{
-            //     console.log(error.message)
-            // })
+            firebase.auth().signOut().then(() =>{
+                this.$router.replace("/");
+            })
+            .catch((error) =>{
+                console.log(error.message);
+                // add a sweetalert here
+            })
         },
     },
     
@@ -102,11 +101,11 @@ export default {
       
       this.username = localStorage.getItem("username");
       this.appointCancelRef.where("status", "==", "cancelled_by_user").where("read", "==", false).orderBy("stamp", "desc").onSnapshot((snapshot) =>{
-      
+        
+        this.nb_notif = 0;
       if(!snapshot.empty){
           this.nb_notif = snapshot.size;
         }
-      else this.nb_notif = 0;
     })
 
   },
