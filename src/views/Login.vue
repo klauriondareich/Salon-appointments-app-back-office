@@ -44,7 +44,7 @@ export default {
          // Login the user to the system 
         signIn(){
 
-            // this.loaderState = true;
+            this.loaderState = true;
 
             firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() =>{
                 this.$router.replace({ name: "Home" });

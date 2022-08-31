@@ -87,14 +87,12 @@ export default {
     methods:{
         signOut(){
             
-             this.$swal('Hello Vue world!!!');
-
-            // firebase.auth().signOut().then(() =>{
-            //     this.$router.replace("/");
-            // })
-            // .catch((error) =>{
-            //     console.log(error.message)
-            // })
+            firebase.auth().signOut().then(() =>{
+                this.$router.replace("/");
+            })
+            .catch((error) =>{
+                console.log(error.message)
+            })
         },
     },
     
