@@ -19,12 +19,12 @@
                     <div class="row pt-5">
                         <div class="col-md-6">
                             <div class="inner-bg inner-bg-style">
-                                <div v-if="images.length >= 10">
+                                <div v-if="images.length >= 100">
                                     <p class="alert alert-warning">
-                                        Vous avez atteint le nombre maximal d'images (10 images)
+                                        Vous avez atteint le nombre maximal d'images (100 images)
                                     </p>
                                 </div>
-                                <div class="field" v-if="images.length < 10"> 
+                                <div class="field" v-if="images.length < 100"> 
                                     <p>Vérifiez la taille de l'image et son format avant d'uploader.</p>
                                     <span class="upload-image">Ajouter une nouvelle image</span>
                                     <label class="fileContainer"> <span>Ajouter</span>
