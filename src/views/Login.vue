@@ -14,7 +14,7 @@
                             <label><i class="fa fa-unlock-alt"></i></label>
                             <input type="password" placeholder="Password" style="background: #fff;" v-model="password">
                             
-                            <label for="remember"> <router-link to="/reset_password">Mot de passe oublié?</router-link></label>
+                            <label for="remember"> <router-link to="/reset_password" style="font-size: 15px">Mot de passe oublié?</router-link></label>
                             <button type="submit">Se connecter</button>
                         </form>
                     </div>
