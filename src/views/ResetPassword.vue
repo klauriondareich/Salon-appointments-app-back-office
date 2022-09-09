@@ -7,11 +7,12 @@
                     <div class="admin-lock vh100">
                         <div class="admin-form">
                                 <div class="logo"><img src="images/b-logo.png" alt=""></div>
-                            <h4>Réinitialisation du mot de passe</h4>
-                            <p class="text-white">Un lien de réinitialisation vous sera envoyé sur votre boîte email.</p>
+                            <h4>Changer le mot de passe</h4>
+                            <p class="text-white">Un lien de réinitialisation vous sera envoyé dans votre boîte email.</p>
                             <form method="post" @submit.prevent="resetPassword">
                                 <label><i class="fa fa-envelope"></i></label>
-                                <input type="text" placeholder="Saisissez votre adresse email" v-model="email" style="background: #fff;"> <br> <br>
+                                <input type="text" placeholder="Saisissez votre adresse email" v-model="email" style="background: #fff;">
+                                <label for="remember"> <router-link to="/" style="font-size: 15px">Retourner à la page précédente</router-link></label>
                                 <button type="submit">Réinitialiser</button>
                             </form>
                         </div>
@@ -23,7 +24,7 @@
 </template>
 
 <script>
-import firebase from 'firebase';
+import firebase from '../firebase/init'
 import Loader from './shared/Loader.vue'
 
 export default {
@@ -42,13 +43,15 @@ export default {
         if (this.email){
           this.loaderState = true;
           let auth = firebase.auth();
-
+        
+          
           auth.sendPasswordResetEmail(this.email).then(() => {
-            this.successMessage = "Reset password link has been sent. Please check your email account.";
+            // this.successMessage = "Lien d'activation encoyé";
             this.email = null;
             this.loaderState = false;
           }).catch((error) => {
             this.errorMessage = error.message;
+            // console.log("error Message ", this.errorMessage);
             this.loaderState = false;
           })
         }

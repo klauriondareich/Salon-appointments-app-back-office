@@ -17,12 +17,27 @@
                     </ul>
                     </div>
                     <div class="row pt-5">
-                        <div class="inner-bg inner-bg-style">
-                            <div class="col-md-12 col-sm-12 field"> 
-                                <span class="upload-image">Ajouter une nouvelle image</span>
-                                <label class="fileContainer"> <span>Ajouter</span>
-                                <input type="file" accept="image/*" @change="uploadImage($event)">
-                                </label>
+                        <div class="col-md-6">
+                            <div class="inner-bg inner-bg-style">
+                                <div v-if="images.length >= 100">
+                                    <p class="alert alert-warning">
+                                        Vous avez atteint le nombre maximal d'images (100 images)
+                                    </p>
+                                </div>
+                                <div class="field" v-if="images.length < 100"> 
+                                    <p>Vérifiez la taille de l'image et son format avant d'uploader.</p>
+                                    <span class="upload-image">Ajouter une nouvelle image</span>
+                                    <label class="fileContainer"> <span>Ajouter</span>
+                                    <input type="file" accept="image/*" @change="uploadImage($event)">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="inner-bg inner-bg-style">
+                                <p class="alert alert-warning">
+                                    Taille maximale autorisée: 1 Mo et le format : PNG
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -114,19 +129,27 @@ export default {
         this.loaderState = true;
 
         let file = event.target.files[0];
-        let fileName = "gal-" + file.lastModified;
-        this.Storage.child("gallery/" + fileName).put(file).then(() =>{
+        let fileSize = (file.size/1024)/1024; // Convert image size in Mo
+        let fileType = file.type;
 
-            let url = "gallery/" + fileName;
-            let obj = {salonId: this.salonId, imageUrl: url};
-            this.images.push(obj);
-            this.addInCollection(obj)
-        })
-        .catch((error) => {
-            alert(error.message);
-            this.loaderState = false
-        });
- 
+        if (fileSize.toFixed(2) < 1 && fileType == "image/png"){
+
+            let fileName = "gal-" + file.lastModified;
+            this.Storage.child("gallery/" + fileName).put(file).then(() =>{
+
+                let url = "gallery/" + fileName;
+                let obj = {salonId: this.salonId, imageUrl: url};
+                this.images.push(obj);
+                this.addInCollection(obj)
+            })
+            .catch((error) => {
+                alert(error.message);
+            });
+            this.loaderState = false;
+            return;
+        }
+        
+        this.loaderState = false;
       },
 
       gettingGalleryImages(){

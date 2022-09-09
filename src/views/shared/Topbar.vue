@@ -86,13 +86,12 @@ export default {
     },
     methods:{
         signOut(){
-
+            
             firebase.auth().signOut().then(() =>{
                 this.$router.replace("/");
             })
             .catch((error) =>{
-                console.log(error.message);
-                // add a sweetalert here
+                console.log(error.message)
             })
         },
     },
