@@ -10,7 +10,6 @@
               <div class="sub-bar">
                 <div class="sub-title">
                   <h4>MON SALON</h4>
-                  <!-- <span>Welcome To web Admin Panel!</span> -->
                 </div>
                 <ul class="bread-crumb">
                   <li><router-link to="/home" title="">Accueil</router-link></li>
@@ -57,7 +56,7 @@
                             <div class="info-meta">
                               <h4>{{turnover}}</h4>
 
-                              <span>Chiffre d'affaire (FCFA)</span> </div>
+                              <span>Chiffre d'affaires (FCFA)</span> </div>
                             <span class="ten purpal"></span>
                           </div>
                       </div>
@@ -284,7 +283,7 @@ export default {
           this.appointments.push(obj);
         });
 
-        // Calculation of the turnover (chiffre d'affaire)
+        // Calculation of the turnover (chiffre d'affaires)
         this.turnover = this.appointments.map(obj => obj.total).reduce((acc, currentValue) => acc + currentValue);
         this.loaderState = false
       }

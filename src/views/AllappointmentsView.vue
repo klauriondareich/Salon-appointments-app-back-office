@@ -209,6 +209,7 @@ export default {
         validate_instant_appoint(appoint_id, amount){
 
             localStorage.setItem("firstLoad", "no");
+            this.loaderState = true;
 
             this.appointmentRef.doc(appoint_id).get().then((doc)=>{
                 if (doc.exists){
@@ -221,7 +222,8 @@ export default {
 
                         new_array.push(this.salonId);
                         this.instant_appointments = [];
-                        this.appointmentRef.doc(appoint_id).update({"allSalonIds": new_array, "amount":amount})
+                        this.appointmentRef.doc(appoint_id).update({"allSalonIds": new_array, "amount":amount});
+                        this.loaderState = false;
                     }
                 }
                 else{
