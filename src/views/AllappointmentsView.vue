@@ -208,9 +208,6 @@ export default {
         
         validate_instant_appoint(appoint_id, amount){
 
-            localStorage.setItem("firstLoad", "no");
-
-            console.log("appoint_id", appoint_id, amount);
             this.appointmentRef.doc(appoint_id).get().then((doc)=>{
                 if (doc.exists){
                     let obj = doc.data();
@@ -237,29 +234,32 @@ export default {
             .where("instant_appoint", "==", true) // must be a instant appoint
             .where("status", "==", "create") // instant appoint not finished yet
             .where("salon", "==", "") // instant appoint not validated by a salon yet
-            .orderBy("stamp", "desc").onSnapshot((query) =>{
-
-                this.pauseBeep() //Pause beep
-
-                if (localStorage.getItem("firstLoad") == "yes"){
-                    this.beepFile.loop = true;
-                    this.playBeep();
-                    this.beepBg = true; // Show background color                    
-                }
-
-                 // Pause beep after 15 seconds
-                 setTimeout(this.pauseBeep, 15000);
+            .orderBy("stamp_create", "desc").onSnapshot((query) =>{
 
                 this.instant_appointments = [];
 
                 if (!query.empty){
+
+                    let nb = localStorage.getItem("nbRessources");
+                    
+                    if (nb && nb<query.size) {
+                        this.beepBg = true;
+                        this.playBeep();
+                        // Pause beep after 15 seconds
+                        setTimeout(this.pauseBeep, 15000);
+
+                    }
+                    
                     query.forEach((doc) =>{
 
                         let data = doc.data();
                         data.id = doc.id;
                         let parseTimeStart = Date.parse(`2022-08-01T${data.time_start}`);
-                        if (!this.instant_appointments.includes(parseTimeStart)) this.instant_appointments.push(data);    
+                        if (!this.instant_appointments.includes(parseTimeStart)) this.instant_appointments.push(data);
                     });
+
+                    
+                    localStorage.setItem("nbRessources", query.size);
 
                      // this.allTimesStart.forEach((item)=>{
                     //     let parseTimeStart = Date.parse(`2022-08-01T${appObj.time_start}`);
@@ -282,7 +282,6 @@ export default {
                     
                     querySnapshot.forEach((doc) =>{
                         let docData = doc.data();
-                        console.log("data3", docData);
                         let timeStart =  Date.parse(`2022-08-01T${docData.time_start}`);
                         // The condition allows to Avoid having duplicate values in the array
                         if (!this.allTimesStart.includes(timeStart)) this.allTimesStart.push(timeStart)
@@ -538,35 +537,33 @@ export default {
     },
     created(){
 
-    this.loaderState = true;
+        this.loaderState = true;
 
-    this.salonId = localStorage.getItem("salon_id");
+        this.salonId = localStorage.getItem("salon_id");
 
-    localStorage.setItem("firstLoad", "yes");
+        this.verifyingAvailability();
 
-    this.verifyingAvailability();
 
-    //this.gettingInstantsAppointments();
 
-    // Getting normal appointmements
-    this.appointmentRef.where("salon", "==", this.salonId).orderBy("stamp", "desc").get().then((snapshot) =>{
+        // Getting normal appointmements
+        this.appointmentRef.where("salon", "==", this.salonId).orderBy("stamp", "desc").get().then((snapshot) =>{
 
-    this.loaderState = false;
+        this.loaderState = false;
 
-        if(!snapshot.empty){
-            this.appointments = [];
-            snapshot.forEach((doc) =>{
-                let obj = doc.data();
-                obj.id = doc.id;
-                obj.isVisible = false;
-                this.appointments.push(obj);
-                this.appointmentsBis.push(obj);
-                this.viewAllappointments();
-                this.loaderState = false;
-            });
-        }
-      
-    });
+            if(!snapshot.empty){
+                this.appointments = [];
+                snapshot.forEach((doc) =>{
+                    let obj = doc.data();
+                    obj.id = doc.id;
+                    obj.isVisible = false;
+                    this.appointments.push(obj);
+                    this.appointmentsBis.push(obj);
+                    this.viewAllappointments();
+                    this.loaderState = false;
+                });
+            }
+        
+        });
 
 
   }
