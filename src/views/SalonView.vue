@@ -57,7 +57,7 @@
                             <div class="info-meta">
                               <h4>{{turnover}}</h4>
 
-                              <span>Chiffre d'affaire (FCFA)</span> </div>
+                              <span>Chiffre d'affaires (FCFA)</span> </div>
                             <span class="ten purpal"></span>
                           </div>
                       </div>
@@ -284,7 +284,7 @@ export default {
           this.appointments.push(obj);
         });
 
-        // Calculation of the turnover (chiffre d'affaire)
+        // Calculation of the turnover (chiffre d'affaires)
         this.turnover = this.appointments.map(obj => obj.total).reduce((acc, currentValue) => acc + currentValue);
         this.loaderState = false
       }
