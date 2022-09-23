@@ -29,7 +29,7 @@
                                 <div class="notifi-info">
                                     <p>Visualisation de tous les rendez-vous</p>
                                     <span>Nombre total : {{appointments.length}} </span> <br>
-                                    Chiffre d'affaire (FCFA) :<span class="yellow-class"> {{totalAmount}} </span>
+                                    Chiffre d'affaires (FCFA) :<span class="yellow-class"> {{totalAmount}} </span>
                                 </div>
                             </div>
                         </div>
@@ -267,8 +267,8 @@ export default {
         // This func checks if the salon has avalaible time to take the appointment
         verifyingAvailability(){
             this.appointmentRef.where("salon", "==", this.salonId).where("status", "==", "create").get().then((querySnapshot) =>{
+                
                 if (!querySnapshot.empty){
-                    
                     querySnapshot.forEach((doc) =>{
                         let docData = doc.data();
                         let timeStart =  Date.parse(`2022-08-01T${docData.time_start}`);
@@ -280,7 +280,8 @@ export default {
                 
                 }
                 else {
-                    this.instant_appointments.push()
+                    this.gettingInstantsAppointments();
+                    // this.instant_appointments.push()
                 }
             })
         },
@@ -322,7 +323,7 @@ export default {
 
         // calculate the turnover based on all appointments of the salon
         calculTurnover(){
-             // Calculation of the turnover (chiffre d'affaire)
+             // Calculation of the turnover (chiffre d'affaires)
              if (this.appointments.length == 0) {
                 this.totalAmount = 0;
                 return
