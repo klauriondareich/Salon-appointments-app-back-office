@@ -4,7 +4,7 @@
 
         <Loader v-if="loaderState"/>
 
-        <div id="beep-bg" v-if="beepBg"  @click="pauseBeep()">
+        <div id="beep-bg"  :class="bgClassValue" @click="pauseBeep()">
             <!-- <div id="loader"></div> -->
             <div class="loader-section"></div>   
         </div>
@@ -200,7 +200,8 @@ export default {
             stopBeep: false,
             beepFile: new Audio('beep.mp3'),
             beepBg: false,
-            allTimesStart: []
+            allTimesStart: [],
+            bgClassValue: 'bg-msg-hide'
         }
     },
     methods:{
@@ -244,15 +245,15 @@ export default {
                     let nb = localStorage.getItem("nbRessources");
                     
                     if (nb && nb<query.size) {
-                        this.beepBg = true;
+                        this.bgClassValue = "bg-msg-visible";
                         this.playBeep();
+                        console.log("bg color", this.bgClassValue);
                         // Pause beep after 15 seconds
                         setTimeout(this.pauseBeep, 15000);
 
                     }
                     
                     query.forEach((doc) =>{
-
                         let data = doc.data();
                         data.id = doc.id;
                         let parseTimeStart = Date.parse(`2022-08-01T${data.time_start}`);
@@ -294,7 +295,7 @@ export default {
 
         pauseBeep(){
             this.beepFile.pause();
-            this.beepBg = false;
+            this.bgClassValue = "bg-msg-hide";
         },
 
         searchCustomers(){
@@ -455,5 +456,11 @@ export default {
 <style>
     .theme--light.v-application{
         background-color: transparent!important;
+    }
+    .bg-msg-hide{
+        visibility: hidden;
+    }
+    .bg-msg-visible{
+        visibility: visible;
     }
 </style>
